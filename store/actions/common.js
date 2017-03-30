@@ -63,3 +63,11 @@ export const setToast = (message, level = 'info', duration = 3000) => ({
 export const clearToast = () => ({
   type: 'app/clearToast',
 })
+
+export const openDrawer = () => ({
+  type: 'app/openDrawer',  
+})
+
+export const closeDrawer = () => ({
+  type: 'app/closeDrawer',  
+})

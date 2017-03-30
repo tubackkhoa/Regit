@@ -34,3 +34,20 @@ export const toast = (state = null, { type, payload }) => {
       return state
   }
 }
+
+export const drawer = (state = {drawerState: 'closed'}, { type }) => {
+  switch (type) {
+    case 'app/openDrawer':
+      return {
+        ...state,
+        drawerState: 'opened',
+      }
+    case 'app/closeDrawer':
+      return {
+        ...state,
+        drawerState: 'closed',
+      }
+    default:
+      return state
+  }
+}

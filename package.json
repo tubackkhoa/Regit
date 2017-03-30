@@ -7,8 +7,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "color": "^1.0.3",
-    "native-base": "^2.1.0",
+    "color": "~0.11.1",
+    "native-base": "git://github.com/GeekyAnts/NativeBase.git",
     "react": "~15.4.1",
     "react-native": "0.42.3",
     "react-redux": "^5.0.3",

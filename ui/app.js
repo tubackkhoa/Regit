@@ -1,31 +1,41 @@
 import React, { Component } from 'react'
-import { Navigator, NativeModules, StatusBar, View } from 'react-native'
+import { Navigator, NativeModules, StatusBar, View, Platform } from 'react-native'
 
 import routes from './routes'
-import {Container, Content, Text} from 'native-base'
+import {Content, Text} from 'native-base'
+import Container from './components/Container'
 
-import myTheme from './themes/base-theme'
 // router => render component base on url
 // history.push => location match => return component using navigator push
 
+import { connect } from 'react-redux'
+
+// should show error if not found
+import { getDrawerState } from '~/store/selectors/common'
+import { isLogged } from '~/store/selectors/auth'
+
 const UIManager = NativeModules.UIManager
 
+@connect(state=>({
+  loggedIn: isLogged(state),
+  drawerState: getDrawerState(state),
+}))
 export default class App extends Component {
     static configureScene(route) {
         // use default as PushFromRight, do not use HorizontalSwipeJump or it can lead to swipe horizontal unwanted
         return Navigator.SceneConfigs[route.animationType || 'PushFromRight']
     }
 
-    static renderScene(route, navigator) {
+    renderScene = (route, navigator) => {
         return (
-            <Container>
-                <StatusBar backgroundColor="rgba(0, 0, 0, 0.2)" translucent />
-                <Content theme={myTheme}>
+            <Container navigator={navigator}>
+                <StatusBar 
+                  hidden={ route.hiddenBar || (this.props.drawerState === 'opened' && Platform.OS === 'ios')}
+                  translucent />                
                     <route.Page
                         route={route}
                         navigator={navigator}
-                    />
-                </Content>
+                    />                
             </Container>
         )
     }
@@ -36,12 +46,12 @@ export default class App extends Component {
     }
 
     render() {
-        return (
-            
+      const {loggedIn} = this.props
+        return (            
             <Navigator
                 configureScene={App.configureScene}
-                initialRoute={routes.home}
-                renderScene={App.renderScene}                
+                initialRoute={loggedIn ? routes.home : routes.login}
+                renderScene={this.renderScene}                
             />
             
         )
