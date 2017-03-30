@@ -4,7 +4,7 @@ import { Navigator, NativeModules, StatusBar, View, Platform } from 'react-nativ
 import routes from './routes'
 import {Content, Text} from 'native-base'
 import Container from './components/Container'
-
+import Toasts from './components/Toasts'
 // router => render component base on url
 // history.push => location match => return component using navigator push
 
@@ -35,7 +35,8 @@ export default class App extends Component {
                     <route.Page
                         route={route}
                         navigator={navigator}
-                    />                
+                    />
+                <Toasts/>                
             </Container>
         )
     }

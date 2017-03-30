@@ -51,12 +51,13 @@ export const markRequestFailed = (reason, key) => ({
 
 // show toast => we can use kind of alerts, stackbar to notify user
 // with dynamic id force update everytime
-export const setToast = (message, level = 'info', duration = 3000) => ({
+export const setToast = (message, level = 'info', duration = 3000, position = 'bottom') => ({
   type: 'app/setToast',
   payload: {    
     message,
     level,
     duration,
+    position,
   },
 })
 

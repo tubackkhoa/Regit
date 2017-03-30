@@ -2,6 +2,7 @@ import { View, StyleSheet } from 'react-native'
 import React, { Component, PropTypes } from 'react'
 
 import {    
+  Content,
   StyleProvider, 
   Drawer,
 } from 'native-base'
@@ -49,8 +50,8 @@ export default class Container extends Component {
             ref="drawer"
             content={<SideBar navigator={this.props.navigator} />}
             onClose={this.props.closeDrawer}
-          >
-          {this.props.children}
+          >          
+          {this.props.children}          
         </Drawer>   
       </StyleProvider>     
     )

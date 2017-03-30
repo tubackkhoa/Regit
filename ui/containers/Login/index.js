@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
 import { Container, Form, Item, Input, Button, Text, Thumbnail, Label } from 'native-base'
 import styles from './styles'
+import { connect } from 'react-redux'
+import { setToast } from '~/store/actions/common'
 
+@connect(null, {setToast})
 export default class Login extends Component {
+
+  _handleLogin = (event) => {
+    this.props.setToast('Login fail', 'danger')
+  }
 
     render() {
         return (
@@ -21,7 +28,7 @@ export default class Login extends Component {
                     </Item>
 
                     
-                    <Button style={styles.button}>
+                    <Button onPress={this._handleLogin} style={styles.button}>
                       <Text>Sign in</Text>
                     </Button>
 
