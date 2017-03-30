@@ -12,17 +12,16 @@ export default {
   },
   item: {
     backgroundColor: '#fff',
-    borderRadius: 4,        
+    borderRadius: 5,        
     marginLeft: 0,
     marginTop: 10,
     paddingLeft: 20,
     paddingRight: 20,
     width: '100%',
   },
-  input: {
-    color: '#c2c2c2',
+  input: {    
     fontFamily: 'Roboto',
-    fontWeight: '300',
+    fontWeight: '300',    
   },
   logo: {
     width: 80, 
@@ -35,12 +34,14 @@ export default {
     backgroundColor: '#0072bc',        
     justifyContent: 'center',
     width: '100%',   
+    borderRadius: 5,
   },
   outlineButton: {
     marginTop: 100,        
     borderColor: '#FFF',      
     justifyContent: 'center',
-    width: '100%',   
+    width: '100%',  
+    borderRadius: 5, 
   },
   margin: {
     flex: 1,
