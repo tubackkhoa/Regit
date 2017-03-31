@@ -7,16 +7,31 @@ import styles from './styles'
 import { connect } from 'react-redux'
 import { setToast } from '~/store/actions/common'
 
-import material from '~/native-base-theme/variables/material'
+import { Field, reduxForm } from 'redux-form'
+
+import { InputField } from '~/ui/elements/Form'
+
+const validate = (values) => {
+  const errors = {}
+  // first time it is empty
+  if(!values) return errors
+  if (!values.email) {
+    errors.email = 'Email is empty'
+  } 
+
+  return errors
+}
 
 @connect(null, {setToast})
+@reduxForm({ form: 'LoginForm', validate})
 export default class Login extends Component {
 
-  _handleLogin = (event) => {
-    this.props.setToast('Login fail', 'danger')
+  _handleLogin = (data) => {
+    this.props.setToast(JSON.stringify(data), 'danger')
   }
 
   render() {
+    const { handleSubmit, submitting } = this.props    
     return (
       <Container style={styles.container}>
                             
@@ -24,21 +39,11 @@ export default class Login extends Component {
           source={require('~/assets/logo.png')} />
         
           <Form>
-              <Item style={styles.item} >                  
-                  <Input 
-                    placeholderTextColor={material.inputColorPlaceholder} 
-                    style={styles.input} 
-                    placeholder="Email" />
-              </Item>
-              <Item style={styles.item} >                  
-                  <Input 
-                    placeholderTextColor={material.inputColorPlaceholder} 
-                    style={styles.input}
-                    placeholder="Password" />
-              </Item>
-
               
-              <Button onPress={this._handleLogin} 
+              <Field name="email" label="Email" component={InputField} />
+              <Field name="password" label="Password" component={InputField} />
+              
+              <Button onPress={handleSubmit(this._handleLogin)} 
                 style={styles.button}>
                 <Text>Sign in</Text>
               </Button>
@@ -47,8 +52,7 @@ export default class Login extends Component {
 
               <Button bordered style={styles.outlineButton}>
                 <Text style={styles.whiteColor}>Sign up</Text>
-              </Button>
-              
+              </Button>              
 
           </Form>
           

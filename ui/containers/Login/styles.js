@@ -1,5 +1,3 @@
-import material from '~/native-base-theme/variables/material'
-
 export default {
   container: {
     backgroundColor: '#00b5f1', 
@@ -9,20 +7,7 @@ export default {
     flexDirection: 'column',          
     paddingLeft: 20,
     paddingRight: 20,        
-  },
-  item: {
-    backgroundColor: '#fff',
-    borderRadius: 5,        
-    marginLeft: 0,
-    marginTop: 10,
-    paddingLeft: 20,
-    paddingRight: 20,
-    width: '100%',
-  },
-  input: {    
-    fontFamily: 'Roboto',
-    fontWeight: '300',    
-  },
+  },  
   logo: {
     width: 80, 
     height: 120,

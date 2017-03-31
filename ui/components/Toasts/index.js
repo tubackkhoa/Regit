@@ -11,7 +11,8 @@ import { getToast } from '~/store/selectors/common'
 }), {clearToast})
 export default class Toasts extends Component {
 
-  componentWillReceiveProps({toast}) {
+  componentDidUpdate() {
+    const {toast} = this.props
     Toast.show({
       text: toast.message,
       position: toast.position,
