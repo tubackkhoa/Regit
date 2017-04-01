@@ -2,7 +2,7 @@ import { takeLatest, takeEvery } from 'redux-saga/effects'
 
 import api from '~/store/api'
 import { createRequestSaga } from '~/store/sagas/common'
-import { setToast, noop, forwardTo } from '~/store/actions/common'
+import { setToast, noop, invokeCallback } from '~/store/actions/common'
 
 import {
     setAuthState,
@@ -47,7 +47,8 @@ const requestLoginAsync = createRequestSaga({
     success: [
         (data) => saveLoggedUser(data),
         () => setAuthState(true),
-        () => setToast('Logged successfully!!!'),        
+        () => setToast('Logged successfully!!!'),   
+        (data, {args:[username, password, callback]}) => invokeCallback(callback, data),     
     ],
     failure: [
         () => setToast('Couldn\'t login', 'error')
@@ -61,7 +62,8 @@ const requestLogoutAsync = createRequestSaga({
     success: [
         () => removeLoggedUser(),
         () => setAuthState(false),
-        () => setToast('Logout successfully!!!'),        
+        () => setToast('Logout successfully!!!'),   
+        (data, {args:[callback]}) => invokeCallback(callback, data),      
     ],
     failure: [
         () => setToast('Couldn\'t logout', 'error')

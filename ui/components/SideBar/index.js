@@ -3,8 +3,12 @@ import { Image, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { Content, Text, List, ListItem, Icon, Container, Left, Right, Badge, Button, View, StyleProvider, getTheme, variables } from 'native-base';
 
+import { logout } from '~/store/actions/auth'
+import routes from '~/ui/routes'
+import { closeDrawer } from '~/store/actions/common'
 import styles from './styles'
 
+@connect(null, {logout, closeDrawer})
 export default class SideBar extends Component {
 
   static propTypes = {
@@ -19,8 +23,8 @@ export default class SideBar extends Component {
     };
   }
 
-  navigateTo(route) {
-    this.props.navigateTo(route, 'home');
+  _handleLogout = (event) => {    
+    this.props.logout(()=>this.props.closeDrawer() && this.props.navigator.resetTo(routes.login))
   }
 
   render() {
@@ -44,7 +48,9 @@ export default class SideBar extends Component {
                         <Text>B</Text>
                     </ListItem>
                     <ListItem>
-                        <Text>Bradley Horowitz</Text>
+                        <Button onPress={this._handleLogout}>
+                          <Text>Logout</Text>
+                      </Button>
                     </ListItem>
 
         </Content>

@@ -11,15 +11,15 @@ import { getToast } from '~/store/selectors/common'
 }), {clearToast})
 export default class Toasts extends Component {
 
-  componentDidUpdate() {
-    const {toast} = this.props
-    Toast.show({
-      text: toast.message,
-      position: toast.position,
-      buttonText: 'x',
-      type: toast.level,
-      duration: toast.duration,
-    })
+  componentWillReceiveProps({toast}) {
+    console.log(toast)
+    // Toast.show({
+    //   text: toast.message,
+    //   position: toast.position,
+    //   buttonText: 'x',
+    //   type: toast.level,
+    //   duration: toast.duration,
+    // })
   }
 
   render(){

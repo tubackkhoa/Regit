@@ -6,8 +6,10 @@ import {
 import styles from './styles'
 import { connect } from 'react-redux'
 import { setToast } from '~/store/actions/common'
-
+import { login } from '~/store/actions/auth'
 import { Field, reduxForm } from 'redux-form'
+
+import routes from '~/ui/routes'
 
 import { InputField } from '~/ui/elements/Form'
 
@@ -22,16 +24,17 @@ const validate = (values) => {
   return errors
 }
 
-@connect(null, {setToast})
+@connect(null, {setToast, login})
 @reduxForm({ form: 'LoginForm', validate})
 export default class Login extends Component {
 
-  _handleLogin = (data) => {
-    this.props.setToast(JSON.stringify(data), 'danger')
+  _handleLogin = ({email, password}) => {
+    // this.props.setToast(JSON.stringify(data), 'danger')    
+    this.props.login(email, password, ()=>this.props.navigator.resetTo(routes.home))
   }
 
-  render() {
-    const { handleSubmit, submitting } = this.props    
+  render() {    
+    const { handleSubmit, submitting } = this.props        
     return (
       <Container style={styles.container}>
                             
@@ -41,7 +44,7 @@ export default class Login extends Component {
           <Form>
               
               <Field name="email" label="Email" component={InputField} />
-              <Field name="password" label="Password" component={InputField} />
+              <Field name="password" label="Password" secureTextEntry={true} component={InputField} />
               
               <Button onPress={handleSubmit(this._handleLogin)} 
                 style={styles.button}>
