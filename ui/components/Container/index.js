@@ -1,8 +1,7 @@
 import { View, StyleSheet } from 'react-native'
 import React, { Component, PropTypes } from 'react'
 
-import {    
-  Content,
+import {      
   StyleProvider, 
   Drawer,
 } from 'native-base'

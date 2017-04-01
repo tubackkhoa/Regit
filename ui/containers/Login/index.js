@@ -1,14 +1,20 @@
 import React, { Component } from 'react'
 import { 
-  Container, Form, Item, Input, Button, 
-  Text, Thumbnail, Label 
+  Container, 
+  Form, 
+  Item, 
+  Input, 
+  Button, 
+  Text, 
+  Thumbnail, 
+  Label,
 } from 'native-base'
 import styles from './styles'
 import { connect } from 'react-redux'
 import { setToast } from '~/store/actions/common'
 import { login } from '~/store/actions/auth'
 import { Field, reduxForm } from 'redux-form'
-
+import {View} from 'react-native'
 import routes from '~/ui/routes'
 
 import { InputField } from '~/ui/elements/Form'
@@ -28,8 +34,7 @@ const validate = (values) => {
 @reduxForm({ form: 'LoginForm', validate})
 export default class Login extends Component {
 
-  _handleLogin = ({email, password}) => {
-    // this.props.setToast(JSON.stringify(data), 'danger')    
+  _handleLogin = ({email, password}) => {    
     this.props.login(email, password, ()=>this.props.navigator.resetTo(routes.home))
   }
 
@@ -53,7 +58,8 @@ export default class Login extends Component {
 
               <Text style={styles.label}>Forgot password?</Text>
 
-              <Button bordered style={styles.outlineButton}>
+              <Button bordered style={styles.outlineButton} onPress={()=>
+                this.props.setToast('hehe')    }>
                 <Text style={styles.whiteColor}>Sign up</Text>
               </Button>              
 

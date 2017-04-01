@@ -24,7 +24,8 @@ const loggerMiddleware = createLogger({
     action: ({ type }) => type === 'MARK_REQUEST_FAILED' ? `#d9534f` : `#5bc0de`,  
     nextState: () => `#449d44`,    
   },
-  predicate: (getState, {type}) => type !== 'app/log', 
+  // not special log message
+  predicate: (getState, {type}) => type.indexOf('@@') == -1, 
 })
 
 export default loggerMiddleware

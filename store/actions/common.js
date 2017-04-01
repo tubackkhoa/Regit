@@ -57,7 +57,7 @@ export const setToast = (message, level = 'info', duration = 3000, position = 'b
     message,
     level,
     duration,
-    position,
+    position,    
   },
 })
 
