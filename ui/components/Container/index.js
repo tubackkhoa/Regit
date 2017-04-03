@@ -1,9 +1,10 @@
-import { View, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 import React, { Component, PropTypes } from 'react'
 
 import {      
   StyleProvider, 
   Drawer,
+  Container as ContainerNB,
 } from 'native-base'
 
 import SideBar from '~/ui/components/SideBar'
@@ -25,6 +26,9 @@ export default class Container extends Component {
   }
 
   updateDrawer(){    
+    const {showDrawer} = this.props
+    if(!showDrawer)
+      return false
     if (this.props.drawerState === 'opened') {
       this.refs.drawer._root.open()
     } else if (this.props.drawerState === 'closed') {
@@ -43,15 +47,19 @@ export default class Container extends Component {
   }
 
   render() {    
+    const {showDrawer} = this.props
     return ( 
       <StyleProvider style={getTheme(material)}>       
-        <Drawer
+      {showDrawer
+        ? <Drawer
             ref="drawer"
-            content={<SideBar navigator={this.props.navigator} />}
+            content={showDrawer && <SideBar navigator={this.props.navigator} />}
             onClose={this.props.closeDrawer}
           >          
-          {this.props.children}          
-        </Drawer>   
+            {this.props.children}          
+          </Drawer>   
+        : <ContainerNB>{this.props.children}</ContainerNB>
+      }
       </StyleProvider>     
     )
   }

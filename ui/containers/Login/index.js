@@ -35,7 +35,7 @@ const validate = (values) => {
 export default class Login extends Component {
 
   _handleLogin = ({email, password}) => {    
-    this.props.login(email, password, ()=>this.props.navigator.resetTo(routes.home))
+    this.props.login(email, password)
   }
 
   render() {    
@@ -48,7 +48,7 @@ export default class Login extends Component {
         
           <Form>
               
-              <Field name="email" label="Email" component={InputField} />
+              <Field autoCapitalize="none" name="email" label="Email" component={InputField} />
               <Field name="password" label="Password" secureTextEntry={true} component={InputField} />
               
               <Button onPress={handleSubmit(this._handleLogin)} 

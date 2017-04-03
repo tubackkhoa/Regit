@@ -18,7 +18,7 @@ export default class Toasts extends Component {
     if(_root && toast){ 
       clearTimeout(this.timer)
       this.timer = setTimeout(()=>{
-        _root.setState({
+        !this._unmounted && _root.setState({
           modalVisible: false
         })
         this.props.clearToast()
@@ -34,6 +34,7 @@ export default class Toasts extends Component {
   }
 
   componentWillUnmount(){
+    this._unmounted = true
     clearTimeout(this.timer)
     this.props.clearToast()
   }

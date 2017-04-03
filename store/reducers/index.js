@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { reducer as form } from 'redux-form'
-import { requests, toast, drawer } from './common'
+import { requests, toast, drawer, router } from './common'
 import { authReducer as auth } from './auth'
 
 // a rootReducer is like a single state, key is function return a sub state value
@@ -12,6 +12,7 @@ const rootReducer = combineReducers({
     drawer,
   }),  
   requests, 
+  router,
   auth,
 })
 

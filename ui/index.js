@@ -20,7 +20,10 @@ export default class Regit extends Component {
   
     this.state = {
       store: null,
-    }    
+    }        
+  }
+
+  componentDidMount(){
     configureStore(store=> this.setState({store}))
   }
 

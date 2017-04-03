@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Navigator, NativeModules, StatusBar, View, Platform } from 'react-native'
+import { NativeModules, StatusBar, Platform } from 'react-native'
 
 import routes from './routes'
-import {Content, Text} from 'native-base'
 import Container from './components/Container'
+import Navigator from './components/Navigator'
 import Toasts from './components/Toasts'
 // router => render component base on url
 // history.push => location match => return component using navigator push
@@ -20,15 +20,11 @@ const UIManager = NativeModules.UIManager
   loggedIn: isLogged(state),
   drawerState: getDrawerState(state),
 }))
-export default class App extends Component {
-    static configureScene(route) {
-        // use default as PushFromRight, do not use HorizontalSwipeJump or it can lead to swipe horizontal unwanted
-        return Navigator.SceneConfigs[route.animationType || 'PushFromRight']
-    }
+export default class App extends Component {    
 
     renderScene = (route, navigator) => {
         return (
-            <Container navigator={navigator}>
+            <Container showDrawer={this.props.loggedIn} navigator={navigator}>
                 <StatusBar 
                   hidden={ route.hiddenBar || (this.props.drawerState === 'opened' && Platform.OS === 'ios')}
                   translucent />                

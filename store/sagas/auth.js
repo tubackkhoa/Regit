@@ -2,7 +2,7 @@ import { takeLatest, takeEvery } from 'redux-saga/effects'
 
 import api from '~/store/api'
 import { createRequestSaga } from '~/store/sagas/common'
-import { setToast, noop, invokeCallback } from '~/store/actions/common'
+import { setToast, noop, forwardTo } from '~/store/actions/common'
 
 import {
     setAuthState,
@@ -10,6 +10,7 @@ import {
     removeLoggedUser
 } from '~/store/actions/auth'
 
+import { closeDrawer } from '~/store/actions/common'
 
 const requestLoginFacebookAsync = createRequestSaga({
     request: api.auth.loginFacebook,
@@ -48,7 +49,7 @@ const requestLoginAsync = createRequestSaga({
         (data) => saveLoggedUser(data),
         () => setAuthState(true),
         () => setToast('Logged successfully!!!'),   
-        (data, {args:[username, password, callback]}) => invokeCallback(callback, data),     
+        () => forwardTo('home', true)     
     ],
     failure: [
         () => setToast('Couldn\'t login', 'error')
@@ -63,7 +64,8 @@ const requestLogoutAsync = createRequestSaga({
         () => removeLoggedUser(),
         () => setAuthState(false),
         () => setToast('Logout successfully!!!'),   
-        (data, {args:[callback]}) => invokeCallback(callback, data),      
+        () => closeDrawer(),
+        () => forwardTo('login', true)    
     ],
     failure: [
         () => setToast('Couldn\'t logout', 'error')

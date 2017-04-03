@@ -6,7 +6,6 @@ import {
 } from '~/store/constants/actions'
 // we defined reducer to change state to state with action
 
-
 // these reducer is used for many pages
 export const requests = (state = {}, { type, payload, meta }) => {
   switch (type) {
@@ -50,4 +49,14 @@ export const drawer = (state = {drawerState: 'closed'}, { type }) => {
     default:
       return state
   }
+}
+
+
+export const router = (state = null, {type, payload}) => {
+  switch(type) {
+    case 'app/forwardTo':
+      return payload
+    default:
+      return state
+  }  
 }

@@ -1,4 +1,4 @@
-import { fetchJson, fetchJsonWithToken } from '~/store/api/common'
+import { fetchJson, fetchJsonWithToken, apiPost } from '~/store/api/common'
 
 let auth = {
   /**
@@ -19,10 +19,11 @@ let auth = {
     })
   },
 
-  login (username, password, permanent=false) {
-    return fetchJson(`/auth/login?permanent=${permanent}`, {
-      method: 'POST',
-      body: JSON.stringify({username, password})
+  login (username, password) {
+    return apiPost(`/token`, {      
+      username,
+      password,
+      grant_type: 'password',
     })
   },
 
@@ -43,11 +44,9 @@ let auth = {
   /**
   * Logs the current user out
   */
-  logout () {
+  logout (accessToken) {
     // return fetchJsonWithToken(token, `/logout`)
-    return fetchJson(`/auth/logout`, {
-      method: 'POST',      
-    })
+    return apiPost(`/api/Account/Logout`, {}, accessToken)
   },
 
 }

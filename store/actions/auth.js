@@ -34,11 +34,11 @@ export const setAuthState = (newAuthState) => ({
 })
 
 
-export const saveLoggedUser = (data) => ({
+export const saveLoggedUser = ({userName,...token}) => ({
   type: 'app/saveLoggedUser',
   payload: {
-    user: data.user,
-    token: data.token,    
+    user: {userName},
+    token,
   }
 })
 

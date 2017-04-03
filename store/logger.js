@@ -6,7 +6,7 @@ const loggerMiddleware = createLogger({
   collapsed: (getState, { type }) => type !== 'MARK_REQUEST_FAILED',
   level: {
     prevState: () => `log`,
-    action: ({ type }) => type === 'MARK_REQUEST_FAILED' ? `error` : `info`,
+    action: ({ type }) => `info`,
     error: () => `error`,
     nextState: () => `log`,
   },

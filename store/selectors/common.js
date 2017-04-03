@@ -13,3 +13,6 @@ export const areRequestsPending = ({requests}) =>
 
 export const getDrawerState = (state) =>
   state.ui.drawer.drawerState || 'closed'
+
+export const getRouter = (state) => 
+  state.router  

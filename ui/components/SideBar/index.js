@@ -4,11 +4,14 @@ import { connect } from 'react-redux';
 import { Content, Text, List, ListItem, Icon, Container, Left, Right, Badge, Button, View, StyleProvider, getTheme, variables } from 'native-base';
 
 import { logout } from '~/store/actions/auth'
+import { forwardTo } from '~/store/actions/common'
 import routes from '~/ui/routes'
-import { closeDrawer } from '~/store/actions/common'
+import { getToken } from '~/store/selectors/auth'
 import styles from './styles'
 
-@connect(null, {logout, closeDrawer})
+@connect(state=>({
+  token: getToken(state)
+}), {logout, forwardTo})
 export default class SideBar extends Component {
 
   static propTypes = {
@@ -24,7 +27,8 @@ export default class SideBar extends Component {
   }
 
   _handleLogout = (event) => {    
-    this.props.logout(()=>this.props.closeDrawer() && this.props.navigator.resetTo(routes.login))
+    this.props.logout(this.props.token)
+    // this.props.forwardTo('login')
   }
 
   render() {

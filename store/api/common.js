@@ -4,8 +4,11 @@ import {
   API_BASE
 } from '~/store/constants/api'
 
+const urlEncode = data => Object.keys(data).map((key) => key + '=' + encodeURIComponent(data[key])
+).join('&')
+
 export const rejectErrors = (res) => {
-  const { status } = res
+  const { status } = res  
   if (status >= 200 && status < 300) {
     return res
   }
@@ -22,13 +25,17 @@ export const fetchJson = (url, options = {}, base = API_BASE) => (
     ...options,
     headers: {
       ...options.headers,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type':'application/x-www-form-urlencoded',      
+      // 'Accept': 'application/json',
+      // 'Content-Type': 'application/json',
     },
   })
   .then(rejectErrors)
   // default return empty json when no content
-  .then((res) => res.status === 204 ? {} : res.json())
+  .then((res) => {
+    const contentType = res.headers.get("content-type") || ''
+    return (res.status !== 204 && contentType.indexOf("application/json") !== -1) ? res.json() : {}
+  })
 )
 
 export const fetchJsonWithToken = (token, url, options = {}, ...args) => (
@@ -40,3 +47,12 @@ export const fetchJsonWithToken = (token, url, options = {}, ...args) => (
     },
   }, ...args)
 )
+
+// default is get method, we can override header with method:PUT for sample
+export const apiCall = (url, options, token = null) => 
+  token ? fetchJsonWithToken(token, url, options) : fetchJson(url, options)
+
+// must have data to post, put should not return data
+export const apiPost = (url, data, token, method='POST') => 
+  apiCall(url, { method, body: urlEncode(data) }, token)
+

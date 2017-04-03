@@ -25,6 +25,14 @@ export const log = (data, type='table') => {
   }
 }
 
+// Little helper function to abstract going to different pages
+export const forwardTo = (route, reset=false) => {  
+  return {
+    type: 'app/forwardTo',
+    payload: { route, reset },
+  }
+}
+
 // mark request for later checking
 export const markRequestPending = (key) => ({
   type: MARK_REQUEST_PENDING,
