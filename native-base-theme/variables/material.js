@@ -137,7 +137,7 @@ export default {
 
     // Footer
   footerHeight: 55,
-  footerDefaultBg: '#3F51B5',
+  footerDefaultBg: '#FFF',
 
 
     // FooterTab
@@ -159,7 +159,7 @@ export default {
 
     // Header
   toolbarBtnColor: '#fff',
-  toolbarDefaultBg: '#3F51B5',
+  toolbarDefaultBg: '#00aeef',
   toolbarHeight: (platform === 'ios') ? 76 : 56,
   toolbarIconSize: (platform === 'ios') ? 20 : 22,
   toolbarSearchIconSize: (platform === 'ios') ? 20 : 23,
@@ -175,7 +175,7 @@ export default {
 
 
     // Icon
-  iconFamily: 'Ionicons',
+  iconFamily: 'MaterialIcons',
   iconFontSize: (platform === 'ios') ? 30 : 28,
   iconMargin: 7,
   iconHeaderSize: (platform === 'ios') ? 29 : 24,

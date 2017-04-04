@@ -7,6 +7,7 @@ import {
   markRequestCancelled,
   markRequestFailed,
   setToast,
+  forwardTo,
 } from '~/store/actions/common'
 
 
@@ -97,7 +98,8 @@ export const createRequestSaga = ({request, key, start, stop, success, failure, 
         } else {
           // call logout user because we do not have refresh token
           yield put(removeLoggedUser())
-          yield put(setAuthState(false))          
+          yield put(setAuthState(false))       
+          yield put(forwardTo('login'))   
         }
       }
       // anyway, we should treat this as error to log

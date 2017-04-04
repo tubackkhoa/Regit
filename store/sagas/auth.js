@@ -10,6 +10,10 @@ import {
     removeLoggedUser
 } from '~/store/actions/auth'
 
+import {
+    getProfile,
+} from '~/store/actions/account'
+
 import { closeDrawer } from '~/store/actions/common'
 
 const requestLoginFacebookAsync = createRequestSaga({
@@ -48,8 +52,8 @@ const requestLoginAsync = createRequestSaga({
     success: [
         (data) => saveLoggedUser(data),
         () => setAuthState(true),
-        () => setToast('Logged successfully!!!'),   
-        () => forwardTo('home', true)     
+        () => setToast('Logged successfully!!!'),           
+        () => forwardTo('home', true),             
     ],
     failure: [
         () => setToast('Couldn\'t login', 'error')
