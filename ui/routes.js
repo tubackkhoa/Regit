@@ -9,7 +9,7 @@ export default {
         Page: Home,
     },   
     'user/profile': {
-        title: 'UserProfile',
+        title: 'User Profile',
         Page: UserProfile,
     },       
     login: {

@@ -49,7 +49,7 @@ export default class UserProfile extends Component {
               </Button>
           </Left>
           <Body>
-              <Title>{route.title}</Title>
+              <Title full>{route.title}</Title>
           </Body>
           <Right>
             <Button transparent>

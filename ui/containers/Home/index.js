@@ -36,9 +36,9 @@ export default class Home extends Component {
                     </Button>
                 </Left>
                 <Body>
-                    <Title>{route.title}</Title>
+                    <Title full>{route.title}</Title>
                 </Body>
-                <Right />
+                <Right/>
             </Header>
 
             <Content padder>

@@ -31,7 +31,7 @@ export default class Container extends Component {
       {showDrawer
         ? <Drawer
             open={drawerState === 'opened'}
-            type="static"             
+            type="displace"             
             content={showDrawer && <SideBar navigator={this.props.navigator} />}
             onClose={this.props.closeDrawer}
           >          

@@ -41,7 +41,7 @@ export default class SideBar extends Component {
   componentDidMount(){    
     if(!this.props.profile){      
       this.props.getProfile(this.props.token)
-    }
+    }    
   }
 
   _handleLogout = (e) => {    
