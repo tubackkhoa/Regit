@@ -54,8 +54,8 @@ export const drawer = (state = {drawerState: 'closed'}, { type }) => {
 
 export const router = (state = null, {type, payload}) => {
   switch(type) {
-    case 'app/forwardTo':
-      return payload
+    case 'app/navigate':
+      return {...state, ...payload}
     default:
       return state
   }  

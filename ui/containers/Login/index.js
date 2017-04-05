@@ -14,7 +14,7 @@ import { connect } from 'react-redux'
 import { setToast } from '~/store/actions/common'
 import { login } from '~/store/actions/auth'
 import { Field, reduxForm } from 'redux-form'
-import {View} from 'react-native'
+
 import routes from '~/ui/routes'
 
 import { InputField } from '~/ui/elements/Form'

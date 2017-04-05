@@ -17,21 +17,21 @@ export const invokeCallback = (callback, ...args) => ({
   payload: callback && callback.call(null, ...args),
 })
 
-export const log = (data, type='table') => {    
-  console[type](data) 
-  return {
-    type: 'app/log',
-    payload: data,
-  }
-}
+export const log = (data, type='table') => ({
+  type: 'app/log',
+  payload: data,
+})
 
 // Little helper function to abstract going to different pages
-export const forwardTo = (route, reset=false) => {  
-  return {
-    type: 'app/forwardTo',
-    payload: { route, reset },
-  }
-}
+export const forwardTo = (route, reset=false) => ({
+  type: 'app/navigate',
+  payload: { route, method: reset ? 'resetTo' : 'push' },
+})
+
+export const goBack = () => ({
+  type: 'app/navigate',
+  payload: { method: 'pop' },
+})
 
 // mark request for later checking
 export const markRequestPending = (key) => ({

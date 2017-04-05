@@ -8,8 +8,7 @@ const deviceWidth = Dimensions.get('window').width;
 export default {
   container: {
     flex: 1, 
-    backgroundColor: '#363636',  
-    
+    backgroundColor: '#363636',    
   },
 
   drawerCover: {
@@ -65,9 +64,6 @@ export default {
     marginLeft:60, 
     color: '#fff',
     fontSize:14
-  },
-  listItem: {
-    borderColor: '#464646',
   },
   iconText: {
     fontSize: (Platform.OS === 'ios') ? 13 : 11,

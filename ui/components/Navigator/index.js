@@ -18,8 +18,9 @@ export default class Navigator extends Component {
     }
 
     // will jump to when call the function forwardTo
-    componentWillReceiveProps({router}){           
-        this.refs.navigator[router.reset ? 'resetTo' : 'push'](routes[router.route])
+    componentWillReceiveProps({router}){        
+      const mavigateMethod = this.refs.navigator[router.method]
+      mavigateMethod && mavigateMethod(routes[router.route])
     }
 
     shouldComponentUpdate({router}){

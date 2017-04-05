@@ -7,7 +7,7 @@ import {
   Label,
 } from 'native-base'
 
-import material from '~/native-base-theme/variables/material'
+import material from '~/theme/variables/material'
 import styles from './styles'
 
 export const InputField = ({ input, label, meta: { touched, error, warning }, ...custom }) => (  

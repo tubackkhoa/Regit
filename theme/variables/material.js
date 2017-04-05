@@ -141,7 +141,7 @@ export default {
 
 
     // FooterTab
-  tabBarTextColor: '#b3c7f9',
+  tabBarTextColor: '#c2c2c2',
   tabBarTextSize: (platform === 'ios') ? 14 : 11,
   activeTab: '#fff',
   sTabBarActiveTextColor: '#007aff',
@@ -150,7 +150,7 @@ export default {
 
     // Tab
   tabDefaultBg: '#3F51B5',
-  topTabBarTextColor: '#b3c7f9',
+  topTabBarTextColor: '#c2c2c2',
   topTabBarActiveTextColor: '#fff',
   topTabActiveBgColor: undefined,
   topTabBarBorderColor: '#fff',
@@ -213,7 +213,7 @@ export default {
 
 
     // List
-  listBorderColor: '#c9c9c9',
+  listBorderColor: '#464646',
   listDividerBg: '#f4f4f4',
   listItemHeight: 45,
   listBtnUnderlayColor: '#DDD',

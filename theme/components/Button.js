@@ -7,9 +7,15 @@ export default (variables = variable) => {
   const platform = variables.platform;
 
   const buttonTheme = {
+      '.textSmall': {
+        paddingHorizontal: variables.buttonPadding,
+        'NativeBase.Text': {
+          fontSize: 9,
+        },
+      },
       '.disabled': {
         backgroundColor: variables.btnDisabledBg,
-      },
+      },      
       '.bordered': {
         '.dark': {
           'NativeBase.Text': {

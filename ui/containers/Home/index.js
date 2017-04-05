@@ -1,14 +1,9 @@
 import React, { Component } from 'react'
-import {
-    Text,
-} from 'react-native'
 
 import {     
     Header, 
     Title, 
     Content, 
-    Footer, 
-    FooterTab, 
     Button, 
     Left, 
     Right, 
@@ -16,44 +11,44 @@ import {
     Icon, 
     Drawer,
     Container,
+    Text,
+    Badge,
 } from 'native-base'
+
+import Footer from '~/ui/components/Footer'
 
 import { connect } from 'react-redux'
 import { openDrawer } from '~/store/actions/common'
 
 @connect(null, {openDrawer})
 export default class Home extends Component {
+
   render() {
-      return (          
-         
-          <Container>
-          
-              <Header>
-                  <Left>
-                      <Button transparent onPress={this.props.openDrawer}>
-                          <Icon name='menu' />
-                      </Button>
-                  </Left>
-                  <Body>
-                      <Title>Header</Title>
-                  </Body>
-                  <Right />
-              </Header>
-
-              <Content>
-                  
-              </Content>
-
-              <Footer>
-                  <FooterTab>
-                      <Button full>
-                          <Text>Footer</Text>
-                      </Button>
-                  </FooterTab>
-              </Footer>
-              
-          </Container>
+    const {route} = this.props
+    return (          
+       
+        <Container>
         
-      )
+            <Header>
+                <Left>
+                    <Button transparent onPress={this.props.openDrawer}>
+                        <Icon name='menu' />
+                    </Button>
+                </Left>
+                <Body>
+                    <Title>{route.title}</Title>
+                </Body>
+                <Right />
+            </Header>
+
+            <Content padder>
+                <Text>Footer</Text>
+            </Content>
+
+            <Footer />
+            
+        </Container>
+      
+    )
   }
 }
