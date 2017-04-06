@@ -1,17 +1,8 @@
 import React, { Component } from 'react'
-// import Relay, {
-//   DefaultNetworkLayer,
-// } from 'react-relay'
-
-// import { API_BASE } from '~/store/constants/api'
-
 import App from './app'
 import { Provider } from 'react-redux'
+import { Spinner } from 'native-base'
 import configureStore from '~/store/config'
-
-// Relay.injectNetworkLayer(
-//   new DefaultNetworkLayer(`${API_BASE}/graphql`)
-// )
 
 export default class Regit extends Component {
 
@@ -31,7 +22,7 @@ export default class Regit extends Component {
     const {store} = this.state
     // should have a pre-load page
     if(!store)
-      return false
+      return (<Spinner color="green" />)
 
     return (
       <Provider store={store}>

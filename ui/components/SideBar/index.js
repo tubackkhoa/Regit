@@ -6,26 +6,25 @@ import { Content, H2, H3, Text, List, ListItem, Icon as IconNB,
   Spinner, Thumbnail,
 } from 'native-base'
 
-import { logout } from '~/store/actions/auth'
+import * as authActions from '~/store/actions/auth'
 import * as accountSelectors from '~/store/selectors/account'
-import { forwardTo, setToast, closeDrawer } from '~/store/actions/common'
-import routes from '~/ui/routes'
+import * as commonActions from '~/store/actions/common'
 import * as authSelectors from '~/store/selectors/auth'
-import { getProfile } from '~/store/actions/account'
-import styles from './styles'
-import options from './options'
+import * as accountActions from '~/store/actions/account'
 
+import options from './options'
+import routes from '~/ui/routes'
 import Icon from '~/ui/elements/Icon'
+import styles from './styles'
 
 import {  
   API_BASE
 } from '~/store/constants/api'
 
-
 @connect(state=>({
   token: authSelectors.getToken(state),
   profile: accountSelectors.getProfile(state),
-}), {logout, forwardTo, getProfile, setToast, closeDrawer})
+}), {...authActions, ...accountActions, ...commonActions})
 export default class SideBar extends Component {
 
   static propTypes = {

@@ -8,7 +8,7 @@ import {
 
 import SideBar from '~/ui/components/SideBar'
 import { connect } from 'react-redux'
-import { closeDrawer } from '~/store/actions/common'
+import * as commonActions from '~/store/actions/common'
 import { getDrawerState } from '~/store/selectors/common'
 
 import getTheme from '~/theme/components'
@@ -16,7 +16,7 @@ import material from '~/theme/variables/material'
 
 @connect(state=>({
   drawerState: getDrawerState(state),
-}), {closeDrawer})
+}), {...commonActions})
 export default class Container extends Component {
 
   static propTypes = {
@@ -25,19 +25,20 @@ export default class Container extends Component {
   }
 
   render() {    
-    const {showDrawer, drawerState} = this.props
+    // should write out function, to prevent wrong params given, and to make sure it is function
+    const {showDrawer, drawerState, closeDrawer, navigator, children} = this.props
     return ( 
       <StyleProvider style={getTheme(material)}>       
       {showDrawer
         ? <Drawer
             open={drawerState === 'opened'}
             type="displace"             
-            content={showDrawer && <SideBar navigator={this.props.navigator} />}
-            onClose={this.props.closeDrawer}
+            content={showDrawer && <SideBar navigator={navigator} />}
+            onClose={()=>closeDrawer()}
           >          
-            {this.props.children}          
+            {children}          
           </Drawer>   
-        : <ContainerNB>{this.props.children}</ContainerNB>
+        : <ContainerNB>{children}</ContainerNB>
       }
       </StyleProvider>     
     )

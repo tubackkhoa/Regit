@@ -8,7 +8,7 @@ import {
 } from 'native-base'
 import styles from './styles'
 import * as accountSelectors from '~/store/selectors/account'
-import { goBack, setToast } from '~/store/actions/common'
+import * as commonActions from '~/store/actions/common'
 import DatePicker from '~/ui/components/DatePicker'
 import Header from '~/ui/components/Header'
 import Toggle from '~/ui/components/Toggle'
@@ -36,19 +36,19 @@ const validate = (values) => {
 
 @connect(state=>({  
   initialValues: accountSelectors.getProfile(state),
-}), { setToast, goBack })
+}), {...commonActions})
 @reduxForm({ form: 'ProfileForm', validate})
 export default class UserProfile extends Component {  
 
   render() {    
-    const {initialValues:profile, route} = this.props
+    const {initialValues:profile, route, goBack} = this.props
     const avatar = {uri: (API_BASE + profile.PhotoUrl)}    
     return (
       <Container>
         
         <Image style={styles.headerImage} source={profileCoverImage}/>        
         <View padder style={styles.headerContainer}>
-          <Icon name="cancel" style={styles.headerIcon} onPress={()=>this.props.goBack()} />  
+          <Icon name="cancel" style={styles.headerIcon} onPress={()=>goBack()} />  
           <View style={styles.avatarContainer}>      
             <Thumbnail source={avatar} style={styles.avatar}/>
             <View style={styles.photoIconContainer}>

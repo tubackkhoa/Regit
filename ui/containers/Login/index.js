@@ -11,8 +11,9 @@ import {
 } from 'native-base'
 import styles from './styles'
 import { connect } from 'react-redux'
-import { setToast } from '~/store/actions/common'
-import { login } from '~/store/actions/auth'
+// this way help copy and paste faster
+import * as commonActions from '~/store/actions/common'
+import * as authActions from '~/store/actions/auth'
 import { Field, reduxForm } from 'redux-form'
 
 import routes from '~/ui/routes'
@@ -30,7 +31,7 @@ const validate = (values) => {
   return errors
 }
 
-@connect(null, {setToast, login})
+@connect(null, {...commonActions, ...authActions})
 @reduxForm({ form: 'LoginForm', validate})
 export default class Login extends Component {
 
@@ -39,7 +40,7 @@ export default class Login extends Component {
   }
 
   render() {    
-    const { handleSubmit, submitting } = this.props        
+    const { handleSubmit, submitting, setToast } = this.props        
     return (
       <Container style={styles.container}>
                             
@@ -58,8 +59,7 @@ export default class Login extends Component {
 
               <Text style={styles.label}>Forgot password?</Text>
 
-              <Button bordered style={styles.outlineButton} onPress={()=>
-                this.props.setToast('hehe')    }>
+              <Button bordered style={styles.outlineButton} onPress={()=>setToast('hehe')}>
                 <Text style={styles.whiteColor}>Sign up</Text>
               </Button>              
 

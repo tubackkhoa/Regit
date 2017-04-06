@@ -18,19 +18,19 @@ import Header from '~/ui/components/Header'
 import Footer from '~/ui/components/Footer'
 
 import { connect } from 'react-redux'
-import { openDrawer } from '~/store/actions/common'
+import * as commonActions from '~/store/actions/common'
 
-@connect(null, {openDrawer})
+@connect(null, {...commonActions})
 export default class Home extends Component {
 
   render() {
-    const {route} = this.props
+    const {route, openDrawer} = this.props
     return (          
        
         <Container>
         
             <Header 
-                left={<Icon name="menu" onPress={this.props.openDrawer}/>}
+                left={<Icon name="menu" onPress={openDrawer}/>}
                 center={route.title}                
             />
 
