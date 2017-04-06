@@ -11,7 +11,8 @@ export default (variables = variable) => {
       flex: 1,      
       'NativeBase.Segment': {
         borderWidth: 0,        
-      }
+      },
+      
   };
 
   return contentTheme;

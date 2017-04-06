@@ -9,12 +9,13 @@ import {
 } from 'native-base'
 
 import DatePicker from '~/ui/components/DatePicker'
+import Dropdown from '~/ui/components/Dropdown'
 import Toggle from '~/ui/components/Toggle'
 import material from '~/theme/variables/material'
 import styles from './styles'
 
-export const InputField = ({ input, label, meta: { touched, error, warning }, icon, ...custom }) => (  
-  <Item style={styles.item} error={touched && !!error}>  
+export const InputField = ({ input, label, meta: { touched, error, warning }, icon, onPress, ...custom }) => (  
+  <Item style={styles.item} error={touched && !!error} onPress={onPress} >  
     <Input   
       placeholder={label}    
       {...input}                   
@@ -49,6 +50,18 @@ export const LockField = ({ input, label, meta: { touched, error, warning }, ...
     checked={input.value}    
     title={label} 
     onToggle={(value) => input.onChange(value)}
+    {...custom}    
+  />
+)
+
+export const DropdownField = ({ input, label, meta: { touched, error, warning }, ...custom }) => (
+  <Dropdown error={touched && !!error}    
+    selected={input.value}    
+    header={label} 
+    onChange={(value) => input.onChange(value)}
+    style={styles.item}
+    inputStyle={styles.input}
+    inputIconStyle={styles.inputIcon}
     {...custom}    
   />
 )

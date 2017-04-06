@@ -12,6 +12,10 @@ import { getToast } from '~/store/selectors/common'
 }), {clearToast})
 export default class Toasts extends Component {
 
+  componentWillMount(){
+    this.timer && clearTimeout(this.timer)
+  }
+
   render(){
     // we can display close all or something
     // for this to show toast only when cross form, for update call Toast.show directly
@@ -19,7 +23,7 @@ export default class Toasts extends Component {
       return false
     const {position, message, level, duration} = this.props.toast
     if (duration>0) {
-      setTimeout(()=> this.props.clearToast(), duration)
+      this.timer = setTimeout(()=> this.props.clearToast(), duration)
     }
     const levelProps = {[level]:true}
     return (

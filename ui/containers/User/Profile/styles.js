@@ -12,23 +12,23 @@ export default {
   headerImage:{
     resizeMode: 'cover', 
     width: '100%', 
-    height:180
+    height:180,    
   },
   headerContainer:{
     flex:1, 
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop:-160,
-    marginBottom:-180
+    marginBottom:-180,    
   },
   avatarContainer:{
     alignSelf: 'center',     
-    marginTop: -100,    
+    marginTop: -100,        
   },
   avatar:{          
     width: 120,
     height: 120,
-    borderRadius: 60,             
+    borderRadius: 60,                 
   },
   photoIconContainer:{
     backgroundColor:'#fff',

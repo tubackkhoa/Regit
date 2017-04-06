@@ -147,9 +147,9 @@ class DatePicker extends Component {
     return Moment(date, format).toDate()
   }
 
-  getDateStr(date = this.props.date) {
-    const {mode, displayFormat = FORMATS[mode]} = this.props
-
+  getDateStr(date = this.props.date, displayMode=true) {
+    const {mode} = this.props
+    const displayFormat = this.props[displayMode ? 'displayFormat' : 'format'] || FORMATS[mode]
     if (date instanceof Date) {
       return Moment(date).format(displayFormat)
     } else {
@@ -159,7 +159,8 @@ class DatePicker extends Component {
 
   datePicked() {
     if (typeof this.props.onDateChange === 'function') {
-      this.props.onDateChange(this.getDateStr(this.state.date), this.state.date)
+      console.log(this.getDateStr(this.state.date, false))
+      this.props.onDateChange(this.getDateStr(this.state.date, false), this.state.date)
     }
   }
 
