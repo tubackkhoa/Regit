@@ -3,42 +3,42 @@ export default {
     {
       name: 'Network',
       route: 'anatomy',
-      icon: 'account-box',
+      icon: 'network',
     },    
     {
       name: 'Activity Log',
       route: 'picker',
-      icon: 'account-box',
+      icon: 'activity',
     },
     {
       name: 'Account Setting',
       route: 'user/profile',
-      icon: 'account-box',
+      icon: 'setting',
     },
     {
       name: 'Manage Interaction',
       route: 'searchbar',
-      icon: 'account-box',
+      icon: 'interaction',
     },
     {
       name: 'Calendar',
       route: 'spinner',
-      icon: 'account-box',
+      icon: 'calendar',
     },
     {
       name: 'Reminder',
       route: 'tab',
-      icon: 'account-box',
+      icon: 'reminder',
     },
     {
       name: 'Poll',
       route: 'tabs',
-      icon: 'account-box',
+      icon: 'poll',
     },
     {
       name: 'Help & Support',
       route: 'thumbnail',
-      icon: 'account-box',    
+      icon: 'help',    
     },
 
   ]

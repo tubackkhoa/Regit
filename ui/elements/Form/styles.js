@@ -6,10 +6,13 @@ export default {
     marginTop: 10,
     paddingLeft: 20,
     paddingRight: 20,
-    width: '100%',
+    width: '100%',    
   },
   input: {    
     fontFamily: 'Roboto',
     fontWeight: '300',    
   },
+  inputIcon: {
+    paddingRight:0,
+  }
 }

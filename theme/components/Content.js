@@ -8,11 +8,9 @@ export default (variables = variable) => {
       '.padder': {
         padding: variables.contentPadding,
       },
-      flex: 1,
-      backgroundColor: '#eaeaea',
+      flex: 1,      
       'NativeBase.Segment': {
-        borderWidth: 0,
-        backgroundColor: '#eaeaea'
+        borderWidth: 0,        
       }
   };
 

@@ -55,22 +55,25 @@ export default {
     color: '#FFF',
   },
   icon: {
-    color: '#FFF',
+    marginTop: 10,
+    width: 20,
+    height: 20,
   },
   iconEdit: {
     position:'absolute', 
     left:'50%',
     bottom:20, 
     marginLeft:60, 
-    color: '#fff',
-    fontSize:14
+    color: '#fff',    
+    width: 25,
+    height: 25,
   },
   iconText: {
-    fontSize: (Platform.OS === 'ios') ? 13 : 11,
-    fontWeight: '400',
-    textAlign: 'center',
-    marginTop: (Platform.OS === 'android') ? -3 : undefined,
+    fontSize: (Platform.OS === 'ios') ? 14 : 12,
+    fontWeight: '400',    
+    textAlign: 'center',    
     color: '#FFF',
+    marginLeft: 20,
   },
   iconTextLast: {
     color: '#ce2d30',

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Platform } from 'react-native'
 import { connect } from 'react-redux'
-import { Content, H2, H3, Text, List, ListItem, Icon, 
+import { Content, H2, H3, Text, List, ListItem, Icon as IconNB, 
   Container, Left, Right, Badge, Button, View, StyleProvider, getTheme, variables,
   Spinner, Thumbnail,
 } from 'native-base'
@@ -14,6 +14,8 @@ import * as authSelectors from '~/store/selectors/auth'
 import { getProfile } from '~/store/actions/account'
 import styles from './styles'
 import options from './options'
+
+import Icon from '~/ui/elements/Icon'
 
 import {  
   API_BASE
@@ -83,7 +85,7 @@ export default class SideBar extends Component {
           {options.listItems.map(item =>
               <ListItem key={item.route} button onPress={() => this.navigateTo(item.route)} >
                 <Left>
-                  <Icon name={item.icon} style={styles.icon} />
+                  <Icon name={item.icon} style={styles.icon} />                  
                   <Text style={styles.iconText}>{item.name}</Text>
                 </Left>                
               </ListItem>)}

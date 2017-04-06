@@ -33,7 +33,7 @@ export default class Footer extends Component {
                     <Text>Message</Text>
                 </Button>
                 <Button badge textSmall>                  
-                    <Badge><Text>2</Text></Badge>      
+                    <Badge><Text>3</Text></Badge>      
                     <Icon name="notifications" />
                     <Text>Notification</Text>
                 </Button>

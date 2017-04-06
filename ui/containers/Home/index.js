@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
-import {     
-    Header, 
+import {         
     Title, 
     Content, 
     Button, 
@@ -15,6 +14,7 @@ import {
     Badge,
 } from 'native-base'
 
+import Header from '~/ui/components/Header'
 import Footer from '~/ui/components/Footer'
 
 import { connect } from 'react-redux'
@@ -29,20 +29,13 @@ export default class Home extends Component {
        
         <Container>
         
-            <Header>
-                <Left>
-                    <Button transparent onPress={this.props.openDrawer}>
-                        <Icon name='menu' />
-                    </Button>
-                </Left>
-                <Body>
-                    <Title full>{route.title}</Title>
-                </Body>
-                <Right/>
-            </Header>
+            <Header 
+                left={<Icon name="menu" onPress={this.props.openDrawer}/>}
+                center={route.title}                
+            />
 
             <Content padder>
-                <Text>Footer</Text>
+                <Text>Home page</Text>
             </Content>
 
             <Footer />
