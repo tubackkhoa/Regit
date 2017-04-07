@@ -14,6 +14,7 @@ import * as accountSelectors from '~/store/selectors/account'
 import * as dataSelectors from '~/store/selectors/data'
 
 import DatePicker from '~/ui/components/DatePicker'
+import PhotoChooser from '~/ui/components/PhotoChooser'
 import Header from '~/ui/components/Header'
 import Toggle from '~/ui/components/Toggle'
 
@@ -37,6 +38,13 @@ import { profileCover } from '~/assets'
 @reduxForm({ form: 'ProfileForm', validate})
 export default class UserProfile extends Component {  
 
+  constructor(props) {
+    super(props)    
+    this.state = {
+      avatar: {uri: (API_BASE + props.initialValues.PhotoUrl)}
+    }
+  }
+
   componentDidMount(){
     const {countries, getCountries, initialValues:profile} = this.props
     countries.length 
@@ -56,25 +64,27 @@ export default class UserProfile extends Component {
     return ret
   }
 
-  _onChangeCountries = (value)=>{    
-    console.log(value)
+  _handleChoosePhoto = ({uri, data})=>{
+    // update 'data:image/jpeg;base64,' + data
+    this.setState({avatar:{uri}})
+  }
+
+  _onChangeCountries = (value)=>{        
     this.loadCities(this.props.countries, value)
   }
 
   render() {        
     const {initialValues:profile, route, goBack, countries, cities} = this.props
-    const avatar = {uri: (API_BASE + profile.PhotoUrl)}      
+    const {avatar} = this.state
+          
     return (
-      <Container>
-        
+      <Container>        
         <Image style={styles.headerImage} source={profileCover}/>        
         <View padder style={styles.headerContainer}>
           <Icon name="cancel" style={styles.headerIcon} onPress={()=>goBack()} />  
           <View style={styles.avatarContainer}>      
             <Thumbnail source={avatar} style={styles.avatar}/>
-            <View style={styles.photoIconContainer}>
-            <Icon name="photo-camera" style={styles.photoIcon}/>
-            </View>
+            <PhotoChooser style={styles.photoIconContainer} onSuccess={this._handleChoosePhoto}/>
           </View>          
           <Icon name="edit" style={styles.headerIcon}/>
         </View>

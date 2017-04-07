@@ -30,7 +30,7 @@ export default class Home extends Component {
         <Container>
         
             <Header 
-                left={<Icon name="menu" onPress={openDrawer}/>}
+                left={<Button transparent onPress={openDrawer}><Icon name="menu"/></Button>}
                 center={route.title}                
             />
 

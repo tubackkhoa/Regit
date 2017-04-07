@@ -4,8 +4,7 @@ import {
     Header as HeaderNB, 
     Left,
     Right,
-    Body, 
-    Button,         
+    Body,           
     Text,
     Title,    
 } from 'native-base'
@@ -18,19 +17,11 @@ export default class Header extends Component {
     const {left, right, center} = this.props
     return (                             
       <HeaderNB>          
-        <Left>
-          <Button transparent>
-          {left}
-          </Button>
-        </Left>
+        <Left>{left}</Left>
         <Body>
           <Title full>{center}</Title>
         </Body>
-        <Right>
-          <Button transparent>
-          {right}
-          </Button>
-        </Right>
+        <Right>{right}</Right>
       </HeaderNB>     
     )
   }

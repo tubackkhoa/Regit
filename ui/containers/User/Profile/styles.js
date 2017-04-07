@@ -30,18 +30,9 @@ export default {
     height: 120,
     borderRadius: 60,                 
   },
-  photoIconContainer:{
-    backgroundColor:'#fff',
-    padding:5,
-    width:30,
-    height:30,
-    borderRadius:15,
+  photoIconContainer:{    
     position:'absolute',
     bottom:10,
     right:0
-  },
-  photoIcon:{
-    fontSize:20,
-    color:'#959595'
-  },
+  }, 
 }
