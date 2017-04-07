@@ -7,16 +7,17 @@ import {
   Form, Item, Switch, View,
 } from 'native-base'
 import styles from './styles'
-import * as accountSelectors from '~/store/selectors/account'
+
+import * as dataActions from '~/store/actions/data'
 import * as commonActions from '~/store/actions/common'
+import * as accountSelectors from '~/store/selectors/account'
+import * as dataSelectors from '~/store/selectors/data'
+
 import DatePicker from '~/ui/components/DatePicker'
 import Header from '~/ui/components/Header'
 import Toggle from '~/ui/components/Toggle'
 
-import {  
-  API_BASE
-} from '~/store/constants/api'
-
+import { API_BASE } from '~/store/constants/api'
 import { Field, reduxForm } from 'redux-form'
 
 import { 
@@ -25,49 +26,48 @@ import {
   DropdownField,
 } from '~/ui/elements/Form'
 
-
-const profileCoverImage = require('~/assets/profile-cover.png')
-
-const validate = (values) => {
-  const errors = {}
-  if(!values) return errors
-  return errors
-}
+import { validate } from './utils'
+import { profileCover } from '~/assets'
 
 @connect(state=>({  
   initialValues: accountSelectors.getProfile(state),
-}), {...commonActions})
+  countries: dataSelectors.getCountries(state),
+  cities: dataSelectors.getCities(state),
+}), {...commonActions, ...dataActions})
 @reduxForm({ form: 'ProfileForm', validate})
 export default class UserProfile extends Component {  
 
-  constructor(props) {
-        super(props);
-        this.state = {
-            selectedItem: undefined,
-            selected1: 'key1',
-            results: {
-                items: []
-            }
-        }
-    }
-    onValueChange (value: string) {
-        console.log(this.refs.picker.children)
-        this.setState({
-            selected1 : value
-        });
-    }
+  componentDidMount(){
+    const {countries, getCountries, initialValues:profile} = this.props
+    countries.length 
+      ? this.loadCities(countries, profile.Country) 
+      : getCountries(data=>this.loadCities(data. profile.Country))
+  }
 
-  _onChangeCity = (e)=>{
-    this.props.setToast('hehe')
+  loadCities(countries, value){    
+    const countryCode = countries.find(item=> item.Name === value)['Code']
+    this.props.getCities(countryCode)    
+  }
+
+  makeItems(data){
+    const ret = {}
+    // pure key value
+    data && data.forEach(item=>ret[item.Name] = item.Name)
+    return ret
+  }
+
+  _onChangeCountries = (value)=>{    
+    console.log(value)
+    this.loadCities(this.props.countries, value)
   }
 
   render() {        
-    const {initialValues:profile, route, goBack} = this.props
-    const avatar = {uri: (API_BASE + profile.PhotoUrl)}    
+    const {initialValues:profile, route, goBack, countries, cities} = this.props
+    const avatar = {uri: (API_BASE + profile.PhotoUrl)}      
     return (
       <Container>
         
-        <Image style={styles.headerImage} source={profileCoverImage}/>        
+        <Image style={styles.headerImage} source={profileCover}/>        
         <View padder style={styles.headerContainer}>
           <Icon name="cancel" style={styles.headerIcon} onPress={()=>goBack()} />  
           <View style={styles.avatarContainer}>      
@@ -86,12 +86,14 @@ export default class UserProfile extends Component {
             <Toggle titleStyle={styles.label} title="Day of birth" text="Public" />            
             <Field name="Birthdate" displayFormat="DD MMMM YYYY" component={DateField} icon="keyboard-arrow-down" />
             <Toggle titleStyle={styles.label} title="Location" text="Public" />            
-            <Field name="Country" component={DropdownField} header="Select Country" items={{China:'China',Aihua:'Aihua'}} />            
-            <Field disabled onPress={this._onChangeCity} name="City" component={InputField} icon="keyboard-arrow-down" />
+            <Field name="Country" onSelected={this._onChangeCountries} component={DropdownField} 
+              header="Select Country" items={this.makeItems(countries)} />            
+            <Field name="City" component={DropdownField} 
+              header="Select City" items={this.makeItems(cities)}/>
           </Form>
                     
         </Content>
-        
+
       </Container>
     )
   }

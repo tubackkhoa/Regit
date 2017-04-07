@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Platform } from 'react-native'
 import { connect } from 'react-redux'
-import { Content, H2, H3, Text, List, ListItem, Icon as IconNB, 
+import { Content,Text, List, ListItem, Icon as IconNB, 
   Container, Left, Right, Badge, Button, View, StyleProvider, getTheme, variables,
   Spinner, Thumbnail,
 } from 'native-base'
@@ -64,7 +64,7 @@ export default class SideBar extends Component {
     const {profile} = this.props    
     if(!profile)
       return (<Spinner color="green" />)
-
+    // by default it is flex, so do not set flex portion
     // render profile
     const avatar = {uri: (API_BASE + profile.PhotoUrl)}
     return (      
@@ -75,11 +75,12 @@ export default class SideBar extends Component {
           <View style={styles.drawerCover}>
             <Thumbnail source={avatar} 
               style={styles.drawerImage}/>
-            <H3 style={styles.text}>{profile.DisplayName}</H3>
-            <Text style={styles.text}>{profile.Birthdate}</Text>
-            <Text style={styles.text}>{profile.City}, {profile.Country}              
-            </Text>
-            <Icon onPress={this._handleEditProfile} name="edit" style={styles.iconEdit} />
+            <Text large style={styles.text}>{profile.DisplayName}</Text>
+            <Text small style={styles.text}>{profile.Birthdate}</Text>
+            <View style={styles.editContainer}>
+              <Text small style={styles.text}>{profile.City}, {profile.Country}</Text>
+              <Icon onPress={this._handleEditProfile} name="edit" style={styles.iconEdit} />
+            </View>
           </View>
           {options.listItems.map(item =>
               <ListItem key={item.route} button onPress={() => this.navigateTo(item.route)} >

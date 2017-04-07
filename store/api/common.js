@@ -4,8 +4,9 @@ import {
   API_BASE
 } from '~/store/constants/api'
 
-const urlEncode = data => Object.keys(data).map((key) => key + '=' + encodeURIComponent(data[key])
-).join('&')
+const urlEncode = data => data 
+? Object.keys(data).map((key) => key + '=' + encodeURIComponent(data[key])).join('&')
+: ''
 
 export const rejectErrors = (res) => {
   const { status } = res  
@@ -55,4 +56,7 @@ export const apiCall = (url, options, token = null) =>
 // must have data to post, put should not return data
 export const apiPost = (url, data, token, method='POST') => 
   apiCall(url, { method, body: urlEncode(data) }, token)
+
+export const apiGet = (url, data, token, method='GET') => 
+  apiCall(url + '?' + urlEncode(data), { method }, token)
 

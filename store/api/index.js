@@ -1,5 +1,6 @@
 import auth from './auth'
 import account from './account'
+import data from './data'
 
 // we compose all api for each category here as single entry point
 // api will be an single entry point for all frame methods
@@ -7,4 +8,5 @@ import account from './account'
 export default {
   auth,  
   account,
+  data,
 }

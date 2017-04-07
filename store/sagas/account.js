@@ -22,7 +22,7 @@ const requestGetProfileAsync = createRequestSaga({
 
 
 // root saga reducer
-const asyncAccountWatchers = [
+export default [
     // like case return, this is take => call
     // inner function we use yield*
     // from direct watcher we just yield value
@@ -34,5 +34,4 @@ const asyncAccountWatchers = [
     },
 ]
 
-export default asyncAccountWatchers
 

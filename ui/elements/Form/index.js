@@ -54,11 +54,14 @@ export const LockField = ({ input, label, meta: { touched, error, warning }, ...
   />
 )
 
-export const DropdownField = ({ input, label, meta: { touched, error, warning }, ...custom }) => (
+export const DropdownField = ({ input, label, meta: { touched, error, warning }, onSelected, ...custom }) => (
   <Dropdown error={touched && !!error}    
     selected={input.value}    
     header={label} 
-    onChange={(value) => input.onChange(value)}
+    onChange={(value) => {
+      onSelected && onSelected(value)
+      input.onChange(value)
+    }}
     style={styles.item}
     inputStyle={styles.input}
     inputIconStyle={styles.inputIcon}

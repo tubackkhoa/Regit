@@ -14,13 +14,11 @@ export default {
   drawerCover: {
     justifyContent: 'center',
     alignItems: 'center',
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
     borderColor:'#8e8e8e',
     height: 220,    
-    position: 'relative',    
-    
+    position: 'relative',        
   },
-
   drawerImage: {    
     width: 100,
     height: 100,
@@ -52,18 +50,19 @@ export default {
   },
   text: {
     fontWeight: (Platform.OS === 'ios') ? '400' : '300',        
-    color: '#FFF',
+    color: '#FFF',    
   },
-  icon: {
-    marginTop: 10,
+  icon: {    
     width: 20,
     height: 20,
   },
-  iconEdit: {
-    position:'absolute', 
-    left:'50%',
-    bottom:20, 
-    marginLeft:60, 
+  editContainer:{
+    flexDirection:'row',
+    paddingLeft:35
+  },
+  iconEdit: {    
+    marginLeft: 10, 
+    marginTop: -10,
     color: '#fff',    
     width: 25,
     height: 25,

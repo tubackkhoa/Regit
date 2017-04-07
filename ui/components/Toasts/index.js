@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Modal, Platform } from 'react-native'
+import { View, Modal } from 'react-native'
 import { Text, Button } from 'native-base'
 
 // for convenient, we can just import one
@@ -13,7 +13,7 @@ import { getToast } from '~/store/selectors/common'
 export default class Toasts extends Component {
 
   componentWillMount(){
-    this.timer && clearTimeout(this.timer)
+    clearTimeout(this.timer)
   }
 
   render(){
@@ -22,8 +22,9 @@ export default class Toasts extends Component {
     if(!this.props.toast)
       return false
     const {position, message, level, duration} = this.props.toast
+    clearTimeout(this.timer)
     if (duration>0) {
-      this.timer = setTimeout(()=> this.props.clearToast(), duration)
+      // this.timer = setTimeout(()=> this.props.clearToast(), duration)
     }
     const levelProps = {[level]:true}
     return (
@@ -32,10 +33,10 @@ export default class Toasts extends Component {
         transparent={true}        
         onRequestClose={() => this.props.clearToast()}
         >
-        <View style={{
-            margin: (Platform.OS==='ios') ? 20 : 0,
+        <View style={{            
             flex: 1,
-            justifyContent: (position==='top') ? 'flex-start' : (position==='bottom') ? 'flex-end' : (position==='center') ? 'center' : 'flex-start'}}          >            
+            justifyContent: (position==='top') ? 'flex-start' : (position==='bottom') ? 'flex-end' : (position==='center') ? 'center' : 'flex-start'
+          }} >            
             <Button 
               full  
               iconRight            
