@@ -1,9 +1,4 @@
-const React = require('react-native');
-
-const { StyleSheet, Platform, Dimensions } = React;
-
-const deviceHeight = Dimensions.get('window').height;
-const deviceWidth = Dimensions.get('window').width;
+import material from '~/theme/variables/material'
 
 export default {
   container: {
@@ -38,18 +33,18 @@ export default {
     height: 37,
     borderRadius: 18,
     marginRight: 12,
-    paddingTop: (Platform.OS === 'android') ? 7 : 5,
+    paddingTop: (material.platform === 'android') ? 7 : 5,
   },
 
   sidebarIcon: {
     fontSize: 21,
     color: '#fff',
-    lineHeight: (Platform.OS === 'android') ? 21 : 25,
+    lineHeight: (material.platform === 'android') ? 21 : 25,
     backgroundColor: 'transparent',
     alignSelf: 'center',
   },
   text: {
-    fontWeight: (Platform.OS === 'ios') ? '400' : '300',        
+    fontWeight: (material.platform === 'ios') ? '400' : '300',        
     color: '#FFF',    
   },
   icon: {    
@@ -68,7 +63,7 @@ export default {
     height: 25,
   },
   iconText: {
-    fontSize: (Platform.OS === 'ios') ? 14 : 12,
+    fontSize: (material.platform === 'ios') ? 14 : 12,
     fontWeight: '400',    
     textAlign: 'center',    
     color: '#FFF',

@@ -51,11 +51,16 @@ export const drawer = (state = {drawerState: 'closed'}, { type }) => {
   }
 }
 
-
-export const router = (state = null, {type, payload}) => {
+// should always be payload for faster copy and paste
+// we write our own route, only replace, do not use speacial function like jumpTo, it can be replaced by modal
+export const router = (state = {stack:[]}, { type, payload }) => {
   switch(type) {
-    case 'app/navigate':
-      return {...state, ...payload}
+    case 'navigate/push':      
+      return state.route === payload ? state : {route:payload, stack: state.route ? [state.route, ...state.stack] : [...state.stack]}
+    case 'navigate/reset':
+      return {route:payload, stack:[]}
+    case 'navigate/pop':      
+      return state.stack[0] ? {route:state.stack[0], stack:state.stack.slice(1)} : state
     default:
       return state
   }  

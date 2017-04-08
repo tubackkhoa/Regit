@@ -17,15 +17,10 @@ export default class Navigator extends Component {
         return NavigatorRN.SceneConfigs[route.animationType || 'PushFromRight']
     }
 
-    // will jump to when call the function forwardTo
+    // replace view from stack
     componentWillReceiveProps({router}){        
-      const mavigateMethod = this.refs.navigator[router.method]
-      mavigateMethod && mavigateMethod(routes[router.route])
+      this.refs.navigator.replace(routes[router.route])      
     }
-
-    shouldComponentUpdate({router}){
-        return (this.props.router.route !== router.route)
-    }    
 
     renderScene = (route, navigator) => {           
         return this.props.renderScene(route, navigator)

@@ -1,34 +1,37 @@
 import React, { Component, PropTypes } from 'react'
 import { TouchableWithoutFeedback, View } from 'react-native'
+import { Icon as IconNB } from 'native-base'
 import Svg from 'react-native-svg'
 import svgs from './svgs'
 
 export default class Icon extends Component {
 
-  static defaultProps = {
-      fill: '#000',            
-  }
-
-  static propTypes = {
-      fill: PropTypes.string.isRequired,      
+  static propTypes = {               
       name: PropTypes.string.isRequired,                   
       stroke: PropTypes.string,
       strokeWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number])   
   }
 
   renderIcon(){
-    const {style, name, onPress, ...props} = this.props    
+    const {style={}, name, onPress, ...props} = this.props    
     // fallback to material?
     const svg = svgs[name]
     if (!svg) 
-        return null
+        return <IconNB {...this.props} />
 
-    const {width=40, height=40, color='#FFF', stroke, strokeWidth, ...iconStyle} = style || {}    
+    const {
+      fontSize=24, 
+      color='#FFF', stroke, strokeWidth, 
+      ...iconStyle
+    } = style
+
     const {svg:svgEl, viewBox = '0 0 100 100'} = svg    
-    
+    // by default height is fontSize, min-x, min-y, width, height
+    const viewBoxCoords = viewBox.split(' ')
+    const width = fontSize * (viewBoxCoords[2] / viewBoxCoords[3])
     return (
       <View style={iconStyle} {...props}>        
-        <Svg height={height} width={width} viewBox={viewBox}>
+        <Svg height={fontSize} width={width} viewBox={viewBox}>
             {React.cloneElement(svgEl, {
                 fill: color,
                 stroke,

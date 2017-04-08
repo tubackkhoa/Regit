@@ -16,22 +16,26 @@ export default class Toasts extends Component {
     clearTimeout(this.timer)
   }
 
+  _closeToast=()=>{
+    clearTimeout(this.timer) 
+    if (duration>0) {
+      this.timer = setTimeout(()=> this.props.clearToast(), duration)
+    }
+  }
+
   render(){
     // we can display close all or something
     // for this to show toast only when cross form, for update call Toast.show directly
     if(!this.props.toast)
       return false
     const {position, message, level, duration} = this.props.toast
-    clearTimeout(this.timer)
-    if (duration>0) {
-      // this.timer = setTimeout(()=> this.props.clearToast(), duration)
-    }
+    this._closeToast(duration)
     const levelProps = {[level]:true}
     return (
       <Modal
         animationType={(position=='bottom') ? "slide" : "fade"}
         transparent={true}        
-        onRequestClose={() => this.props.clearToast()}
+        onRequestClose={() => this._closeToast(100)}
         >
         <View style={{            
             flex: 1,
@@ -41,7 +45,7 @@ export default class Toasts extends Component {
               full  
               iconRight            
               {...levelProps}
-              onPress={() =>this.props.clearToast()}>
+              onPress={() => this._closeToast(100)}>
               <Text style={{color:'#fff'}}>{message}</Text>
             </Button>      
         </View>

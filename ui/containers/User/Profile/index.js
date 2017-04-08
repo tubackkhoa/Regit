@@ -84,7 +84,7 @@ export default class UserProfile extends Component {
           <Icon name="cancel" style={styles.headerIcon} onPress={()=>goBack()} />  
           <View style={styles.avatarContainer}>      
             <Thumbnail source={avatar} style={styles.avatar}/>
-            <PhotoChooser style={styles.photoIconContainer} onSuccess={this._handleChoosePhoto}/>
+            <PhotoChooser style={styles.photoIcon} onSuccess={this._handleChoosePhoto}/>
           </View>          
           <Icon name="edit" style={styles.headerIcon}/>
         </View>

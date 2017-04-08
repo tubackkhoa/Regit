@@ -24,13 +24,13 @@ export const log = (data, type='table') => ({
 
 // Little helper function to abstract going to different pages
 export const forwardTo = (route, reset=false) => ({
-  type: 'app/navigate',
-  payload: { route, method: reset ? 'resetTo' : 'push' },
+  type: 'navigate/' + (reset ? 'reset' : 'push'),
+  payload: route,
 })
 
 export const goBack = () => ({
-  type: 'app/navigate',
-  payload: { method: 'pop' },
+  type: 'navigate/pop',
+  payload: null,
 })
 
 // mark request for later checking

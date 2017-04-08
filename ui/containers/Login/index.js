@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { 
   Container, 
+  Content,
   Form, 
   Item, 
   Input, 
@@ -34,13 +35,14 @@ export default class Login extends Component {
     const { handleSubmit, submitting, setToast } = this.props        
     return (
       <Container style={styles.container}>
-                            
-        <Thumbnail style={styles.logo} source={logo} />        
+        <Content>                    
+        
+          <Thumbnail style={styles.logo} source={logo} />        
+        
           <Form>
               
               <Field autoCapitalize="none" name="email" label="Email" component={InputField} />
-              <Field name="password" label="Password" secureTextEntry={true} component={InputField} />
-              
+              <Field name="password" label="Password" secureTextEntry={true} component={InputField} />              
               <Button onPress={handleSubmit(this._handleLogin)} 
                 style={styles.button}>
                 <Text>Sign in</Text>
@@ -53,7 +55,7 @@ export default class Login extends Component {
               </Button>              
 
           </Form>
-          
+        </Content>
       </Container>
     )
   }

@@ -1,5 +1,4 @@
 import color from 'color';
-
 import { Platform, Dimensions, PixelRatio } from 'react-native';
 
 const deviceHeight = Dimensions.get('window').height;
@@ -145,7 +144,7 @@ export default {
   tabBarTextSize: (platform === 'ios') ? 14 : 11,
   activeTab: '#fff',
   sTabBarActiveTextColor: '#007aff',
-  tabBarActiveTextColor: '#fff',
+  tabBarActiveTextColor: '#00aeef',
   tabActiveBgColor: undefined,
 
     // Tab

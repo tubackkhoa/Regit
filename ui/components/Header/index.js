@@ -14,12 +14,12 @@ export default class Header extends Component {
 
   render() {
 
-    const {left, right, center} = this.props
+    const {left, right, center, ...props} = this.props
     return (                             
-      <HeaderNB>          
+      <HeaderNB {...props}>          
         <Left>{left}</Left>
         <Body>
-          <Title full>{center}</Title>
+          {typeof center === 'string' ? <Title full>{center}</Title> : center}
         </Body>
         <Right>{right}</Right>
       </HeaderNB>     

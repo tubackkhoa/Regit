@@ -11,8 +11,9 @@ export default {
   logo: {
     width: 80, 
     height: 120,
-    marginTop: 20,    
+    marginTop: 60,    
     marginBottom: 20,
+    alignSelf:'center',
   },
   button: {
     marginTop: 15,    

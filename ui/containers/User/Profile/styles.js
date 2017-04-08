@@ -30,7 +30,7 @@ export default {
     height: 120,
     borderRadius: 60,                 
   },
-  photoIconContainer:{    
+  photoIcon:{    
     position:'absolute',
     bottom:10,
     right:0
