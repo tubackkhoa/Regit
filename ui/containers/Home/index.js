@@ -1,17 +1,11 @@
 import React, { Component } from 'react'
 
-import {         
-    Title, 
+import {             
     Content, 
-    Button, 
-    Left, 
-    Right, 
-    Body, 
-    Icon, 
-    Drawer,
+    Button,         
+    Icon,     
     Container,
-    Text,
-    Badge,
+    Text,    
     Item,
     Input,
 } from 'native-base'
@@ -21,6 +15,7 @@ import Footer from '~/ui/components/Footer'
 
 import { connect } from 'react-redux'
 import * as commonActions from '~/store/actions/common'
+import Event from '~/ui/components/Event'
 
 import styles from './styles'
 
@@ -45,7 +40,7 @@ export default class Home extends Component {
             />
 
             <Content padder>
-                <Text>Home page</Text>
+                <Event />
             </Content>
 
             <Footer />
