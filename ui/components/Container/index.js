@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import {      
   StyleProvider, 
   Drawer,
-  Container as ContainerNB,
+  Container,
 } from 'native-base'
 
 import SideBar from '~/ui/components/SideBar'
@@ -17,7 +17,7 @@ import material from '~/theme/variables/material'
 @connect(state=>({
   drawerState: getDrawerState(state),
 }), {...commonActions})
-export default class Container extends Component {
+export default class extends Component {
 
   static propTypes = {
     children: PropTypes.node,
@@ -38,7 +38,7 @@ export default class Container extends Component {
           >          
             {children}          
           </Drawer>   
-        : <ContainerNB>{children}</ContainerNB>
+        : <Container>{children}</Container>
       }
       </StyleProvider>     
     )

@@ -30,6 +30,7 @@ export default {
   },
   image:{ 
     resizeMode: 'cover',    
+    width:'100%',
     height:material.deviceWidth * 0.6,
   },
   textGray: {    

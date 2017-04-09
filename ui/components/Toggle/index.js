@@ -10,7 +10,7 @@ import Icon from '~/ui/elements/Icon'
 
 import styles from './styles'
 
-export default class Toggle extends Component {
+export default class extends Component {
 
   constructor(props) {
     super(props)  

@@ -7,7 +7,7 @@ import {
 import { regitIcon } from '~/assets'
 import styles from './styles'
 
-export default class RegitButton extends Component {
+export default class extends Component {
   render(){
     const {style, children, ...props} = this.props
     return (

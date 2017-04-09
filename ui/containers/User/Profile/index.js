@@ -36,7 +36,7 @@ import { profileCover } from '~/assets'
   cities: dataSelectors.getCities(state),
 }), {...commonActions, ...dataActions})
 @reduxForm({ form: 'ProfileForm', validate})
-export default class UserProfile extends Component {  
+export default class extends Component {  
 
   constructor(props) {
     super(props)    

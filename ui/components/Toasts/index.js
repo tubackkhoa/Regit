@@ -10,13 +10,13 @@ import { getToast } from '~/store/selectors/common'
 @connect(state => ({
   toast: getToast(state),
 }), {clearToast})
-export default class Toasts extends Component {
+export default class extends Component {
 
   componentWillMount(){
     clearTimeout(this.timer)
   }
 
-  _closeToast=()=>{
+  _closeToast=(duration)=>{
     clearTimeout(this.timer) 
     if (duration>0) {
       this.timer = setTimeout(()=> this.props.clearToast(), duration)

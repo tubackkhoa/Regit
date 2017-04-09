@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import App from './app'
 import { Provider } from 'react-redux'
-import { Spinner } from 'native-base'
 import configureStore from '~/store/config'
+
+import Preload from './containers/Preload'
 
 export default class Regit extends Component {
 
@@ -22,7 +23,7 @@ export default class Regit extends Component {
     const {store} = this.state
     // should have a pre-load page
     if(!store)
-      return (<Spinner color="green" />)
+      return ( <Preload/> )
 
     return (
       <Provider store={store}>

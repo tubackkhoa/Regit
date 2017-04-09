@@ -10,7 +10,7 @@ import ImagePicker from 'react-native-image-picker'
 import options from './options'
 import styles from './styles'
 
-export default class PhotoChooser extends Component {
+export default class extends Component {
 
   _handleImagePickerOpen = (e) => {
     const {onCancel, onError, onCustomButton, onSuccess} = this.props

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import {         
-    Footer as FooterNB, 
+    Footer, 
     FooterTab, 
     Button,         
     Text,
@@ -18,12 +18,12 @@ import * as commonActions from '~/store/actions/common'
 
 // component should not update on store that connect to database
 @connect(null, {...commonActions})
-export default class Footer extends Component {
+export default class extends Component {
   render() {
       return (                             
         
-        <FooterNB>
-            <FooterTab>
+        <Footer>
+            <FooterTab style={styles.container}>
               {options.footerItems.map((item, index)=>
                 <Button onPress={e=>this.props.forwardTo(item.route)} textSmall key={index}>                        
                     <Icon name={item.icon} style={
@@ -40,7 +40,7 @@ export default class Footer extends Component {
                   <Text>Notification</Text>
               </Button>
             </FooterTab>
-        </FooterNB>    
+        </Footer>    
         
       )
   }

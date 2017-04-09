@@ -25,18 +25,10 @@ import {
   token: authSelectors.getToken(state),
   profile: accountSelectors.getProfile(state),
 }), {...authActions, ...accountActions, ...commonActions})
-export default class SideBar extends Component {
+export default class extends Component {
 
   static propTypes = {
     
-  }
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      shadowOffsetWidth: 1,
-      shadowRadius: 4,
-    }
   }
 
   componentDidMount(){    
@@ -49,19 +41,14 @@ export default class SideBar extends Component {
     this.props.logout(this.props.token)       
   }
 
-  _handleEditProfile = (e) => {
-    const {forwardTo, closeDrawer} = this.props
-    // close drawer then open profile
-    closeDrawer()
-    forwardTo('user/profile')
-  }
-
   navigateTo(route) {
-    this.props.forwardTo(route)
+    const {forwardTo, closeDrawer} = this.props
+    closeDrawer()
+    forwardTo(route)
   }
 
   render() {
-    const {profile} = this.props    
+    const {profile, forwardTo} = this.props    
     if(!profile)
       return (<Spinner color="green" />)
     // by default it is flex, so do not set flex portion
@@ -79,11 +66,11 @@ export default class SideBar extends Component {
             <Text small style={styles.text}>{profile.Birthdate}</Text>
             <View style={styles.editContainer}>
               <Text small style={styles.text}>{profile.City}, {profile.Country}</Text>
-              <Icon onPress={this._handleEditProfile} name="edit" style={styles.iconEdit} />
+              <Icon onPress={e=>this.navigateTo('user/profile')} name="edit" style={styles.iconEdit} />
             </View>
           </View>
           {options.listItems.map(item =>
-              <ListItem key={item.route} button onPress={() => this.navigateTo(item.route)} >
+              <ListItem key={item.route} button onPress={e => this.navigateTo(item.route)} >
                 <Left>
                   <Icon name={item.icon} style={styles.icon} />                  
                   <Text style={styles.iconText}>{item.name}</Text>

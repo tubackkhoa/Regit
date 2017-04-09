@@ -35,6 +35,7 @@ const configureStore = callback =>   {
 
   // then run the saga
   sagaMiddleware.run(rootSaga)
+  // callback(store)
   persistStore(store, {storage: AsyncStorage}, ()=> callback(store))
   
 }

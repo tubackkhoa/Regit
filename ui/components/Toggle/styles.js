@@ -4,30 +4,22 @@ export default {
     flexDirection: 'row',
     justifyContent:'space-between',    
     marginTop: 10,
+    marginBottom:-10,
   },
   button: {
     paddingRight:5,
-    paddingBottom:0,
-    paddingTop:0,
-    height:null
+    paddingBottom:10,
+    paddingTop:0,    
   },
-  text: {
-    fontSize:14,
-    color:'#898989',
-    lineHeight:14
-  },
-  trueIcon: {    
-    color:'#898989',
+  icon: {
     marginLeft:10,
-    width: 50,
-    height: 40,
+    fontSize:30,    
     marginBottom:-5,
   },
-  falseIcon: {    
-    color:'#9e0b0f',  
-    marginLeft:10,
-    width: 30,
-    height: 40,      
-    marginBottom:-5,
+  get trueIcon() {
+    return {...this.icon, color:'#898989'}
+  },
+  get falseIcon() {
+    return {...this.icon, color:'#9e0b0f'}
   },
 }

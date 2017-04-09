@@ -10,7 +10,7 @@ import {
 import Header from '~/ui/components/Header'
 
 
-export default class Modal extends Component {
+export default class extends Component {
 
   static defaultProps = {
     title: 'Modal',

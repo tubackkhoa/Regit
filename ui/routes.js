@@ -1,6 +1,7 @@
 import Home from './containers/Home'
 import Login from './containers/Login'
 import UserProfile from './containers/User/Profile'
+import UserSetting from './containers/User/Setting'
 
 // we can use animationType object for each route via Navigator.SceneConfigs
 export default {
@@ -11,6 +12,10 @@ export default {
     'user/profile': {
         title: 'User Profile',
         Page: UserProfile,
+    },  
+    'user/setting': {
+        title: 'User Setting',
+        Page: UserSetting,
     },       
     login: {
         title: 'Login',

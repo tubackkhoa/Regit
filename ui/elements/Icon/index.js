@@ -4,7 +4,7 @@ import { Icon as IconNB } from 'native-base'
 import Svg from 'react-native-svg'
 import svgs from './svgs'
 
-export default class Icon extends Component {
+export default class extends Component {
 
   static propTypes = {               
       name: PropTypes.string.isRequired,                   

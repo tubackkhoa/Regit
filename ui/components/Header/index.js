@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import {         
-    Header as HeaderNB, 
+    Header, 
     Left,
     Right,
     Body,           
@@ -10,19 +10,19 @@ import {
 } from 'native-base'
 
 
-export default class Header extends Component {
+export default class extends Component {
 
   render() {
 
     const {left, right, center, ...props} = this.props
     return (                             
-      <HeaderNB {...props}>          
+      <Header {...props}>          
         <Left>{left}</Left>
         <Body>
           {typeof center === 'string' ? <Title full>{center}</Title> : center}
         </Body>
         <Right>{right}</Right>
-      </HeaderNB>     
+      </Header>     
     )
   }
 }

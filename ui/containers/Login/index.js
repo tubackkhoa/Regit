@@ -25,7 +25,7 @@ import { logo } from '~/assets'
 
 @connect(null, {...commonActions, ...authActions})
 @reduxForm({ form: 'LoginForm', validate})
-export default class Login extends Component {
+export default class extends Component {
 
   _handleLogin = ({email, password}) => {    
     this.props.login(email, password)

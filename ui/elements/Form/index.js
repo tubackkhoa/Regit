@@ -4,9 +4,11 @@ import {
   Item, 
   Input, 
   Text, 
-  Label,
-  Icon,
+  Label,    
 } from 'native-base'
+
+import Icon from '~/ui/elements/Icon'
+import Switch from '~/ui/elements/Switch'
 
 import DatePicker from '~/ui/components/DatePicker'
 import Dropdown from '~/ui/components/Dropdown'
@@ -28,6 +30,18 @@ export const InputField = ({ input, label, meta: { touched, error, warning }, ic
       name={icon}
     />}
   </Item>
+)
+
+export const SwitchField = ({ input, meta: { touched, error, warning }, ...custom }) => (
+  <Switch         
+    value={!!input.value}
+    width={45}
+    circleColor={material.activeTab}    
+    backgroundActive={material.tabBarActiveTextColor}
+    backgroundInactive="#898989"
+    onSyncPress={input.onChange}
+    {...custom}    
+  />
 )
 
 export const DateField = ({ input, label, meta: { touched, error, warning }, format="MM/DD/YYYY", ...custom }) => (

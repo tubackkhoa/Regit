@@ -8,7 +8,7 @@ import {
 
 import renderItems from './renderItems'
 
-export default class Dropdown extends Component {
+export default class extends Component {
 
   state = {
 

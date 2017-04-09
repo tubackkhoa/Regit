@@ -17,7 +17,7 @@ import styles from './styles'
 @connect(state=>({  
   profile: accountSelectors.getProfile(state),  
 }))
-export default class Event extends Component {
+export default class extends Component {
 
   render() {
     const {profile} = this.props

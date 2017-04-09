@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { NativeModules, StatusBar, Platform } from 'react-native'
 
-import routes from './routes'
 import Container from './components/Container'
 import Navigator from './components/Navigator'
 import Toasts from './components/Toasts'
@@ -11,13 +10,14 @@ import Toasts from './components/Toasts'
 import { connect } from 'react-redux'
 
 // should show error if not found
-import { getDrawerState } from '~/store/selectors/common'
+import { getDrawerState, getRouter } from '~/store/selectors/common'
 import { isLogged } from '~/store/selectors/auth'
 
 const UIManager = NativeModules.UIManager
 
 @connect(state=>({
   loggedIn: isLogged(state),
+  router: getRouter(state),
   drawerState: getDrawerState(state),
 }))
 export default class App extends Component {    
@@ -43,11 +43,11 @@ export default class App extends Component {
     }
 
     render() {
-      const {loggedIn} = this.props
+      const {loggedIn, router} = this.props
         return (            
             <Navigator
                 configureScene={App.configureScene}
-                initialRoute={loggedIn ? routes.home : routes.login}
+                initialRoute={router.route}
                 renderScene={this.renderScene}                
             />
             

@@ -10,16 +10,29 @@ import { getRouter } from '~/store/selectors/common'
 @connect(state=>({
   router: getRouter(state),  
 }))
-export default class Navigator extends Component {
+export default class extends Component {
 
     static configureScene(route) {
         // use default as PushFromRight, do not use HorizontalSwipeJump or it can lead to swipe horizontal unwanted
         return NavigatorRN.SceneConfigs[route.animationType || 'PushFromRight']
     }
 
+    // push on first time, later only jumpTo without reload
+    static mounted = {
+
+    }
+
     // replace view from stack
-    componentWillReceiveProps({router}){        
-      this.refs.navigator.replace(routes[router.route])      
+    componentWillReceiveProps({router}){     
+      const page = routes[router.route]
+      if(!page)   
+        return console.warn('Not found: ' + router.route)
+      if(this.constructor.mounted[router.route]){
+        this.refs.navigator.jumpTo(page)
+      } else {
+        this.constructor.mounted[router.route] = true
+        this.refs.navigator.push(page) 
+      }           
     }
 
     renderScene = (route, navigator) => {           
@@ -28,14 +41,15 @@ export default class Navigator extends Component {
 
     render() {
       const {initialRoute} = this.props
-        return (            
-            <NavigatorRN ref="navigator"
-                configureScene={Navigator.configureScene}
-                initialRoute={initialRoute}
-                renderScene={this.renderScene}                
-            />
-            
-        )
+      this.constructor.mounted[initialRoute] = true
+      return (            
+        <NavigatorRN ref="navigator"
+            configureScene={this.constructor.configureScene}
+            initialRoute={routes[initialRoute]}
+            renderScene={this.renderScene}                
+        />
+          
+      )
     }
 }
 

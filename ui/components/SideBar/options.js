@@ -12,7 +12,7 @@ export default {
     },
     {
       name: 'Account Setting',
-      route: 'user/profile',
+      route: 'user/setting',
       icon: 'setting',
     },
     {
