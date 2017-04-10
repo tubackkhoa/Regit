@@ -16,14 +16,15 @@ import Toggle from '~/ui/components/Toggle'
 import material from '~/theme/variables/material'
 import styles from './styles'
 
-export const InputField = ({ input, label, meta: { touched, error, warning }, icon, onPress, ...custom }) => (  
-  <Item style={styles.item} error={touched && !!error} onPress={onPress} >  
+export const InputField = ({ input, label, meta: { touched, error, warning }, icon, addon, onPress, style, inputStyle, ...custom }) => (  
+  <Item style={{...styles.item, ...style}} error={touched && !!error} onPress={onPress} >  
+    {addon}
     <Input   
       placeholder={label}    
       {...input}                   
       {...custom}
       placeholderTextColor={material.inputColorPlaceholder} 
-      style={styles.input}     
+      style={{...styles.input, ...inputStyle}}     
     />    
     {icon && <Icon
       style={styles.inputIcon}

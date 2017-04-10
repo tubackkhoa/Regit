@@ -8,8 +8,14 @@ export default (variables = variable) => {
       fontSize: variables.DefaultFontSize - 1,
       fontFamily: variables.fontFamily,
       color: variables.textColor,
+      '.bold': {
+        fontWeight: '600',
+      },
+      '.link':{
+        color: variables.linkTextColor,
+      },
       '.note': {
-        color: '#a7a7a7',
+        color: variables.noteTextColor,
         fontSize: variables.noteFontSize
       },
       '.small': {

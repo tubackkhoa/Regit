@@ -6,22 +6,27 @@ export default {
         {
           title: 'Change Login Password',
           type: 'route',
+          route: 'user/action/changePassword',
         },
         {
           title: 'Set PIN code',
           type: 'route',
+          route: 'user/action/changePIN',
         },
         {
           title: 'Phone Number for OTP',
           type: 'route',
+          route: 'user/action/changePhoneNumber',
         },
         {
           title: 'Change Email',
           type: 'route',
+          route: 'user/action/changeEmail',
         },
         {
           title: 'Change Security Question',
           type: 'route',
+          route: 'user/action/changeSecurityQuestion',
         },
       ]
     },
@@ -93,8 +98,9 @@ export default {
     {
       items: [
         {
-          title: 'Change Login Password',
-          type: 'route',
+          title: 'Close your account',
+          type: 'user/action/close',
+          route: 'user/action/closeAccount',
         },
       ]
     }

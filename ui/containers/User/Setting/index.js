@@ -29,6 +29,7 @@ import styles from './styles'
 export default class extends Component {
 
   renderOption(option, key){
+    const {forwardTo} = this.props
     return (
       <View style={styles.container} key={key}>
         {option.title && 
@@ -43,7 +44,7 @@ export default class extends Component {
               <Text>{item.title}</Text>             
               {item.type === 'toggle' 
               ? <Field name={item.name} component={SwitchField} />           
-              : <Icon name="keyboard-arrow-right" />                        
+              : <Icon onPress={e=>forwardTo(item.route)} name="keyboard-arrow-right" />                        
               }
             </ListItem>
           )}          

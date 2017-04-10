@@ -3,8 +3,7 @@ export default {
     {
       name: 'Home Feeds',
       route: 'home',
-      icon: 'home',
-      color: ''
+      icon: 'home',      
     },    
     {
       name: 'Delegation',

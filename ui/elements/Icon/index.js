@@ -20,7 +20,7 @@ export default class extends Component {
         return <IconNB {...this.props} />
 
     const {
-      fontSize=24, 
+      fontSize=24,       
       color='#FFF', stroke, strokeWidth, 
       ...iconStyle
     } = style
@@ -28,10 +28,17 @@ export default class extends Component {
     const {svg:svgEl, viewBox = '0 0 100 100'} = svg    
     // by default height is fontSize, min-x, min-y, width, height
     const viewBoxCoords = viewBox.split(' ')
-    const width = fontSize * (viewBoxCoords[2] / viewBoxCoords[3])
+    let width = iconStyle.width
+    let height = fontSize
+    if(width){
+      height = width * (viewBoxCoords[3] / viewBoxCoords[2])
+    } else {
+      width = height * (viewBoxCoords[2] / viewBoxCoords[3])
+    }
+    
     return (
       <View style={iconStyle} {...props}>        
-        <Svg height={fontSize} width={width} viewBox={viewBox}>
+        <Svg height={height} width={width} viewBox={viewBox}>
             {React.cloneElement(svgEl, {
                 fill: color,
                 stroke,

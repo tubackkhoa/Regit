@@ -11,8 +11,8 @@ export default {
     marginLeft:5,
     marginRight:5
   },
-  active: {
-    color: material.tabBarActiveTextColor,
+  get footerIconActive() {
+    return {...this.footerIcon, color: material.tabBarActiveTextColor}
   },
   badgeIcon: {
     marginTop: -18,

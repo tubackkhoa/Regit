@@ -111,7 +111,7 @@ export default {
 
 
       // Color
-  brandPrimary: '#3F51B5',
+  brandPrimary: '#0054a6',
   brandInfo: '#3F57D3',
   brandSuccess: '#5cb85c',
   brandDanger: '#d9534f',
@@ -190,7 +190,7 @@ export default {
     return this.textColor;
   },
   get inputColorPlaceholder() {
-    return '#c2c2c2';
+    return '#a7e7ff';
   },
 
   inputGroupMarginBottom: 10,
@@ -261,7 +261,8 @@ export default {
   textColor: '#000',
   inverseTextColor: '#fff',
   noteFontSize: 14,
-
+  noteTextColor: '#a7a7a7',
+  linkTextColor: '#448ccb',
 
     // Title
   titleFontfamily: (platform === 'ios') ? 'Roboto' : 'Roboto_medium',
@@ -292,4 +293,7 @@ export default {
 
     // New Variable
   inputGroupRoundedBorderRadius: 30,
+
+  // color theme
+  grayColor: '#959595',  
 };

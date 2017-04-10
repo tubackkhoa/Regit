@@ -16,6 +16,13 @@ export default {
     color:'#a7e7ff',
     paddingRight:0,
   },
+  menuIcon:{
+    marginLeft:0,
+  },
+  uploadIcon: {
+    fontSize: 17,
+    marginRight:-3    
+  },
   searchInput:{
     height: material.platform === 'ios' ? 30 : 50,    
     color:'#fff'
