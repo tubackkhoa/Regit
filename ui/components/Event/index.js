@@ -42,7 +42,7 @@ export default class extends Component {
                     <Text note>{profile.Birthdate}</Text>
                 </Body>
             </Left>
-            <Right>
+            <Right style={{flex:0.5}}>
               <Button style={styles.button} small bordered iconLeft>
                 <Icon style={styles.icon} name="rss-feed"/>
                 <Text style={styles.text}>Follow</Text>                        

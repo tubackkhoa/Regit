@@ -9,6 +9,7 @@ import {
     Title,    
 } from 'native-base'
 
+import styles from './styles'
 
 export default class extends Component {
 
@@ -16,7 +17,7 @@ export default class extends Component {
 
     const {left, right, center, ...props} = this.props
     return (                             
-      <Header {...props}>          
+      <Header noShadow {...props} style={styles.container}>          
         <Left>{left}</Left>
         <Body>
           {typeof center === 'string' ? <Title full>{center}</Title> : center}

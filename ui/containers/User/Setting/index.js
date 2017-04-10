@@ -33,7 +33,7 @@ export default class extends Component {
       <View style={styles.container} key={key}>
         {option.title && 
           <ListItem noBorder style={styles.itemHeader}>
-              <Text>{option.title}</Text>
+              <Text style={styles.itemHeaderText}>{option.title}</Text>
           </ListItem>
         }
 

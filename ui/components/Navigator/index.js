@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Navigator as NavigatorRN} from 'react-native'
+import { Navigator } from 'react-native'
 
 import routes from '~/ui/routes'
 import { connect } from 'react-redux'
@@ -14,7 +14,7 @@ export default class extends Component {
 
     static configureScene(route) {
         // use default as PushFromRight, do not use HorizontalSwipeJump or it can lead to swipe horizontal unwanted
-        return NavigatorRN.SceneConfigs[route.animationType || 'PushFromRight']
+        return Navigator.SceneConfigs[route.animationType || 'PushFromRight']
     }
 
     // push on first time, later only jumpTo without reload
@@ -43,7 +43,7 @@ export default class extends Component {
       const {initialRoute} = this.props
       this.constructor.mounted[initialRoute] = true
       return (            
-        <NavigatorRN ref="navigator"
+        <Navigator ref="navigator"
             configureScene={this.constructor.configureScene}
             initialRoute={routes[initialRoute]}
             renderScene={this.renderScene}                

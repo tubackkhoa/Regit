@@ -7,6 +7,9 @@ export default {
     marginLeft:0,
     marginTop:0,
     paddingBottom:5,
-    paddingTop:0,    
+    paddingTop:0,        
   },
+  itemHeaderText:{
+    fontSize:15,
+  }
 }

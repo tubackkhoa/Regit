@@ -60,3 +60,7 @@ export const apiPost = (url, data, token, method='POST') =>
 export const apiGet = (url, data, token, method='GET') => 
   apiCall(url + '?' + urlEncode(data), { method }, token)
 
+
+// if we want to fetch blob data with progress support, we should use fetchBlob, such as download from uri to local, then cache it
+// https://github.com/wkh237/react-native-fetch-blob  
+

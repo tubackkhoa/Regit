@@ -7,10 +7,11 @@ export default {
     paddingLeft: 20,
     paddingRight: 20,
     width: '100%',    
+    borderBottomWidth: 0,
   },
   input: {    
     fontFamily: 'Roboto',
-    fontWeight: '300',    
+    fontWeight: '300',        
   },
   inputIcon: {
     paddingRight:0,

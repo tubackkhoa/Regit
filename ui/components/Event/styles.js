@@ -46,5 +46,6 @@ export default {
   },
   button: {
     borderColor: material.tabBarActiveTextColor,
+    width: '100%',
   }
 }

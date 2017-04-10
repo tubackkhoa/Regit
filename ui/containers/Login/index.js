@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { 
-  Container, 
-  Content,
+  Container,   
   Form, 
   Item, 
   Input, 
@@ -19,6 +18,7 @@ import { Field, reduxForm } from 'redux-form'
 
 import routes from '~/ui/routes'
 
+import Content from '~/ui/components/Content'
 import { InputField } from '~/ui/elements/Form'
 import { validate } from './utils'
 import { logo } from '~/assets'
@@ -36,10 +36,10 @@ export default class extends Component {
     return (
       <Container style={styles.container}>
         <Content>                    
-        
+          
           <Thumbnail style={styles.logo} source={logo} />        
-        
-          <Form>
+          
+          <Form style={styles.form}>
               
               <Field autoCapitalize="none" name="email" label="Email" component={InputField} />
               <Field name="password" label="Password" secureTextEntry={true} component={InputField} />              

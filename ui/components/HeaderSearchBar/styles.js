@@ -8,7 +8,7 @@ export default {
     paddingLeft: 5,
     paddingRight: 5,
     marginLeft:-20,    
-    width: material.deviceWidth/2 + 25 + 40,        
+    width: material.deviceWidth/2 + 60,        
     height:30,    
     flexDirection:'row',  
   },

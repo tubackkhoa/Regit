@@ -4,10 +4,12 @@ export default {
     flex: 1,
     alignItems: 'center',  
     justifyContent: 'center',   
-    flexDirection: 'column',          
-    paddingLeft: 20,
-    paddingRight: 20,        
+    flexDirection: 'column',                   
   },  
+  form:{
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
   logo: {
     width: 80, 
     height: 120,

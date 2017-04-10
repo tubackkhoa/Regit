@@ -6,7 +6,7 @@ import variable from './../variables/platform';
 export default (variables = variable) => {
   const viewTheme = {
       '.padder': {
-        padding: variables.contentPadding,
+        padding: variables.contentPadding/2,
       },
       '.regit': {                
 
@@ -24,7 +24,8 @@ export default (variables = variable) => {
             marginRight: -10,                  
           },
           'NativeBase.Text':{
-            width: variable.deviceWidth - 160,
+            width: variable.deviceWidth - 140,
+            fontSize:14,
           },
           '.last': {
             borderBottomWidth:null,
