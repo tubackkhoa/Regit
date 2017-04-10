@@ -120,13 +120,6 @@ export default class extends Component {
           <Form style={styles.form}>            
             <Text style={styles.label}>DisplayName</Text>
             <Field name="DisplayName" component={InputField} />
-            <Text style={styles.label}>DisplayName</Text>
-            <Field name="DisplayName" component={InputField} />
-            <Text style={styles.label}>DisplayName</Text>
-            <Field name="DisplayName" component={InputField} />
-
-            <Text style={styles.label}>DisplayName</Text>
-            <Field name="DisplayName" component={InputField} />
             <Toggle titleStyle={styles.label} title="Day of birth" text="Public" />            
             <Field name="Birthdate" displayFormat="DD MMMM YYYY" component={DateField} icon="keyboard-arrow-down" />
             <Toggle titleStyle={styles.label} title="Location" text="Public" />            
