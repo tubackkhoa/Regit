@@ -1,7 +1,7 @@
 import { createLogger } from 'redux-logger'
 
 const loggerMiddleware = createLogger({     
-  diff: true,
+  diff: false,
   duration: true,
   collapsed: (getState, { type }) => type !== 'MARK_REQUEST_FAILED',
   level: {

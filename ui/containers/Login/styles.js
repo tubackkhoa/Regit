@@ -7,8 +7,8 @@ export default {
     flexDirection: 'column',                   
   },  
   form:{
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   logo: {
     width: 80, 

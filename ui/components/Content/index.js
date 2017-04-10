@@ -10,16 +10,15 @@ export default class extends Component {
 
   render() {
 
-    const {style, children, refreshing, onRefresh, ...props} = this.props    
+    const {children, refreshing, onRefresh, padder, ...props} = this.props    
     // show refresh control
-    if(onRefresh) {
-      Object.assign(props,{
-        refreshControl: <RefreshControl refreshing={refreshing} onRefresh={onRefresh} title="Loading..." />
-      })
+    if(onRefresh){
+      props.refreshControl = <RefreshControl refreshing={refreshing} onRefresh={onRefresh} title="Loading..." />
     }
+    
     return (                             
       <Content {...props} >
-        <View padder>
+        <View padder={padder}>
           {children}
         </View>
       </Content>    

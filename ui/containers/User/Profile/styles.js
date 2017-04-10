@@ -1,4 +1,14 @@
+import options from './options'
+import material from '~/theme/variables/material'
+
 export default {
+  container:{
+    marginTop: 0,
+  },
+  form:{
+    padding: 10,
+    marginTop: options.avatar.halfSize,
+  },
   label:{
     paddingLeft:5,
     fontSize:14,    
@@ -6,33 +16,45 @@ export default {
     paddingTop: 20,
     marginBottom:-5,    
   },
+  headerContainer:{
+    justifyContent: 'space-between', 
+    flexDirection: 'row',    
+    position:'absolute',    
+    top:0,
+    width:'100%',
+    height: material.toolbarHeight,
+    backgroundColor:material.toolbarDefaultBg,
+    opacity:0,
+    zIndex:10,
+  },
   headerIcon: {
-    color: '#464646',
+    color: '#464646',    
+    top: 20,
+    padding:10,    
+    position:'absolute',
+    zIndex:10,
+  },
+  get headerIconRight() {
+    return {...this.headerIcon, right:0}
   },
   headerImage:{
     resizeMode: 'cover', 
     width: '100%', 
-    height:180,    
+    height:options.header.MAX_HEIGHT - options.avatar.halfSize,     
   },
-  headerContainer:{
-    flex:1, 
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop:-160,
-    marginBottom:-180,    
-  },
-  avatarContainer:{
-    alignSelf: 'center',     
-    marginTop: -100,        
+  avatarContainer:{       
+    position: 'absolute',    
+    alignSelf: 'center',
+    zIndex:10,    
   },
   avatar:{          
-    width: 120,
-    height: 120,
-    borderRadius: 60,                 
+    width: options.avatar.size,
+    height: options.avatar.size,
+    borderRadius: options.avatar.halfSize,                    
   },
   photoIcon:{    
     position:'absolute',
     bottom:10,
-    right:0
+    right:0,    
   }, 
 }

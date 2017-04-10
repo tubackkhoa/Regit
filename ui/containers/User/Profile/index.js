@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { TouchableOpacity, Image } from 'react-native'
+import { TouchableOpacity, Image, Animated } from 'react-native'
 import { connect } from 'react-redux'
 import { 
-  Container, Content, Button, Icon, List, 
+  Container, Button, Icon, List,
   ListItem, InputGroup, Input, Picker, Text, Thumbnail,
   Form, Item, Switch, View,
 } from 'native-base'
+
+import options from './options'
 import styles from './styles'
 
 import * as dataActions from '~/store/actions/data'
@@ -13,6 +15,7 @@ import * as commonActions from '~/store/actions/common'
 import * as accountSelectors from '~/store/selectors/account'
 import * as dataSelectors from '~/store/selectors/data'
 
+import Content from '~/ui/components/Content'
 import DatePicker from '~/ui/components/DatePicker'
 import PhotoChooser from '~/ui/components/PhotoChooser'
 import Header from '~/ui/components/Header'
@@ -41,7 +44,8 @@ export default class extends Component {
   constructor(props) {
     super(props)    
     this.state = {
-      avatar: {uri: (API_BASE + props.initialValues.PhotoUrl)}
+      avatar: {uri: (API_BASE + props.initialValues.PhotoUrl)},
+      scrollY: new Animated.Value(0)
     }
   }
 
@@ -54,7 +58,7 @@ export default class extends Component {
 
   loadCities(countries, value){    
     const countryCode = countries.find(item=> item.Name === value)['Code']
-    this.props.getCities(countryCode)    
+    // this.props.getCities(countryCode)    
   }
 
   makeItems(data){
@@ -73,24 +77,54 @@ export default class extends Component {
     this.loadCities(this.props.countries, value)
   }
 
+  _onScroll = (e)=>{    
+    const offsetY = e.nativeEvent.contentOffset.y     
+    this.state.scrollY.setValue(offsetY)
+  }
+
   render() {        
     const {initialValues:profile, route, goBack, countries, cities} = this.props
-    const {avatar} = this.state
-          
-    return (
-      <Container>        
-        <Image style={styles.headerImage} source={profileCover}/>        
-        <View padder style={styles.headerContainer}>
-          <Icon name="cancel" style={styles.headerIcon} onPress={()=>goBack()} />  
-          <View style={styles.avatarContainer}>      
-            <Thumbnail source={avatar} style={styles.avatar}/>
-            <PhotoChooser style={styles.photoIcon} onSuccess={this._handleChoosePhoto}/>
-          </View>          
-          <Icon name="edit" style={styles.headerIcon}/>
-        </View>
+    const {avatar, scrollY} = this.state    
+    // no header or footer
+    const opacity = scrollY.interpolate({
+      inputRange: [0, options.header.SCROLL_DISTANCE / 2],
+      outputRange: [0, 1],
+      extrapolate: 'clamp',
+    })    
+    const top = scrollY.interpolate({
+      inputRange: [0, options.header.SCROLL_DISTANCE],
+      outputRange: [options.header.MAX_HEIGHT - options.avatar.size, 30],
+      extrapolate: 'clamp',
+    })
+    const size = scrollY.interpolate({
+      inputRange: [0, options.header.SCROLL_DISTANCE],
+      outputRange: [options.avatar.size, 60],
+      extrapolate: 'clamp',
+    })    
+    const borderRadius = Animated.divide(size, new Animated.Value(2))
 
-        <Content padder>                    
-          <Form>            
+  
+    return (
+      <Container>                             
+        <Animated.View style={{...styles.headerContainer, opacity}} />
+        <Icon name="cancel" style={styles.headerIcon} onPress={()=>goBack()} /> 
+        <Icon name="edit" style={styles.headerIconRight}/>                     
+        <Animated.View style={{...styles.avatarContainer,top}}>      
+          <Animated.Image source={avatar} style={{...styles.avatar,width:size,height:size,borderRadius}}/>
+          <PhotoChooser style={styles.photoIcon} onSuccess={this._handleChoosePhoto}/>
+        </Animated.View>                      
+        
+
+        <Content scrollEventThrottle={16} style={styles.container} onScroll={this._onScroll}>          
+          <Image style={styles.headerImage} source={profileCover}/>  
+          <Form style={styles.form}>            
+            <Text style={styles.label}>DisplayName</Text>
+            <Field name="DisplayName" component={InputField} />
+            <Text style={styles.label}>DisplayName</Text>
+            <Field name="DisplayName" component={InputField} />
+            <Text style={styles.label}>DisplayName</Text>
+            <Field name="DisplayName" component={InputField} />
+
             <Text style={styles.label}>DisplayName</Text>
             <Field name="DisplayName" component={InputField} />
             <Toggle titleStyle={styles.label} title="Day of birth" text="Public" />            
@@ -101,8 +135,8 @@ export default class extends Component {
             <Field name="City" component={DropdownField} 
               header="Select City" items={this.makeItems(cities)}/>
           </Form>
-                    
         </Content>
+
 
       </Container>
     )

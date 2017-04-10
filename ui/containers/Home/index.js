@@ -43,7 +43,7 @@ export default class extends Component {
         
             <HeaderSearchBar/>
 
-            <Content refreshing={this.state.refreshing}
+            <Content padder refreshing={this.state.refreshing}
                 onRefresh={this._onRefresh}                
             >              
               <Event />              
