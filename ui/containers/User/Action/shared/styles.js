@@ -31,6 +31,7 @@ export default {
   inputStyle:{
     marginLeft:10,
     marginRight:10,
+    fontSize: material.fontSizeBase,
   },
   inputLast: {
     marginTop:2,

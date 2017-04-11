@@ -44,15 +44,14 @@ export default class extends Component {
                 onRefresh={this._onRefresh}                
             >              
               <List dataArray={options.notifications} renderRow={item =>
-                <ListItem icon style={styles.listItemContainer}>
+                <ListItem icon noBorder style={styles.listItemContainer}>
                     <Left>
                         <Icon name={item.icon} style={styles.icon}/>
                     </Left>
-                    <Body style={{borderBottomWidth:0}}>
-                        <View style={{flexDirection: 'row'}}>
-                          <Text small bold>{item.user} </Text>
-                          <Text small>{item.message}</Text>
-                        </View>
+                    <Body>
+                        <Text small>
+                          <Text small bold>{item.user}</Text> {item.message}
+                        </Text>                        
                         <Text note small>{item.time}</Text>
                     </Body>
                 </ListItem>   

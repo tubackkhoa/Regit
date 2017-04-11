@@ -332,7 +332,7 @@ export default (variables = variable) => {
           justifyContent: 'center',
           alignItems: 'center',
         },
-        'NativeBase.Body': {
+        'NativeBase.Body': {          
           'NativeBase.Text': {
             marginLeft: null,
             fontSize: 17,
@@ -388,6 +388,9 @@ export default (variables = variable) => {
       },
       '.noBorder': {
         borderBottomWidth: null,
+        'NativeBase.Body': { 
+          borderBottomWidth: null,
+        }
       },
       alignItems: 'center',
       flexDirection: 'row',

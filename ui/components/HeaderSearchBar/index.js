@@ -11,8 +11,6 @@ import styles from './styles'
 import { connect } from 'react-redux'
 
 import Icon from '~/ui/elements/Icon'
-
-import material from '~/theme/variables/material'
 import * as commonActions from '~/store/actions/common'
 
 @connect(null, {...commonActions})
@@ -27,7 +25,7 @@ export default class extends Component {
           center={
               <Item style={styles.searchContainer}>
                   <Icon name="search" style={styles.searchIcon} />
-                  <Input placeholderTextColor={material.inputColorPlaceholder} style={styles.searchInput} placeholder="Regit Search" />                        
+                  <Input placeholderTextColor="#a7e7ff" style={styles.searchInput} placeholder="Regit Search" />                        
               </Item>
           }    
           right={<Button transparent><Icon style={styles.uploadIcon} name="cloud-upload"/></Button>}            

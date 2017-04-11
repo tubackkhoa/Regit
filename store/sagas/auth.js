@@ -86,8 +86,8 @@ export default [
     function* asyncLoginFetchWatcher() {
         // use takeLatest instead of take every, so double click in short time will not trigger more fork
         yield [
-            takeLatest('app/loginFacebook', requestLoginFacebookAsync),
-            takeLatest('app/loginGoogle', requestLoginGoogleAsync),
+            // takeLatest('app/loginFacebook', requestLoginFacebookAsync),
+            // takeLatest('app/loginGoogle', requestLoginGoogleAsync),
             takeLatest('app/login', requestLoginAsync),
         ]
     },

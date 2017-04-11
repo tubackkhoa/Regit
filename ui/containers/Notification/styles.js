@@ -9,6 +9,7 @@ export default {
     borderColor: material.noteTextColor,
     marginLeft:0,
     marginRight:0,
+    height: 60,
   },
   icon:{
     color: material.toolbarDefaultBg,

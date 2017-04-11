@@ -14,6 +14,7 @@ export default {
   value: {
     color:material.textColor,
     marginLeft:5,  
+    fontSize: material.fontSizeBase,
   },
   icon: {
     marginRight:-10,   

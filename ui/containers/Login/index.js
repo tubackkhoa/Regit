@@ -11,19 +11,24 @@ import {
 } from 'native-base'
 import styles from './styles'
 import { connect } from 'react-redux'
-// this way help copy and paste faster
-import * as commonActions from '~/store/actions/common'
-import * as authActions from '~/store/actions/auth'
 import { Field, reduxForm } from 'redux-form'
 
 import routes from '~/ui/routes'
 
+// this way help copy and paste faster
+import * as commonActions from '~/store/actions/common'
+import * as authActions from '~/store/actions/auth'
+import * as commonSelectors from '~/store/selectors/common'
+
 import Content from '~/ui/components/Content'
+import Preload from '~/ui/containers/Preload'
 import { InputField } from '~/ui/elements/Form'
 import { validate } from './utils'
 import { logo } from '~/assets'
 
-@connect(null, {...commonActions, ...authActions})
+@connect(state=>({  
+  loginRequest: commonSelectors.getRequest(state, 'login'),  
+}), {...commonActions, ...authActions})
 @reduxForm({ form: 'LoginForm', validate})
 export default class extends Component {
 
@@ -32,7 +37,14 @@ export default class extends Component {
   }
 
   render() {    
-    const { handleSubmit, submitting, setToast } = this.props        
+    const { handleSubmit, submitting, setToast, loginRequest } = this.props      
+    console.log(loginRequest)
+    if(loginRequest.status === 'pending'){
+      return (
+        <Preload/>
+      )
+    }          
+
     return (
       <Container style={styles.container}>
         <Content>                    
