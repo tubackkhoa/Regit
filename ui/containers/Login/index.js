@@ -37,8 +37,7 @@ export default class extends Component {
   }
 
   render() {    
-    const { handleSubmit, submitting, setToast, loginRequest } = this.props      
-    console.log(loginRequest)
+    const { handleSubmit, submitting, setToast, loginRequest } = this.props          
     if(loginRequest.status === 'pending'){
       return (
         <Preload/>

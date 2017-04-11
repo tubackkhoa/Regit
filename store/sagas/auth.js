@@ -51,9 +51,9 @@ const requestLoginAsync = createRequestSaga({
     cancel: 'app/logout',
     success: [
         (data) => saveLoggedUser(data),
-        () => setAuthState(true),
-        () => setToast('Logged successfully!!!'),           
-        () => forwardTo('home', true),             
+        () => setAuthState(true),                   
+        () => forwardTo('home'), 
+        () => setToast('Logged successfully!!!'),            
     ],
     failure: [
         () => setToast('Couldn\'t login', 'error')
@@ -66,10 +66,10 @@ const requestLogoutAsync = createRequestSaga({
     key: 'logout',
     success: [
         () => removeLoggedUser(),
-        () => setAuthState(false),
-        () => setToast('Logout successfully!!!'),   
+        () => setAuthState(false),           
         () => closeDrawer(),
-        () => forwardTo('login', true)    
+        () => forwardTo('login'),
+        () => setToast('Logout successfully!!!'),    
     ],
     failure: [
         () => setToast('Couldn\'t logout', 'error')
