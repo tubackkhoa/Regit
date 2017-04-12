@@ -3,6 +3,7 @@ import Notification from './containers/Notification'
 import Login from './containers/Login'
 import UserProfile from './containers/User/Profile'
 import UserSetting from './containers/User/Setting'
+import Delegation from './containers/Delegation'
 import ChangePassword from './containers/User/Action/ChangePassword'
 import ChangeEmail from './containers/User/Action/ChangeEmail'
 import ChangePIN from './containers/User/Action/ChangePIN'
@@ -20,6 +21,10 @@ export default {
         title: 'Notification',
         Page: Notification,
     },   
+    delegation: {
+        title: 'Delegation',
+        Page: Delegation,
+    },
     'user/profile': {
         title: 'User Profile',
         Page: UserProfile,
