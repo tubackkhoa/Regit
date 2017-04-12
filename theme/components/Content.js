@@ -8,6 +8,9 @@ export default (variables = variable) => {
       '.padder': {
         padding: variables.contentPadding,
       },
+      '.rounded': {
+        borderRadius: 4,
+      },
       flex: 1,      
       'NativeBase.Segment': {
         borderWidth: 0,        

@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import {                 
-    Button, Container, ListItem, List, TabHeading,
-    Text, Item, View, Input, Left, Body, Tab, Tabs, ScrollableTab,
+    Button, Container, ListItem, List, TabHeading, Thumbnail,
+    Text, Item, View, Input, Left, Body, Tab, Right,
 } from 'native-base'
 
 import Footer from '~/ui/components/Footer'
 import Content from '~/ui/components/Content'
 import { connect } from 'react-redux'
 import * as commonActions from '~/store/actions/common'
+import * as accountSelectors from '~/store/selectors/account'
 import Header from '~/ui/components/Header'
 
 import AutoWidthTabs from '~/ui/components/AutoWidthTabs'
@@ -17,7 +18,11 @@ import Icon from '~/ui/elements/Icon'
 import options from './options'
 import styles from './styles'
 
-@connect(null, {...commonActions})
+import { API_BASE } from '~/store/constants/api'
+
+@connect(state=>({
+  profile: accountSelectors.getProfile(state),
+}), {...commonActions})
 export default class extends Component {
 
   constructor(props) {
@@ -36,8 +41,9 @@ export default class extends Component {
 
   render() {
 
-    const {goBack, route} = this.props
-    
+    const {goBack, route, profile} = this.props
+    const avatar = {uri: (API_BASE + profile.PhotoUrl)}
+
     return (          
        
         <Container>
@@ -52,28 +58,67 @@ export default class extends Component {
             />  
 
             <AutoWidthTabs>
-                <Tab small heading="WHO YOU DELEGATED TO">
-                    <Content style={styles.container} refreshing={this.state.refreshing}
+                <Tab style={styles.container} heading="WHO YOU DELEGATED TO">
+                    <Content refreshing={this.state.refreshing}
                         onRefresh={this._onRefresh}                
                     >              
-                      <List dataArray={options.notifications} renderRow={item =>
-                        <ListItem icon noBorder style={styles.listItemContainer}>
-                            <Left>
-                                <Icon name={item.icon} style={styles.icon}/>
-                            </Left>
-                            <Body>
-                                <Text small>
-                                  <Text small bold>{item.user}</Text> {item.message}
-                                </Text>                        
-                                <Text note small>{item.time}</Text>
-                            </Body>
-                        </ListItem>   
-                      }/>      
-
+                      <View rounded style={styles.content} >
+                        <List dataArray={options.notifications} renderRow={item =>
+                          <ListItem avatar noBorder style={styles.listItemContainer}>
+                              <Left>
+                                  <Thumbnail style={styles.thumb} source={avatar}/>
+                              </Left>
+                              <Body style={{marginLeft:10}}>
+                                  <Text small bold active>{profile.DisplayName}</Text>                        
+                                  <Text note small>{profile.Birthdate}</Text>
+                              </Body>
+                              <Right  style={styles.rightContainer}>
+                                {item.icon === 'refresh'
+                                  ?<Button small textSmall style={styles.button} bordered success>
+                                      <Text>Active</Text>
+                                  </Button>
+                                  :<Button small textSmall style={styles.button} bordered warning>
+                                      <Text>Pending</Text>
+                                  </Button>
+                                }
+                                  
+                                  <Icon large name="keyboard-arrow-right" /> 
+                              </Right>
+                          </ListItem>   
+                        }/>      
+                        </View>
                     </Content>
                 </Tab>
-                <Tab small heading="WHO HAS DELEGATED TO YOU">
-                    <Text>Ngon</Text>
+                <Tab style={styles.container} heading="WHO HAS DELEGATED TO YOU">
+                    <Content refreshing={this.state.refreshing}
+                        onRefresh={this._onRefresh}                
+                    >              
+                      <View rounded style={styles.content} >
+                        <List dataArray={options.notifications} renderRow={item =>
+                          <ListItem avatar noBorder style={styles.listItemContainer}>
+                              <Left>
+                                  <Thumbnail style={styles.thumb} source={avatar}/>
+                              </Left>
+                              <Body style={{marginLeft:10}}>
+                                  <Text small bold active>{profile.DisplayName}</Text>                        
+                                  <Text note small>{profile.Birthdate}</Text>
+                              </Body>
+                              <Right  style={styles.rightContainer}>
+                                {item.icon === 'refresh'
+                                  ?<Button small textSmall style={styles.button} bordered success>
+                                      <Text>Active</Text>
+                                  </Button>
+                                  :<Button small textSmall style={styles.button} bordered warning>
+                                      <Text>Pending</Text>
+                                  </Button>
+                                }
+                                  
+                                  <Icon large name="keyboard-arrow-right" /> 
+                              </Right>
+                          </ListItem>   
+                        }/>      
+                        </View>
+                    </Content>
                 </Tab>
             </AutoWidthTabs>            
 

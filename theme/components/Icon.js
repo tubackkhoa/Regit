@@ -8,6 +8,9 @@ export default (variables = variable) => {
     fontSize: variables.iconFontSize,
     color: '#000',
     backgroundColor:'transparent',
+    '.large': {
+      fontSize:28,
+    },
   };
 
 

@@ -11,6 +11,9 @@ export default (variables = variable) => {
       '.bold': {
         fontWeight: '600',
       },
+      '.active': {
+        color: variables.tabBarActiveTextColor,
+      },
       '.link':{
         color: variables.linkTextColor,
       },

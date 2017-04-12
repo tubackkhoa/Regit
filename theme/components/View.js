@@ -7,7 +7,10 @@ export default (variables = variable) => {
   const viewTheme = {
       '.padder': {
         padding: variables.contentPadding/2,
-      },
+      },   
+      '.rounded': {
+        borderRadius: 4,
+      },   
       '.regit': {                
 
         'NativeBase.ListItem': {          

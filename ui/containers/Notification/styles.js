@@ -6,7 +6,7 @@ export default {
   },
   listItemContainer:{
     borderBottomWidth:0.5,
-    borderColor: material.noteTextColor,
+    borderColor: material.grayColor,
     marginLeft:0,
     marginRight:0,
     height: 60,

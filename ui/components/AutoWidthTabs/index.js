@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import {                 
     Tabs, ScrollableTab, TabHeading, Text,
 } from 'native-base'
+import styles from './styles'
 
-import material from '~/theme/variables/material'
 
 export default class extends Component {
   render() {
@@ -13,7 +13,7 @@ export default class extends Component {
       return React.cloneElement(child, {tabStyle, activeTabStyle:tabStyle, key})
     })
     return (                         
-      <Tabs {...props} renderTabBar={props => <ScrollableTab tabsContainerStyle={{width: material.deviceWidth}} />}>
+      <Tabs {...props} renderTabBar={props => <ScrollableTab style={styles.tab} tabsContainerStyle={styles.tabContainer} />}>
         {autoWidthChildren}
       </Tabs>      
     )
