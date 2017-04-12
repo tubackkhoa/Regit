@@ -41,11 +41,13 @@ export default class extends Component {
 
     render() {
       const {initialRoute} = this.props
+      // default is not found page, render must show error
+      const page = routes[initialRoute] || routes.notFound
       this.constructor.mounted[initialRoute] = true
       return (            
         <Navigator ref="navigator"
             configureScene={this.constructor.configureScene}
-            initialRoute={routes[initialRoute]}
+            initialRoute={page}
             renderScene={this.renderScene}                
         />
           

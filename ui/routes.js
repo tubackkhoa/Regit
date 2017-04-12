@@ -1,4 +1,5 @@
 import Home from './containers/Home'
+import NotFound from './containers/NotFound'
 import Notification from './containers/Notification'
 import Login from './containers/Login'
 import UserProfile from './containers/User/Profile'
@@ -13,6 +14,10 @@ import CloseAccount from './containers/User/Action/CloseAccount'
 
 // we can use animationType object for each route via Navigator.SceneConfigs
 export default {
+    notFound: {
+        title: 'Not Found',
+        Page: NotFound,
+    },
     home: {
         title: 'Home',
         Page: Home,
