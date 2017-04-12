@@ -232,8 +232,6 @@ export default (variables = variable) => {
     'NativeBase.Separator': {
       ...separatorTheme(variables),
     },
-    'NativeBase.Tabs': {
-    },
     'NativeBase.Thumbnail': {
       '.square': {
         borderRadius: 0,

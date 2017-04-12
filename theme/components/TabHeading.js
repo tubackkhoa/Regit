@@ -9,18 +9,20 @@ export default (variables = variable) => {
 
   const tabHeadingTheme = {
     flexDirection: 'row',
-    backgroundColor: variables.tabDefaultBg,
+    backgroundColor: variables.topTabDefaultBg,
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     '.scrollable': {
-      paddingHorizontal: 20,
+      paddingHorizontal: 10,
       flex: (platform==='android') ? 0 : 1,
       minWidth: (platform==='android') ? undefined : 60,
     },
     'NativeBase.Text': {
       color: variables.topTabBarTextColor,
-      marginHorizontal: 7
+      marginHorizontal: 0,
+      fontSize: variables.topTabBarTextSize,
+      fontWeight: '600',
     },
     'NativeBase.Icon': {
       color: variables.topTabBarTextColor,
@@ -28,8 +30,7 @@ export default (variables = variable) => {
     },
     '.active': {
       'NativeBase.Text': {
-        color: variables.topTabBarActiveTextColor,
-        fontWeight: '600'
+        color: variables.topTabBarActiveTextColor,        
       },
       'NativeBase.Icon': {
         color: variables.topTabBarActiveTextColor

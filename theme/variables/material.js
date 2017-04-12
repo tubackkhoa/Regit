@@ -148,12 +148,14 @@ export default {
   tabActiveBgColor: undefined,
 
     // Tab
+  topTabBarTextSize: 11,
   tabDefaultBg: '#3F51B5',
-  topTabBarTextColor: '#c2c2c2',
-  topTabBarActiveTextColor: '#fff',
+  topTabBarTextColor: '#959595',
+  topTabBarActiveTextColor: '#959595',
+  topTabDefaultBg: '#d7d7d7',
   topTabActiveBgColor: undefined,
-  topTabBarBorderColor: '#fff',
-  topTabBarActiveBorderColor: '#fff',
+  topTabBarBorderColor: 'transparent',
+  topTabBarActiveBorderColor: '#117e9e',
 
 
     // Header

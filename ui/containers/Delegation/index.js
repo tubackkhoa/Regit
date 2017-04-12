@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {                 
     Button, Container, ListItem, List, TabHeading,
-    Text, Item, View, Input, Left, Body, Tab, Tabs,
+    Text, Item, View, Input, Left, Body, Tab, Tabs, ScrollableTab,
 } from 'native-base'
 
 import Footer from '~/ui/components/Footer'
@@ -9,6 +9,8 @@ import Content from '~/ui/components/Content'
 import { connect } from 'react-redux'
 import * as commonActions from '~/store/actions/common'
 import Header from '~/ui/components/Header'
+
+import AutoWidthTabs from '~/ui/components/AutoWidthTabs'
 
 import Icon from '~/ui/elements/Icon'
 
@@ -49,8 +51,8 @@ export default class extends Component {
               center={route.title}                         
             />  
 
-            <Tabs>
-                <Tab heading={<TabHeading><Text >WHO YOU DELEGATED TO</Text></TabHeading>}>
+            <AutoWidthTabs>
+                <Tab small heading="WHO YOU DELEGATED TO">
                     <Content style={styles.container} refreshing={this.state.refreshing}
                         onRefresh={this._onRefresh}                
                     >              
@@ -70,12 +72,10 @@ export default class extends Component {
 
                     </Content>
                 </Tab>
-                <Tab heading="WHO HAS DELEGATED TO YOU">
+                <Tab small heading="WHO HAS DELEGATED TO YOU">
                     <Text>Ngon</Text>
                 </Tab>
-            </Tabs>
-
-            
+            </AutoWidthTabs>            
 
             <Footer />
             
