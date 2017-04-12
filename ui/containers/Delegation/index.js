@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {                 
-    Button, Container, ListItem, List,
-    Text, Item, View, Input, Left, Body,
+    Button, Container, ListItem, List, TabHeading,
+    Text, Item, View, Input, Left, Body, Tab, Tabs,
 } from 'native-base'
 
 import Footer from '~/ui/components/Footer'
@@ -40,7 +40,7 @@ export default class extends Component {
        
         <Container>
         
-            <Header 
+            <Header hasTabs
               left={
                 <Button transparent onPress={e=>goBack()}>
                   <Icon name="keyboard-arrow-left"/>
@@ -49,24 +49,33 @@ export default class extends Component {
               center={route.title}                         
             />  
 
-            <Content style={styles.container} refreshing={this.state.refreshing}
-                onRefresh={this._onRefresh}                
-            >              
-              <List dataArray={options.notifications} renderRow={item =>
-                <ListItem icon noBorder style={styles.listItemContainer}>
-                    <Left>
-                        <Icon name={item.icon} style={styles.icon}/>
-                    </Left>
-                    <Body>
-                        <Text small>
-                          <Text small bold>{item.user}</Text> {item.message}
-                        </Text>                        
-                        <Text note small>{item.time}</Text>
-                    </Body>
-                </ListItem>   
-              }/>      
+            <Tabs>
+                <Tab heading={<TabHeading><Text >WHO YOU DELEGATED TO</Text></TabHeading>}>
+                    <Content style={styles.container} refreshing={this.state.refreshing}
+                        onRefresh={this._onRefresh}                
+                    >              
+                      <List dataArray={options.notifications} renderRow={item =>
+                        <ListItem icon noBorder style={styles.listItemContainer}>
+                            <Left>
+                                <Icon name={item.icon} style={styles.icon}/>
+                            </Left>
+                            <Body>
+                                <Text small>
+                                  <Text small bold>{item.user}</Text> {item.message}
+                                </Text>                        
+                                <Text note small>{item.time}</Text>
+                            </Body>
+                        </ListItem>   
+                      }/>      
 
-            </Content>
+                    </Content>
+                </Tab>
+                <Tab heading="WHO HAS DELEGATED TO YOU">
+                    <Text>Ngon</Text>
+                </Tab>
+            </Tabs>
+
+            
 
             <Footer />
             
