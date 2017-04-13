@@ -15,5 +15,15 @@ export default {
   },
   inputIcon: {
     paddingRight:0,
-  }
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',        
+  },
+  checkbox: {    
+    marginLeft: -10,
+  },
+  label: {
+    
+  },
 }

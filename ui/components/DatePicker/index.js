@@ -159,7 +159,7 @@ class DatePicker extends Component {
 
   datePicked() {
     if (typeof this.props.onDateChange === 'function') {
-      console.log(this.getDateStr(this.state.date, false))
+      // console.log(this.getDateStr(this.state.date, false))
       this.props.onDateChange(this.getDateStr(this.state.date, false), this.state.date)
     }
   }
@@ -281,7 +281,7 @@ class DatePicker extends Component {
         <Input disabled 
           placeholder={placeholder}
           placeholderTextColor={material.inputColorPlaceholder} 
-          style={{...styles.dateInputStyle, ...customStyles.dateInputStyle}} value={this.getDateStr()} />                
+          style={{...styles.dateInputStyle, ...dateInputStyle}} value={this.getDateStr()} />                
           {icon && <Icon
             style={{...styles.dateIcon, ...customStyles.dateIcon}}
             name={icon}

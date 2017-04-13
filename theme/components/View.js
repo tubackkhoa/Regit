@@ -11,8 +11,16 @@ export default (variables = variable) => {
       '.rounded': {
         borderRadius: 4,
       },   
+      '.row': {
+        flexDirection: 'row',
+        alignItems:'center',
+      },
+      '.full':{
+        justifyContent: 'space-between',
+        width: '100%',
+      },
       '.regit': {                
-
+        overflow: 'hidden',
         'NativeBase.ListItem': {          
           borderColor:'#cccccc',
           justifyContent:'space-between',

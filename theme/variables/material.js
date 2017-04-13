@@ -26,8 +26,10 @@ export default {
   btnDisabledClr: '#f1f1f1',
 
     // CheckBox
-  CheckboxRadius: 0,
-  CheckboxBorderWidth: 2,
+  get CheckboxRadius(){
+    return this.checkboxSize / 2
+  },
+  CheckboxBorderWidth: 1,
   CheckboxPaddingLeft: 2,
   CheckboxPaddingBottom: (platform === 'ios') ? 0 : 5,
   CheckboxIconSize: (platform === 'ios') ? 18 : 14,
@@ -36,7 +38,10 @@ export default {
   DefaultFontSize: 17,
   checkboxBgColor: '#039BE5',
   checkboxSize: 20,
-  checkboxTickColor: '#fff',
+  checkboxTickColor: 'transparent',
+  get checkboxSizeLarge(){
+    return this.checkboxSize * 1.5
+  },
 
   // Segment
   segmentBackgroundColor: '#3F51B5',
@@ -217,6 +222,7 @@ export default {
   listBorderColor: '#464646',
   listDividerBg: '#f4f4f4',
   listItemHeight: 45,
+  listItemActiveColor: '#c7eafb',
   listBtnUnderlayColor: '#DDD',
 
     // Card

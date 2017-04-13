@@ -14,6 +14,12 @@ export default (variables = variable) => {
           color: variables.checkboxTickColor,
         },
       },
+      '.large': {
+        borderRadius: variables.checkboxSizeLarge / 2,
+        width: variables.checkboxSizeLarge,
+        height: variables.checkboxSizeLarge,
+        borderWidth: variables.CheckboxBorderWidth * 2,
+      },
       'NativeBase.Icon': {
         color: 'transparent',
         lineHeight: variables.CheckboxIconSize,
@@ -27,6 +33,7 @@ export default (variables = variable) => {
         fontSize: variables.CheckboxFontSize,
       },
       borderRadius: variables.CheckboxRadius,
+      borderColor: '#ccc',
       overflow: 'hidden',
       width: variables.checkboxSize,
       height: variables.checkboxSize,

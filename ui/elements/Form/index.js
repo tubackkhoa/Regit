@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 
 import { 
-  Item, 
-  Input, 
-  Text, 
-  Label,    
+  Item, Input, Text, Label,    
+  View, CheckBox,
 } from 'native-base'
 
 import Icon from '~/ui/elements/Icon'
@@ -33,6 +31,24 @@ export const InputField = ({ input, label, meta: { touched, error, warning }, ic
   </Item>
 )
 
+export const CheckBoxField = ({ input, label, meta: { touched, error, warning }, style, checkboxStyle, labelStyle, ...custom }) => (  
+  <View style={{...styles.checkboxContainer, ...style}} >      
+    <CheckBox
+      checked={!!input.value}
+      {...custom}      
+      style={{...styles.checkbox, ...checkboxStyle}}     
+      onPress={e=>input.onChange(!input.value)}
+    />    
+    {label && <Text textSmall={custom.large===undefined} style={{
+      ...styles.label, 
+      fontSize:material.fontSizeBase * (custom.large ? 0.9 : 0.7), 
+      lineHeight: material.lineHeight * (custom.large ? 0.7 : 0.6),
+      marginLeft: custom.large ? 20 : 15,
+      ...labelStyle
+    }}>{label}</Text>}
+  </View>
+)
+
 export const SwitchField = ({ input, meta: { touched, error, warning }, ...custom }) => (
   <Switch         
     value={!!input.value}
@@ -45,15 +61,16 @@ export const SwitchField = ({ input, meta: { touched, error, warning }, ...custo
   />
 )
 
-export const DateField = ({ input, label, meta: { touched, error, warning }, format="MM/DD/YYYY", ...custom }) => (
+export const DateField = ({ input, label, meta: { touched, error, warning }, style, inputStyle, iconStyle, format="MM/DD/YYYY", ...custom }) => (
   <DatePicker    
     date={input.value}
     mode="date"
     placeholder={label}    
     onDateChange={(date) => input.onChange(date)}
     customStyles={{
-      dateTouch: styles.item,
-      dateInput: styles.input,
+      dateTouch: {...styles.item, ...style},
+      dateInput: {...styles.input, ...inputStyle},
+      dateIcon: iconStyle,
     }}
     format={format}
     {...custom}    

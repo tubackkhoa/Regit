@@ -24,6 +24,9 @@ export default (variables = variable) => {
       margin: -10,
       borderBottomColor: 'transparent',
     },
+    '.active': {
+      backgroundColor: variables.listItemActiveColor,
+    },
     '.searchBar': {
       'NativeBase.Item': {
         'NativeBase.Icon': {
