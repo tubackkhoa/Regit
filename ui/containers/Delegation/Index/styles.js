@@ -34,5 +34,6 @@ export default {
   },
   button: {
     height: 18,
+    paddingTop:material.platform === 'ios' ? 0 : -5,    
   }
 }

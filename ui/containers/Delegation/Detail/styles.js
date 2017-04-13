@@ -20,7 +20,7 @@ export default {
     marginBottom: 10,
   },
   textArea:{
-    height: '100%',
+    height: '100%',    
   },
   label: {
     fontSize:14,
@@ -49,7 +49,8 @@ export default {
   dateContainer:{
     marginTop:0,
     backgroundColor:'transparent',
-    width:150,                  
+    width:150,          
+    borderWidth:0,        
   },
   listItem:{
     marginLeft:10,

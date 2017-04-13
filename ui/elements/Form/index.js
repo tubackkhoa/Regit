@@ -20,7 +20,7 @@ export const InputField = ({ input, label, meta: { touched, error, warning }, ic
     <Input   
       placeholder={label}    
       {...input}                   
-      {...custom}
+      {...custom}      
       placeholderTextColor={material.inputColorPlaceholder} 
       style={{...styles.input, ...inputStyle}}     
     />    
@@ -42,7 +42,7 @@ export const CheckBoxField = ({ input, label, meta: { touched, error, warning },
     {label && <Text textSmall={custom.large===undefined} style={{
       ...styles.label, 
       fontSize:material.fontSizeBase * (custom.large ? 0.9 : 0.7), 
-      lineHeight: material.lineHeight * (custom.large ? 0.7 : 0.6),
+      lineHeight: Math.round(material.lineHeight * (custom.large ? 0.7 : 0.6)),
       marginLeft: custom.large ? 20 : 15,
       ...labelStyle
     }}>{label}</Text>}
