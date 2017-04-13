@@ -59,7 +59,7 @@ export const router = (state = {route:'login', stack:[]}, { type, payload }) => 
       // max stack is 20 items :D
       return state.route === payload 
       ? state 
-      : {route:payload, stack: [state.route, ...(state.stack.length ===20 ? state.stack.slice(0, -1) : state.stack)]}
+      : {route:payload, stack: [state.route, ...(state.stack.length > 19 ? state.stack.slice(0, -1) : state.stack)]}
     case 'navigate/reset':
       return {route:payload, stack:[]}
     case 'navigate/pop':      

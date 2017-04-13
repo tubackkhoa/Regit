@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 
 // should show error if not found
 import { getRouter } from '~/store/selectors/common'
+import { getPage } from './utils'
 
 @connect(state=>({
   router: getRouter(state),  
@@ -17,21 +18,21 @@ export default class extends Component {
         return Navigator.SceneConfigs[route.animationType || 'PushFromRight']
     }
 
-    // push on first time, later only jumpTo without reload
-    static mounted = {
-
-    }
-
     // replace view from stack
-    componentWillReceiveProps({router}){     
-      const page = routes[router.route]
+    componentWillReceiveProps({router}){           
+      const page = getPage(router.route)      
       if(!page)   
         return console.warn('Not found: ' + router.route)
-      if(this.constructor.mounted[router.route]){
-        this.refs.navigator.jumpTo(page)
-      } else {
-        this.constructor.mounted[router.route] = true
-        this.refs.navigator.push(page) 
+      // check if page is mounted
+      const destIndex = this.navigator.getCurrentRoutes()
+        .findIndex(route => route.url === page.url)
+      // console.log(destIndex, this.navigator.getCurrentRoutes())
+      
+      if(destIndex !==-1){
+        // this.navigator.jumpTo(page)
+        this.navigator._jumpN(destIndex - this.navigator.state.presentedIndex);
+      } else {        
+        this.navigator.push(page) 
       }           
     }
 
@@ -42,10 +43,9 @@ export default class extends Component {
     render() {
       const {initialRoute} = this.props
       // default is not found page, render must show error
-      const page = routes[initialRoute] || routes.notFound
-      this.constructor.mounted[initialRoute] = true
+      const page = getPage(initialRoute) || routes.notFound            
       return (            
-        <Navigator ref="navigator"
+        <Navigator ref={item=>this.navigator=item}
             configureScene={this.constructor.configureScene}
             initialRoute={page}
             renderScene={this.renderScene}                

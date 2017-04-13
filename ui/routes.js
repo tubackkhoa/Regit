@@ -4,7 +4,8 @@ import Notification from './containers/Notification'
 import Login from './containers/Login'
 import UserProfile from './containers/User/Profile'
 import UserSetting from './containers/User/Setting'
-import Delegation from './containers/Delegation'
+import Delegation from './containers/Delegation/Index'
+import DelegationDetail from './containers/Delegation/Detail'
 import ChangePassword from './containers/User/Action/ChangePassword'
 import ChangeEmail from './containers/User/Action/ChangeEmail'
 import ChangePIN from './containers/User/Action/ChangePIN'
@@ -29,6 +30,10 @@ export default {
     delegation: {
         title: 'Delegation',
         Page: Delegation,
+    },
+    'delegation/detail/:id': {
+        title: 'Delegation Detail',
+        Page: DelegationDetail,
     },
     'user/profile': {
         title: 'User Profile',
