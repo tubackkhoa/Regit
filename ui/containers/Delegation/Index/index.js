@@ -39,10 +39,41 @@ export default class extends Component {
     }, 2000)
   }    
 
+  renderList(){
+    const {forwardTo, profile} = this.props
+    const avatar = {uri: (API_BASE + profile.PhotoUrl)}
+    return (
+      <List dataArray={options.notifications} renderRow={item =>
+        <ListItem avatar noBorder style={styles.listItemContainer}>
+            <Left>
+                <Thumbnail style={styles.thumb} source={avatar}/>
+            </Left>
+            <Body style={{marginLeft:10}}>
+                <Text small bold active>{profile.DisplayName}</Text>                        
+                <Text note small>{profile.Birthdate}</Text>
+            </Body>
+            <Right  style={styles.rightContainer}>
+              {item.icon === 'refresh'
+                ?<Button small textSmall style={styles.button} bordered success>
+                    <Text>Active</Text>
+                </Button>
+                :<Button small textSmall style={styles.button} bordered warning>
+                    <Text>Pending</Text>
+                </Button>
+              }
+              <Button iconRight style={styles.buttonIcon} transparent onPress={e=>forwardTo(`delegation/detail/${item.id}`)}>
+                <Icon style={styles.icon} name="keyboard-arrow-right" /> 
+              </Button>
+            </Right>
+        </ListItem>   
+      }/> 
+    )
+  }
+
   render() {
 
-    const {goBack, route, profile, forwardTo} = this.props
-    const avatar = {uri: (API_BASE + profile.PhotoUrl)}
+    const {goBack, route, forwardTo} = this.props
+    
 
     return (          
        
@@ -63,30 +94,8 @@ export default class extends Component {
                         onRefresh={this._onRefresh}                
                     >              
                       <View rounded style={styles.content} >
-                        <List dataArray={options.notifications} renderRow={item =>
-                          <ListItem avatar noBorder style={styles.listItemContainer}>
-                              <Left>
-                                  <Thumbnail style={styles.thumb} source={avatar}/>
-                              </Left>
-                              <Body style={{marginLeft:10}}>
-                                  <Text small bold active>{profile.DisplayName}</Text>                        
-                                  <Text note small>{profile.Birthdate}</Text>
-                              </Body>
-                              <Right  style={styles.rightContainer}>
-                                {item.icon === 'refresh'
-                                  ?<Button small textSmall style={styles.button} bordered success>
-                                      <Text>Active</Text>
-                                  </Button>
-                                  :<Button small textSmall style={styles.button} bordered warning>
-                                      <Text>Pending</Text>
-                                  </Button>
-                                }
-                                  
-                                  <Icon onPress={e=>forwardTo(`delegation/detail/${item.id}`)} large name="keyboard-arrow-right" /> 
-                              </Right>
-                          </ListItem>   
-                        }/>      
-                        </View>
+                        {this.renderList()}
+                      </View>
                     </Content>
                 </Tab>
                 <Tab style={styles.container} heading="WHO HAS DELEGATED TO YOU">
@@ -94,30 +103,8 @@ export default class extends Component {
                         onRefresh={this._onRefresh}                
                     >              
                       <View rounded style={styles.content} >
-                        <List dataArray={options.notifications} renderRow={item =>
-                          <ListItem avatar noBorder style={styles.listItemContainer}>
-                              <Left>
-                                  <Thumbnail style={styles.thumb} source={avatar}/>
-                              </Left>
-                              <Body style={{marginLeft:10}}>
-                                  <Text small bold active>{profile.DisplayName}</Text>                        
-                                  <Text note small>{profile.Birthdate}</Text>
-                              </Body>
-                              <Right  style={styles.rightContainer}>
-                                {item.icon === 'refresh'
-                                  ?<Button small textSmall style={styles.button} bordered success>
-                                      <Text>Active</Text>
-                                  </Button>
-                                  :<Button small textSmall style={styles.button} bordered warning>
-                                      <Text>Pending</Text>
-                                  </Button>
-                                }
-                                  
-                                  <Icon large name="keyboard-arrow-right" /> 
-                              </Right>
-                          </ListItem>   
-                        }/>      
-                        </View>
+                        {this.renderList()}
+                      </View>
                     </Content>
                 </Tab>
             </AutoWidthTabs>            

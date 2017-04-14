@@ -48,7 +48,7 @@ export default {
         Page: Login,
         hiddenBar: true,
     },   
-    'user/action/changePassword':{
+    'user/action/changePassword':{   
         title: 'Change Password',
         Page: ChangePassword,
     },    

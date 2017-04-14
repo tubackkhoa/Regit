@@ -20,34 +20,34 @@ export default class extends Component {
 
     // replace view from stack
     componentWillReceiveProps({router}){           
-      const page = getPage(router.route)      
-      if(!page)   
+      this.page = getPage(router.route)      
+      if(!this.page)   
         return console.warn('Not found: ' + router.route)
       // check if page is mounted
       const destIndex = this.navigator.getCurrentRoutes()
-        .findIndex(route => route.url === page.url)
-      // console.log(destIndex, this.navigator.getCurrentRoutes())
-      
+        .findIndex(route => route.path === this.page.path)
+      console.log(destIndex, this.navigator.getCurrentRoutes())      
       if(destIndex !==-1){
         // this.navigator.jumpTo(page)
         this.navigator._jumpN(destIndex - this.navigator.state.presentedIndex);
       } else {        
-        this.navigator.push(page) 
+        this.navigator.push(this.page) 
       }           
     }
 
-    renderScene = (route, navigator) => {           
-        return this.props.renderScene(route, navigator)
+    renderScene = (route, navigator) => {               
+      // we only pass this.page, route and navigator is for mapping or some event like will focus ...
+      return this.props.renderScene(this.page)
     }
 
     render() {
       const {initialRoute} = this.props
       // default is not found page, render must show error
-      const page = getPage(initialRoute) || routes.notFound            
+      this.page = getPage(initialRoute) || routes.notFound            
       return (            
         <Navigator ref={item=>this.navigator=item}
             configureScene={this.constructor.configureScene}
-            initialRoute={page}
+            initialRoute={this.page}
             renderScene={this.renderScene}                
         />
           

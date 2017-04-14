@@ -8,7 +8,7 @@ export const getPage = (pathname) => {
       exact: true,
       strict: false,
     })
-    if(match) {
+    if(match) {      
       return {...routes[route], ...match}
     }
   }  

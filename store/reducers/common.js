@@ -63,7 +63,8 @@ export const router = (state = {route:'login', stack:[]}, { type, payload }) => 
     case 'navigate/reset':
       return {route:payload, stack:[]}
     case 'navigate/pop':      
-      return state.stack[0] ? {route:state.stack[0], stack:state.stack.slice(1)} : state
+      // prevent back forever      
+      return {route:state.stack[0] || 'home', stack:state.stack.slice(1)}
     default:
       return state
   }  

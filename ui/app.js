@@ -22,16 +22,14 @@ const UIManager = NativeModules.UIManager
 }))
 export default class App extends Component {    
 
-    renderScene = (route, navigator) => {
+    renderScene = (page) => {      
+        
         return (
-            <Container showDrawer={this.props.loggedIn} navigator={navigator}>
+            <Container showDrawer={this.props.loggedIn}>
                 <StatusBar 
-                  hidden={ route.hiddenBar || (this.props.drawerState === 'opened' && Platform.OS === 'ios')}
+                  hidden={ page.hiddenBar || (this.props.drawerState === 'opened' && Platform.OS === 'ios')}
                   translucent />                
-                    <route.Page
-                        route={route}
-                        navigator={navigator}
-                    />
+                    <page.Page route={page}/>
                 <Toasts/>                
             </Container>
         )
@@ -45,8 +43,7 @@ export default class App extends Component {
     render() {
       const {loggedIn, router} = this.props
         return (            
-            <Navigator
-                configureScene={App.configureScene}
+            <Navigator                
                 initialRoute={router.route}
                 renderScene={this.renderScene}                
             />

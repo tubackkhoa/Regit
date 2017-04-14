@@ -14,7 +14,7 @@ export default {
   rightContainer:{
     borderBottomWidth:0,
     flexDirection:'row',
-    width:85,                              
+    width:100,                              
     paddingRight:5,
     alignItems:'center',
     justifyContent:'space-between'
@@ -34,6 +34,13 @@ export default {
   },
   button: {
     height: 18,
-    paddingTop:material.platform === 'ios' ? 0 : -5,    
+    paddingTop:material.platform === 'ios' ? 5 : -5,    
+  },
+  buttonIcon: {
+    paddingRight:0,
+    paddingLeft:0,
+  },
+  icon: {
+    color: material.grayColor,
   }
 }

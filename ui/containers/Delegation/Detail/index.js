@@ -41,8 +41,7 @@ export default class extends Component {
 
 
   render() {
-    const {route, goBack, roles, dateIndefinite} = this.props
-    
+    const {route, goBack, roles, dateIndefinite} = this.props    
     return (          
        
         <Container>
@@ -53,7 +52,7 @@ export default class extends Component {
                   <Icon name="keyboard-arrow-left"/>
                 </Button>
               }
-              center={route.title}                         
+              center={`${route.title} : ${route.params.id}`}                         
             />  
 
 

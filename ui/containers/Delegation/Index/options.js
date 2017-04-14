@@ -36,35 +36,35 @@ export default {
       time: 'Yesterday at 23:49'
     },
     {
-      id: 1,
+      id: 7,
       icon: 'network',
       user: 'Vinh Long',
       message: 'has requested to push information to your vault.',
       time: 'Yesterday at 23:49'
     },
     {
-      id: 1,
+      id: 8,
       icon: 'delegation',
       user: 'Quay Do',
       message: 'has invited you to join a sync form.',
       time: '12 March at 23:49'
     },
     {
-      id: 1,
+      id: 9,
       icon: 'delegation',
       user: 'Bank ABC',
       message: 'has requested to push information to your vault.',
       time: '12 March at 23:49'
     },
     {
-      id: 1,
+      id: 10,
       icon: 'refresh',
       user: 'Bank ABC',
       message: 'has invited you to join a sync form.',
       time: '2 minutes ago'
     },
     {
-      id: 1,
+      id: 11,
       icon: 'refresh',
       user: 'Bank ABC',
       message: 'has requested to push information to your vault.',

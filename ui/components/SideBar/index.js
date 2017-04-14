@@ -27,10 +27,6 @@ import {
 }), {...authActions, ...accountActions, ...commonActions})
 export default class extends Component {
 
-  static propTypes = {
-    
-  }
-
   componentDidMount(){    
     if(!this.props.profile){      
       this.props.getProfile(this.props.token)
