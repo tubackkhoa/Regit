@@ -115,7 +115,7 @@ export default class extends Component {
         </Animated.View>                      
         
 
-        <Content scrollEventThrottle={16} style={styles.container} onScroll={this._onScroll}>          
+        <Content scrollEventThrottle={10} style={styles.container} onScroll={this._onScroll}>          
           <Image style={styles.headerImage} source={profileCover}/>  
           <Form style={styles.form}>            
             <Text style={styles.label}>DisplayName</Text>

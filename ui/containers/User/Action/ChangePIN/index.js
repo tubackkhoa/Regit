@@ -4,11 +4,9 @@ import {
     Container, Text, Item, View, Input,
 } from 'native-base'
 
-import Footer from '~/ui/components/Footer'
 import Content from '~/ui/components/Content'
 import { connect } from 'react-redux'
 import * as commonActions from '~/store/actions/common'
-import Header from '~/ui/components/Header'
 
 import { Field, reduxForm } from 'redux-form'
 
@@ -30,16 +28,7 @@ export default class extends Component {
     const {goBack, route} = this.props
     return (          
        
-        <Container>
-        
-            <Header 
-              left={
-                <Button transparent onPress={e=>goBack()}>
-                  <Icon name="keyboard-arrow-left"/>
-                </Button>
-              }
-              center={route.title}                         
-            />  
+        <Container>                  
 
             <Content padder>       
               <Form style={styles.form}>        
@@ -58,8 +47,6 @@ export default class extends Component {
                 </View>
               </Form>
             </Content>
-
-            <Footer />
             
         </Container>
       

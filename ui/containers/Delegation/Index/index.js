@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import {                 
-    Button, Container, ListItem, List, TabHeading, Thumbnail,
+    Button, Container, ListItem, TabHeading, Thumbnail,
     Text, Item, View, Input, Left, Body, Tab, Right,
 } from 'native-base'
 
-import Footer from '~/ui/components/Footer'
+// import Footer from '~/ui/components/Footer'
 import Content from '~/ui/components/Content'
 import { connect } from 'react-redux'
 import * as commonActions from '~/store/actions/common'
 import * as accountSelectors from '~/store/selectors/account'
-import Header from '~/ui/components/Header'
+// import Header from '~/ui/components/Header'
 
 import AutoWidthTabs from '~/ui/components/AutoWidthTabs'
 
@@ -43,30 +43,32 @@ export default class extends Component {
     const {forwardTo, profile} = this.props
     const avatar = {uri: (API_BASE + profile.PhotoUrl)}
     return (
-      <List dataArray={options.notifications} renderRow={item =>
-        <ListItem avatar noBorder style={styles.listItemContainer}>
-            <Left>
-                <Thumbnail style={styles.thumb} source={avatar}/>
-            </Left>
-            <Body style={{marginLeft:10}}>
-                <Text small bold active>{profile.DisplayName}</Text>                        
-                <Text note small>{profile.Birthdate}</Text>
-            </Body>
-            <Right  style={styles.rightContainer}>
-              {item.icon === 'refresh'
-                ?<Button small textSmall style={styles.button} bordered success>
-                    <Text>Active</Text>
+      <View rounded style={styles.content} >
+        {options.notifications.map((item,index) =>
+          <ListItem key={index} avatar noBorder style={styles.listItemContainer}>
+              <Left>
+                  <Thumbnail style={styles.thumb} source={avatar}/>
+              </Left>
+              <Body style={{marginLeft:10}}>
+                  <Text small bold active>{profile.DisplayName}</Text>                        
+                  <Text note small>{profile.Birthdate}</Text>
+              </Body>
+              <Right  style={styles.rightContainer}>
+                {item.icon === 'refresh'
+                  ?<Button small textSmall style={styles.button} bordered success>
+                      <Text>Active</Text>
+                  </Button>
+                  :<Button small textSmall style={styles.button} bordered warning>
+                      <Text>Pending</Text>
+                  </Button>
+                }
+                <Button iconRight style={styles.buttonIcon} transparent onPress={e=>forwardTo(`delegation/detail/${item.id}`)}>
+                  <Icon style={styles.icon} name="keyboard-arrow-right" /> 
                 </Button>
-                :<Button small textSmall style={styles.button} bordered warning>
-                    <Text>Pending</Text>
-                </Button>
-              }
-              <Button iconRight style={styles.buttonIcon} transparent onPress={e=>forwardTo(`delegation/detail/${item.id}`)}>
-                <Icon style={styles.icon} name="keyboard-arrow-right" /> 
-              </Button>
-            </Right>
-        </ListItem>   
-      }/> 
+              </Right>
+          </ListItem>   
+        )} 
+      </View>
     )
   }
 
@@ -77,39 +79,24 @@ export default class extends Component {
 
     return (          
        
-        <Container>
-        
-            <Header hasTabs
-              left={
-                <Button transparent onPress={e=>goBack()}>
-                  <Icon name="keyboard-arrow-left"/>
-                </Button>
-              }
-              center={route.title}                         
-            />  
+        <Container>         
 
             <AutoWidthTabs>
                 <Tab style={styles.container} heading="WHO YOU DELEGATED TO">
                     <Content refreshing={this.state.refreshing}
                         onRefresh={this._onRefresh}                
-                    >              
-                      <View rounded style={styles.content} >
-                        {this.renderList()}
-                      </View>
+                    >     
+                        {this.renderList()}                      
                     </Content>
                 </Tab>
                 <Tab style={styles.container} heading="WHO HAS DELEGATED TO YOU">
                     <Content refreshing={this.state.refreshing}
                         onRefresh={this._onRefresh}                
-                    >              
-                      <View rounded style={styles.content} >
-                        {this.renderList()}
-                      </View>
+                    > 
+                        {this.renderList()}                      
                     </Content>
                 </Tab>
-            </AutoWidthTabs>            
-
-            <Footer />
+            </AutoWidthTabs>   
             
         </Container>
       

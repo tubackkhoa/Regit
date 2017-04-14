@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import {                 
-    Button, Container, ListItem, List,
+    Button, Container, ListItem,
     Text, Item, View, Input, Left, Body,
 } from 'native-base'
 
-import Footer from '~/ui/components/Footer'
+// import Footer from '~/ui/components/Footer'
 import Content from '~/ui/components/Content'
 import { connect } from 'react-redux'
 import * as commonActions from '~/store/actions/common'
-import HeaderSearchBar from '~/ui/components/HeaderSearchBar'
+// import HeaderSearchBar from '~/ui/components/HeaderSearchBar'
 
 import Icon from '~/ui/elements/Icon'
 
@@ -37,14 +37,13 @@ export default class extends Component {
     return (          
        
         <Container>
-        
-            <HeaderSearchBar/>
+                    
 
             <Content style={styles.container} refreshing={this.state.refreshing}
                 onRefresh={this._onRefresh}                
             >              
-              <List dataArray={options.notifications} renderRow={item =>
-                <ListItem icon noBorder style={styles.listItemContainer}>
+              {options.notifications.map((item,index) =>
+                <ListItem key={index} icon noBorder style={styles.listItemContainer}>
                     <Left>
                         <Icon name={item.icon} style={styles.icon}/>
                     </Left>
@@ -55,11 +54,10 @@ export default class extends Component {
                         <Text note small>{item.time}</Text>
                     </Body>
                 </ListItem>   
-              }/>      
+              )}   
 
             </Content>
-
-            <Footer />
+            
             
         </Container>
       

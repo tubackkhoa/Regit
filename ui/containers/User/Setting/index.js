@@ -56,12 +56,10 @@ export default class extends Component {
   render() {
     const {route, forwardTo} = this.props       
     return (                 
-        <Container>        
-            <HeaderSearchBar/>
+        <Container>                    
             <Content padder>
                 {options.listItems.map((item, index)=>this.renderOption(item, index))}
-            </Content>
-            <Footer />            
+            </Content>                   
         </Container>      
     )
   }

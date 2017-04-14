@@ -25,7 +25,7 @@ export default {
     borderRadius: 5,
   },
   outlineButton: {
-    marginTop: 100,        
+    marginTop: 60,        
     borderColor: '#FFF',      
     justifyContent: 'center',
     width: '100%',  

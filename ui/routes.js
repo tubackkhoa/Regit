@@ -18,10 +18,12 @@ export default {
     notFound: {
         title: 'Not Found',
         Page: NotFound,
+        headerType: 'none',
+        footerType: 'none',
     },
-    home: {
+    home: {        
         title: 'Home',
-        Page: Home,
+        Page: Home,        
     },  
     notification: {
         title: 'Notification',
@@ -34,10 +36,13 @@ export default {
     'delegation/detail/:id': {
         title: 'Delegation Detail',
         Page: DelegationDetail,
+        headerType: 'back',
+        footer: false,
     },
     'user/profile': {
         title: 'User Profile',
         Page: UserProfile,
+        headerType: 'none',
     },  
     'user/setting': {
         title: 'User Setting',
@@ -47,29 +52,43 @@ export default {
         title: 'Login',
         Page: Login,
         hiddenBar: true,
+        headerType: 'none',
+        footerType: 'none',
     },   
     'user/action/changePassword':{   
         title: 'Change Password',
         Page: ChangePassword,
+        headerType: 'back',
+        footerType: 'none',
     },    
     'user/action/changeEmail':{
         title: 'Change Email',
         Page: ChangeEmail,
+        headerType: 'back',
+        footerType: 'none',
     }, 
     'user/action/changePIN':{
         title: 'Change PIN',
         Page: ChangePIN,
+        headerType: 'back',
+        footerType: 'none',
     }, 
     'user/action/changePhoneNumber':{
         title: 'Change Phone',
         Page: ChangePhoneNumber,
+        headerType: 'back',
+        footerType: 'none',
     }, 
     'user/action/changeSecurityQuestion':{
         title: 'Change Question',
         Page: ChangeSecurityQuestion,
+        headerType: 'back',
+        footerType: 'none',
     }, 
     'user/action/closeAccount':{
         title: 'Close Account',
         Page: CloseAccount,
+        headerType: 'back',
+        footerType: 'none',
     }, 
 }
