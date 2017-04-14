@@ -54,7 +54,7 @@ export default class extends Component {
   }
 
   render() {
-    const {route, forwardTo} = this.props    
+    const {route, forwardTo} = this.props       
     return (                 
         <Container>        
             <HeaderSearchBar/>

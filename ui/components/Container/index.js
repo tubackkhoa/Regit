@@ -28,6 +28,7 @@ export default class extends Component {
         ? <Drawer
             open={drawerState === 'opened'}
             type="displace"             
+            tweenDuration={200}
             content={showDrawer && <SideBar/>}
             onClose={()=>closeDrawer()}
           >          

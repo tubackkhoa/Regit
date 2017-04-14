@@ -22,8 +22,7 @@ const UIManager = NativeModules.UIManager
 }))
 export default class App extends Component {    
 
-    renderScene = (page) => {      
-        
+    renderScene = (page) => {              
         return (
             <Container showDrawer={this.props.loggedIn}>
                 <StatusBar 
@@ -41,14 +40,14 @@ export default class App extends Component {
     }
 
     render() {
-      const {loggedIn, router} = this.props
-        return (            
-            <Navigator                
-                initialRoute={router.route}
-                renderScene={this.renderScene}                
-            />
-            
-        )
+      const {loggedIn, router} = this.props          
+      return (            
+          <Navigator                
+              initialRoute={router.route}
+              renderScene={this.renderScene}                
+          />
+          
+      )
     }
 }
 
