@@ -28,19 +28,21 @@ export default class extends Component {
       this.page = getPage(props.initialRoute) || routes.notFound            
     }
 
-    // replace view from stack
+    // replace view from stack, hard code but have high performance
     componentWillReceiveProps({router}){               
       this.page = getPage(router.route)      
       if(this.page){   
           // return console.warn('Not found: ' + router.route)
         // check if page is mounted
-        const destIndex = this.navigator.getCurrentRoutes()
+        const destIndex = this.navigator.state.routeStack
           .findIndex(route => route.path === this.page.path)
-        // console.log(destIndex, this.navigator.getCurrentRoutes())      
+
+        // console.log(destIndex, this.navigator.state.presentedIndex, this.navigator.state.routeStack)      
         if(destIndex !==-1){
           // this.navigator.jumpTo(page)
           this.navigator._jumpN(destIndex - this.navigator.state.presentedIndex)
         } else {        
+          this.navigator.state.presentedIndex = this.navigator.state.routeStack.length
           this.navigator.push(this.page)
         }  
       } else {

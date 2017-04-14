@@ -34,7 +34,7 @@ export default class Regit extends Component {
 } 
 
 // hotfix in case babel remove console does not work
-if(__DEV__) {
+if(!__DEV__) {
     const noop = () => {}
     console = {
       info: noop,
