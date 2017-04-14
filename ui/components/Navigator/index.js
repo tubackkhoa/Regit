@@ -39,9 +39,9 @@ export default class extends Component {
         // console.log(destIndex, this.navigator.getCurrentRoutes())      
         if(destIndex !==-1){
           // this.navigator.jumpTo(page)
-          this.navigator._jumpN(destIndex - this.navigator.state.presentedIndex);
+          this.navigator._jumpN(destIndex - this.navigator.state.presentedIndex)
         } else {        
-          this.navigator.push(this.page) 
+          this.navigator.push(this.page)
         }  
       } else {
         // no need to push to route

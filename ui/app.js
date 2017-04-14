@@ -4,6 +4,8 @@ import { NativeModules, StatusBar, Platform } from 'react-native'
 import Container from './components/Container'
 import Navigator from './components/Navigator'
 import Toasts from './components/Toasts'
+import AfterInteractions from './components/AfterInteractions'
+import Preload from './containers/Preload'
 // router => render component base on url
 // history.push => location match => return component using navigator push
 
@@ -28,7 +30,9 @@ export default class App extends Component {
                 <StatusBar 
                   hidden={ page.hiddenBar || (this.props.drawerState === 'opened' && Platform.OS === 'ios')}
                   translucent />                
-                    <page.Page route={page}/>
+                    <AfterInteractions placeholder={page.Preload || <Preload/>}>
+                      <page.Page route={page}/>
+                    </AfterInteractions>
                 <Toasts/>                
             </Container>
         )
