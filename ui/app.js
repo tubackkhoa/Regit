@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NativeModules, StatusBar, Navigator } from 'react-native'
+import { BackAndroid, NativeModules, StatusBar, Navigator } from 'react-native'
 import { Drawer, StyleProvider } from 'native-base'
 
 import getTheme from '~/theme/components'
@@ -142,6 +142,18 @@ export default class App extends Component {
   componentWillMount() {
       UIManager.setLayoutAnimationEnabledExperimental &&
       UIManager.setLayoutAnimationEnabledExperimental(true)        
+  }
+
+  componentDidMount() {
+    BackAndroid.addEventListener('hardwareBackPress', () => {
+      const {router, goBack} = this.props
+      if (router.route === 'home') {
+        return false
+      }
+      // go back
+      goBack()
+      return true
+    })
   }
 
   render() {    
