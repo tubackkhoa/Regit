@@ -9,12 +9,10 @@ import {
     Input,
 } from 'native-base'
 
-// import Footer from '~/ui/components/Footer'
 import Content from '~/ui/components/Content'
 import { connect } from 'react-redux'
 import * as commonActions from '~/store/actions/common'
 import Event from '~/ui/components/Event'
-// import HeaderSearchBar from '~/ui/components/HeaderSearchBar'
 
 import styles from './styles'
 

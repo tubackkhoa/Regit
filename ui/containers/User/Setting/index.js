@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import { RefreshControl } from 'react-native'
 import {             
-    Content, Button, Icon, List, ListItem, Switch,
+    Button, Icon, List, ListItem, Switch,
     Container, Text, Item, Input, Left, Body, Right, View,
 } from 'native-base'
 
 import Footer from '~/ui/components/Footer'
+import Content from '~/ui/components/Content'
 
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 
 import * as commonActions from '~/store/actions/common'
-import HeaderSearchBar from '~/ui/components/HeaderSearchBar'
 
 import { 
   SwitchField,
