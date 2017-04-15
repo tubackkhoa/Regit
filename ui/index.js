@@ -23,7 +23,7 @@ export default class Regit extends Component {
     const {store} = this.state
     // should have a pre-load page
     if(!store)
-      return ( <Preload/> )
+      return ( <Preload message="Initializing..."/> )
 
     return (
       <Provider store={store}>

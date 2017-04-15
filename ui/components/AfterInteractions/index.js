@@ -19,9 +19,11 @@ export default class AfterInteractions extends Component {
   interactionHandle = null
 
   componentDidMount() {
+    // console.log('start',new Date())
     this.interactionHandle = InteractionManager.runAfterInteractions(() => {
       this.setState({interactionsComplete: true})
       this.interactionHandle = null
+      // console.log('end',new Date())
     })
   }
 

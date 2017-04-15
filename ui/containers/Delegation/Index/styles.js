@@ -36,11 +36,4 @@ export default {
     height: 18,
     paddingTop:material.platform === 'ios' ? 5 : -5,    
   },
-  buttonIcon: {
-    paddingRight:0,
-    paddingLeft:0,
-  },
-  icon: {
-    color: material.grayColor,
-  }
 }

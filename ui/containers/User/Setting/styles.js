@@ -11,5 +11,8 @@ export default {
   },
   itemHeaderText:{
     fontSize:15,
+  },
+  iconRight: {
+    marginRight:-10,
   }
 }

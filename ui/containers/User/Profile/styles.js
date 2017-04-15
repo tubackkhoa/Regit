@@ -27,15 +27,17 @@ export default {
     opacity:0,
     zIndex:10,
   },
-  headerIcon: {
-    color: '#464646',    
-    top: 20,
-    padding:10,    
+  buttonLeft: {        
+    top: 20,      
     position:'absolute',
     zIndex:10,
   },
-  get headerIconRight() {
-    return {...this.headerIcon, right:0}
+  get buttonRight() {
+    return {...this.buttonLeft, right:0}
+  },
+  iconGray:{
+    color: '#464646',
+    fontSize: 30,
   },
   headerImage:{
     resizeMode: 'cover', 

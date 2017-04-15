@@ -44,7 +44,9 @@ export default class extends Component {
               <Text>{item.title}</Text>             
               {item.type === 'toggle' 
               ? <Field name={item.name} component={SwitchField} />           
-              : <Icon onPress={e=>forwardTo(item.route)} name="keyboard-arrow-right" />                        
+              : <Button iconRight noPadder transparent onPress={e=>forwardTo(item.route)}>
+                  <Icon gray style={styles.iconRight} name="keyboard-arrow-right" />                        
+                </Button>
               }
             </ListItem>
           )}          

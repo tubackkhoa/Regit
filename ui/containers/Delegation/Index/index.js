@@ -62,8 +62,8 @@ export default class extends Component {
                       <Text>Pending</Text>
                   </Button>
                 }
-                <Button iconRight style={styles.buttonIcon} transparent onPress={e=>forwardTo(`delegation/detail/${item.id}`)}>
-                  <Icon style={styles.icon} name="keyboard-arrow-right" /> 
+                <Button iconRight noPadder transparent onPress={e=>forwardTo(`delegation/detail/${item.id}`)}>
+                  <Icon gray name="keyboard-arrow-right" /> 
                 </Button>
               </Right>
           </ListItem>   
@@ -74,8 +74,7 @@ export default class extends Component {
 
   render() {
 
-    const {goBack, route, forwardTo} = this.props
-    
+    const {goBack, route, forwardTo} = this.props    
 
     return (          
        

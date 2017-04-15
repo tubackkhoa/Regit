@@ -1,4 +1,9 @@
 {
-    "plugins": ["transform-decorators-legacy", "babel-plugin-root-import"],
+    "plugins": [
+      "transform-decorators-legacy", 
+      ["babel-plugin-root-import", {
+        "rootPathSuffix": "./"
+      }]
+    ],
     "presets": ["react-native"]
 }

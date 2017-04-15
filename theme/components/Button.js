@@ -13,6 +13,10 @@ export default (variables = variable) => {
           fontSize: 9,
         },
       },
+      '.noPadder': {
+        paddingRight:0,
+        paddingLeft:0,
+      },      
       '.disabled': {
         backgroundColor: variables.btnDisabledBg,
       },      

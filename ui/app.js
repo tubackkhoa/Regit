@@ -49,7 +49,7 @@ export default class App extends Component {
   static configureScene(route) {
       // use default as PushFromRight, do not use HorizontalSwipeJump or it can lead to swipe horizontal unwanted
       return {
-        ...Navigator.SceneConfigs[route.animationType || 'PushFromRight'], 
+        ...Navigator.SceneConfigs[routes[route.path].animationType || 'PushFromRight'], 
         gestures: null,
         defaultTransitionVelocity: 20,
       }
@@ -63,6 +63,7 @@ export default class App extends Component {
 
   // replace view from stack, hard code but have high performance
   componentWillReceiveProps({router}){         
+    // process for route change only
     if(router.route !== this.props.router.route){                
       this.page = getPage(router.route)      
       if(this.page){   
@@ -71,13 +72,14 @@ export default class App extends Component {
         const destIndex = this.navigator.state.routeStack
           .findIndex(route => route.path === this.page.path)
 
-        // console.log(destIndex, this.navigator.state.presentedIndex, this.navigator.state.routeStack)      
+        console.log(this.navigator.state.routeStack)      
         if(destIndex !==-1){
           // this.navigator.jumpTo(page)
           this.navigator._jumpN(destIndex - this.navigator.state.presentedIndex)
         } else {        
+          const {title, path} = this.page
           this.navigator.state.presentedIndex = this.navigator.state.routeStack.length
-          this.navigator.push(this.page)
+          this.navigator.push({title, path})
         }  
       } else {
         // no need to push to route
@@ -87,11 +89,10 @@ export default class App extends Component {
   }
 
   // we can use events to pass between header and footer and page via App container or store
-  renderScene = (route, navigator) => {   
+  _renderPage = (route) => {   
     if(this.page.path && route.path !== this.page.path) {
       console.log('will focus')
-    }  else {          
-      // console.log('ngon')
+    }  else {                
       // we only pass this.page, route and navigator is for mapping or some event like will focus ...
       return (                                           
         <AfterInteractions placeholder={this.page.Preload || <Preload/>}>             
@@ -102,7 +103,8 @@ export default class App extends Component {
   }
 
   // events will be 
-  renderHeader({headerType, title}){
+  renderHeader(){
+    const {headerType, title} = this.page
     // event will be invoke via pageInstance
     switch(headerType){
       case 'none':      
@@ -114,7 +116,8 @@ export default class App extends Component {
     }    
   }
 
-  renderFooter({footerType}){
+  renderFooter(){
+    const {footerType} = this.page
     switch(footerType){
       case 'none':      
         return false
@@ -130,7 +133,8 @@ export default class App extends Component {
   }
 
   render() {    
-    const {router, drawerState} = this.props    
+    const {router, drawerState} = this.props   
+    const {title, path} = this.page 
     return (            
       <StyleProvider style={getTheme(material)}>  
         <Drawer
@@ -141,13 +145,13 @@ export default class App extends Component {
           onClose={this.props.closeDrawer}
         >           
           <StatusBar hidden={ this.page.hiddenBar || (drawerState === 'opened' && material.platform === 'ios')} translucent />
-          {this.renderHeader(this.page)}
+          {this.renderHeader()}
           <Navigator ref={item=>this.navigator=item}
               configureScene={this.constructor.configureScene}
-              initialRoute={this.page}
-              renderScene={this.renderScene}                
+              initialRoute={{title, path}}
+              renderScene={this._renderPage}                
           />
-          {this.renderFooter(this.page)}
+          {this.renderFooter()}
           <Toasts/>
         </Drawer>   
       </StyleProvider>          

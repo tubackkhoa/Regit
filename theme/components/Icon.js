@@ -11,6 +11,9 @@ export default (variables = variable) => {
     '.large': {
       fontSize:28,
     },
+    '.gray': {        
+      color: variables.grayColor
+    },
   };
 
 
