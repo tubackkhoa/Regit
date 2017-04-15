@@ -11,8 +11,7 @@ import Toasts from './components/Toasts'
 import AfterInteractions from './components/AfterInteractions'
 import SideBar from './components/SideBar'
 import Preload from './containers/Preload'
-import HeaderSearchBar from '~/ui/components/HeaderSearchBar'
-import HeaderBack from '~/ui/components/HeaderBack'
+import Header from '~/ui/components/Header'
 import Footer from '~/ui/components/Footer'
 
 // router => render component base on url
@@ -22,7 +21,7 @@ import { connect } from 'react-redux'
 
 // should show error if not found
 import { getDrawerState, getRouter } from '~/store/selectors/common'
-import { closeDrawer } from '~/store/actions/common'
+import * as commonActions from '~/store/actions/common'
 import routes from './routes'
 
 const getPage = (pathname) => {  
@@ -43,7 +42,7 @@ const UIManager = NativeModules.UIManager
 @connect(state=>({
   router: getRouter(state),
   drawerState: getDrawerState(state),
-}), { closeDrawer })
+}), commonActions)
 export default class App extends Component {    
 
   static configureScene(route) {
@@ -62,22 +61,25 @@ export default class App extends Component {
   }
 
   // replace view from stack, hard code but have high performance
-  componentWillReceiveProps({router}){         
+  componentWillReceiveProps({router, drawerState}){         
     // process for route change only
     if(router.route !== this.props.router.route){                
       this.page = getPage(router.route)      
       if(this.page){   
-          // return console.warn('Not found: ' + router.route)
+        const {headerType, footerType, title, path} = this.page
+        // show header and footer
+        this.header.show(headerType, title)
+        this.footer.show(footerType, router.route)
+        // return console.warn('Not found: ' + router.route)
         // check if page is mounted
         const destIndex = this.navigator.state.routeStack
           .findIndex(route => route.path === this.page.path)
 
-        console.log(this.navigator.state.routeStack)      
+        // console.log(this.navigator.state.routeStack)      
         if(destIndex !==-1){
           // this.navigator.jumpTo(page)
           this.navigator._jumpN(destIndex - this.navigator.state.presentedIndex)
-        } else {        
-          const {title, path} = this.page
+        } else {                  
           this.navigator.state.presentedIndex = this.navigator.state.routeStack.length
           this.navigator.push({title, path})
         }  
@@ -86,12 +88,22 @@ export default class App extends Component {
         this.page = routes.notFound 
       }         
     }
+
+    // check drawer
+    if(drawerState !== this.props.drawerState){
+      this.drawer._root[drawerState === 'opened' ? 'open' : 'close']()
+    }
+  }
+
+  // we handle manually to gain performance
+  shouldComponentUpdate(nextProps){
+    return false
   }
 
   // we can use events to pass between header and footer and page via App container or store
   _renderPage = (route) => {   
     if(this.page.path && route.path !== this.page.path) {
-      console.log('will focus')
+      // console.log('will focus')
     }  else {                
       // we only pass this.page, route and navigator is for mapping or some event like will focus ...
       return (                                           
@@ -102,27 +114,25 @@ export default class App extends Component {
     }
   }
 
-  // events will be 
-  renderHeader(){
-    const {headerType, title} = this.page
-    // event will be invoke via pageInstance
-    switch(headerType){
+  _onLeftClick=(type)=>{
+    const {openDrawer, goBack} = this.props
+    switch(type){
       case 'none':      
         return false
       case 'back':
-        return <HeaderBack center={title}/>
+        return goBack()
       default:
-        return <HeaderSearchBar/>
-    }    
+        return openDrawer()
+    }      
   }
 
-  renderFooter(){
-    const {footerType} = this.page
-    switch(footerType){
+  _onTabClick=(type, route)=>{    
+    const {forwardTo} = this.props
+    switch(type){
       case 'none':      
         return false
       default:
-        return <Footer/>
+        return forwardTo(route)
     }    
   }
 
@@ -133,25 +143,26 @@ export default class App extends Component {
   }
 
   render() {    
-    const {router, drawerState} = this.props   
+    const {router, drawerState, closeDrawer} = this.props   
     const {title, path} = this.page 
     return (            
       <StyleProvider style={getTheme(material)}>  
         <Drawer
+          ref={ref => this.drawer = ref}
           open={drawerState === 'opened'}
           type="displace"             
           tweenDuration={200}
           content={<SideBar/>}
-          onClose={this.props.closeDrawer}
+          onClose={closeDrawer}
         >           
           <StatusBar hidden={ this.page.hiddenBar || (drawerState === 'opened' && material.platform === 'ios')} translucent />
-          {this.renderHeader()}
-          <Navigator ref={item=>this.navigator=item}
+          <Header onLeftClick={this._onLeftClick} ref={ref=>this.header=ref} />
+          <Navigator ref={ref=>this.navigator=ref}
               configureScene={this.constructor.configureScene}
               initialRoute={{title, path}}
               renderScene={this._renderPage}                
           />
-          {this.renderFooter()}
+          <Footer route={router.route} onTabClick={this._onTabClick} ref={ref=>this.footer=ref} />
           <Toasts/>
         </Drawer>   
       </StyleProvider>          
