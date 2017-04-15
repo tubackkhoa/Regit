@@ -46,9 +46,10 @@ const UIManager = NativeModules.UIManager
 export default class App extends Component {    
 
   static configureScene(route) {
+      const {animationType = 'PushFromRight'} = routes[route.path] || {}
       // use default as PushFromRight, do not use HorizontalSwipeJump or it can lead to swipe horizontal unwanted
       return {
-        ...Navigator.SceneConfigs[routes[route.path].animationType || 'PushFromRight'], 
+        ...Navigator.SceneConfigs[animationType], 
         gestures: null,
         defaultTransitionVelocity: 20,
       }
@@ -85,7 +86,8 @@ export default class App extends Component {
         }  
       } else {
         // no need to push to route
-        this.page = routes.notFound 
+        this.page = routes.notFound
+        this.props.setToast('Route not found: ' + router.route, 'danger')
       }         
     }
 
