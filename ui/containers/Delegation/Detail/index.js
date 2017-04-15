@@ -4,7 +4,6 @@ import {
     ListItem, Item, View, Input, CheckBox, Left,
 } from 'native-base'
 
-import Footer from '~/ui/components/Footer'
 import Content from '~/ui/components/Content'
 import { connect } from 'react-redux'
 import * as commonActions from '~/store/actions/common'

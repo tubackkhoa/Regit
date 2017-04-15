@@ -5,7 +5,6 @@ import {
     Container, Text, Item, Input, Left, Body, Right, View,
 } from 'native-base'
 
-import Footer from '~/ui/components/Footer'
 import Content from '~/ui/components/Content'
 
 import { connect } from 'react-redux'

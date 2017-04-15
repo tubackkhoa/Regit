@@ -123,6 +123,7 @@ export default class App extends Component {
       case 'none':      
         return false
       case 'back':
+      case 'searchBack':
         return goBack()
       default:
         return openDrawer()

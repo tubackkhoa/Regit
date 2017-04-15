@@ -4,7 +4,6 @@ import {
     Text, Item, View, Input, Left, Body, Tab, Right,
 } from 'native-base'
 
-import Footer from '~/ui/components/Footer'
 import Content from '~/ui/components/Content'
 import { connect } from 'react-redux'
 import * as commonActions from '~/store/actions/common'
@@ -47,15 +46,6 @@ export default class extends Component {
     return (          
        
         <Container>
-        
-            <Header hasTabs
-              left={
-                <Button transparent onPress={e=>goBack()}>
-                  <Icon name="keyboard-arrow-left"/>
-                </Button>
-              }
-              center={route.title}                         
-            />  
 
             <AutoWidthTabs>
                 <Tab style={styles.container} heading="WHO YOU DELEGATED TO">
@@ -120,9 +110,7 @@ export default class extends Component {
                         </View>
                     </Content>
                 </Tab>
-            </AutoWidthTabs>            
-
-            <Footer />
+            </AutoWidthTabs>                        
             
         </Container>
       

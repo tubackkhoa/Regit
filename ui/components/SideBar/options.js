@@ -7,7 +7,7 @@ export default {
     },    
     {
       name: 'Activity Log',
-      route: 'picker',
+      route: 'activityLog',
       icon: 'activity',
     },
     {

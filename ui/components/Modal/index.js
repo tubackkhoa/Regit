@@ -17,29 +17,20 @@ export default class extends Component {
   }
 
   render(){
-    const {open, title, children, onButtonPress} = this.props
+    const {open, title, children, onLeftClick} = this.props
     return (
       
       <Modal
           animationType="slide"
           transparent={false}
           visible={open}          
-        >
-        
-        <Container>
-        
-            <Header 
-                left={<Button onPress={e=>onButtonPress&&onButtonPress('cancel')} transparent><Text>Cancel</Text></Button>}
-                right={<Button onPress={e=>onButtonPress&&onButtonPress('ok')} transparent><Text>OK</Text></Button>}
-                center={title}                
-            />
-
+        >          
+          <Container>
+            <Header type="back" title={title} onLeftClick={onLeftClick}/>
             <Content padder>
                 {children}
-            </Content>            
-            
-        </Container>
-
+            </Content>
+          </Container>             
       </Modal>
       
     )

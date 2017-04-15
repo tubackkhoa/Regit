@@ -6,6 +6,7 @@ import UserProfile from './containers/User/Profile'
 import UserSetting from './containers/User/Setting'
 import Delegation from './containers/Delegation/Index'
 import DelegationDetail from './containers/Delegation/Detail'
+import ActivityLog from './containers/ActivityLog'
 import ChangePassword from './containers/User/Action/ChangePassword'
 import ChangeEmail from './containers/User/Action/ChangeEmail'
 import ChangePIN from './containers/User/Action/ChangePIN'
@@ -91,4 +92,9 @@ export default {
         headerType: 'back',
         footerType: 'none',
     }, 
+    activityLog:{
+        title: 'Activity Log',
+        Page: ActivityLog,
+        headerType: 'searchBack',
+    }
 }

@@ -39,10 +39,10 @@ export default class extends Component {
     return this.renderHeader(left, center)    
   }
 
-  renderHeaderSearch(){    
+  renderHeaderSearch(iconName="menu"){    
     const left = (
       <Button transparent onPress={this._leftClick}>
-        <Icon style={styles.menuIcon} name="menu"/>
+        <Icon style={styles.menuIcon} name={iconName}/>
       </Button>
     )
     const center = (
@@ -71,13 +71,15 @@ export default class extends Component {
 
   render(){
     // events will be 
-    const {type, title} = this.state
+    const {type, title} = this.state    
     // event will be invoke via pageInstance
     switch(type){
       case 'none':      
         return false
       case 'back':
         return this.renderHeaderBack(title)
+      case 'searchBack':
+        return this.renderHeaderSearch('keyboard-arrow-left')
       default:
         return this.renderHeaderSearch()
     } 
