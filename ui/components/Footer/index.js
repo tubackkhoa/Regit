@@ -15,7 +15,7 @@ export default class extends Component {
     super(props)
   
     this.state = {
-      type: 'tabs',
+      type: props.type,
       route: props.route,
     }
   }

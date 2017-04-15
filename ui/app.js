@@ -47,6 +47,7 @@ export default class App extends Component {
 
   static configureScene(route) {
       const {animationType = 'PushFromRight'} = routes[route.path] || {}
+      // Navigator.SceneConfigs[animationType]
       // use default as PushFromRight, do not use HorizontalSwipeJump or it can lead to swipe horizontal unwanted
       return {
         ...Navigator.SceneConfigs[animationType], 
@@ -71,14 +72,14 @@ export default class App extends Component {
         // show header and footer
         this.header.show(headerType, title)
         this.footer.show(footerType, router.route)
+        
         // return console.warn('Not found: ' + router.route)
         // check if page is mounted
         const destIndex = this.navigator.state.routeStack
           .findIndex(route => route.path === this.page.path)
 
-        // console.log(this.navigator.state.routeStack)      
-        if(destIndex !==-1){
-          // this.navigator.jumpTo(page)
+        // console.log(this.navigator.state)      
+        if(destIndex !==-1){          
           this.navigator._jumpN(destIndex - this.navigator.state.presentedIndex)
         } else {                  
           this.navigator.state.presentedIndex = this.navigator.state.routeStack.length
@@ -158,7 +159,7 @@ export default class App extends Component {
 
   render() {    
     const {router, drawerState, closeDrawer} = this.props   
-    const {title, path} = this.page 
+    const {title, path, headerType, footerType} = this.page 
     return (            
       <StyleProvider style={getTheme(material)}>  
         <Drawer
@@ -166,17 +167,17 @@ export default class App extends Component {
           open={drawerState === 'opened'}
           type="displace"             
           tweenDuration={200}
-          content={<SideBar/>}
+          content={router.route !== 'login' && <SideBar/>}
           onClose={closeDrawer}
         >           
           <StatusBar hidden={ this.page.hiddenBar || (drawerState === 'opened' && material.platform === 'ios')} translucent />
-          <Header onLeftClick={this._onLeftClick} ref={ref=>this.header=ref} />
+          <Header type={headerType} title={title} onLeftClick={this._onLeftClick} ref={ref=>this.header=ref} />
           <Navigator ref={ref=>this.navigator=ref}
               configureScene={this.constructor.configureScene}
               initialRoute={{title, path}}
               renderScene={this._renderPage}                
           />
-          <Footer route={router.route} onTabClick={this._onTabClick} ref={ref=>this.footer=ref} />
+          <Footer type={footerType} route={router.route} onTabClick={this._onTabClick} ref={ref=>this.footer=ref} />
           <Toasts/>
         </Drawer>   
       </StyleProvider>          

@@ -13,7 +13,8 @@ export default class extends Component {
     super(props)
   
     this.state = {
-      type: 'search',
+      type: props.type,
+      title: props.title,
     }
   }
 
