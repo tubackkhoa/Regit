@@ -17,11 +17,9 @@ export default {
   itemHeaderText:{
     fontSize:15,
   },
-  iconRight: {
-    marginRight:-10,
-  },
   buttonCenter:{
     alignSelf:'center',
+    marginRight: -10,
   },
   labelTime:{
     marginTop:5
@@ -44,5 +42,9 @@ export default {
     paddingRight:5,
     height: 25,
     paddingBottom:0,
+  },
+  modalContent: {
+    margin: 10,
+    marginTop: 20,
   }
 }

@@ -143,6 +143,17 @@ export default (variables = variable) => {
       flex: 1,
     },
 
+    'NativeBase.DefaultTabBar': {
+      '.regit': {
+        'NativeBase.TabContainer': {
+          height: 40,
+          borderBottomWidth: 0,
+          borderColor: 'transparent',
+          shadowColor: 'transparent',
+        }
+      }
+    },
+
     'NativeBase.FooterTab': {
       ...footerTabTheme(variables),
     },

@@ -9,7 +9,7 @@ import styles from './styles'
 // can use our Icon component with custom icon
 export default class extends Component {
   render(){
-    const {items, title, sheetTitle, children, icon="keyboard-arrow-down", style, iconStyle, onSelected} = this.props
+    const {items, title, sheetTitle, children, icon="keyboard-arrow-down", style, textStyle, iconStyle, onSelected} = this.props
     return (
       <Button onPress={()=> ActionSheet.show({
           options: items,
@@ -19,7 +19,7 @@ export default class extends Component {
 
         transparent style={{...styles.container, ...style}}>
           {title && <Text style={styles.label}>{title}</Text>}
-          <Text style={styles.value}>{children || items[0]}</Text>
+          <Text style={{...styles.value, ...textStyle}}>{children || items[0]}</Text>
           <Icon name={icon} style={{...styles.icon, ...iconStyle}} />
       </Button>
     )

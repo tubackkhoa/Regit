@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
-import { Modal } from 'react-native'
+import { Modal, View, TouchableWithoutFeedback } from 'react-native'
 import {
   Container,
-  Content, 
-  Text,
-  Icon, 
-  Button,
 } from 'native-base'
-import Header from '~/ui/components/Header'
 
+import Header from '~/ui/components/Header'
+import styles from './styles'
 
 export default class extends Component {
 
@@ -16,23 +13,46 @@ export default class extends Component {
     title: 'Modal',
   }
 
-  render(){
-    const {open, title, children, onLeftClick} = this.props
-    return (
-      
+  renderFullModal(){
+    const {open, title, children, onCloseClick} = this.props
+    return (      
       <Modal
+          onRequestClose={onCloseClick}
           animationType="slide"
           transparent={false}
           visible={open}          
         >          
           <Container>
-            <Header type="back" title={title} onLeftClick={onLeftClick}/>
-            <Content padder>
-                {children}
-            </Content>
+            <Header type="back" title={title} onLeftClick={onCloseClick}/>            
+            {children}            
           </Container>             
-      </Modal>
-      
+      </Modal>      
     )
+  }
+
+  renderModal(){
+    const {open, children, onCloseClick} = this.props
+    return (
+      <Modal
+        onRequestClose={onCloseClick}
+        animationType="fade"
+        transparent={true}        
+        visible={open}        
+        >
+        <View style={styles.container}>
+          <TouchableWithoutFeedback onPress={onCloseClick}>
+            <View style={styles.backdrop}>              
+            </View>
+          </TouchableWithoutFeedback>
+          <View style={styles.content}>
+              {children}
+          </View>
+        </View>
+      </Modal>
+    )
+  }
+
+  render(){    
+    return this.props.full ? this.renderFullModal() : this.renderModal()    
   }
 }

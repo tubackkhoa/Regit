@@ -49,7 +49,7 @@ export default class extends Component {
                   <Thumbnail style={styles.thumb} source={avatar}/>
               </Left>
               <Body style={{marginLeft:10}}>
-                  <Text small bold active>{profile.DisplayName}</Text>                        
+                  <Text small bold active>{item.user}</Text>                        
                   <Text note small>{profile.Birthdate}</Text>
               </Body>
               <Right  style={styles.rightContainer}>

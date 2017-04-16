@@ -119,7 +119,7 @@ export default {
   brandPrimary: '#0054a6',
   brandInfo: '#3F57D3',
   brandSuccess: '#00a651',
-  brandDanger: '#d9534f',
+  brandDanger: '#ed1c24',
   brandWarning: '#f26522',
   brandSidebar: '#252932',
 

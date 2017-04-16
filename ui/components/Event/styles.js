@@ -26,7 +26,8 @@ export default {
   },
   icon: {
     color: material.tabBarActiveTextColor,
-    marginLeft:-10
+    marginLeft:-5,
+    fontSize: 15,
   },
   image:{ 
     resizeMode: 'cover',    

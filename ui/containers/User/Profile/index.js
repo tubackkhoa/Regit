@@ -108,10 +108,10 @@ export default class extends Component {
       <Container>                             
         <Animated.View style={{...styles.headerContainer, opacity}} />
         <Button transparent style={styles.buttonLeft} onPress={()=>goBack()}>
-          <Icon style={styles.iconGray} name="cancel"/>
+          <Text style={styles.iconGray}>Cancel</Text>
         </Button>
         <Button transparent style={styles.buttonRight}>
-          <Icon style={styles.iconGray} name="edit" />
+          <Text style={styles.iconGray}>Save</Text>
         </Button>                     
         <Animated.View style={{...styles.avatarContainer,top}}>      
           <Animated.Image source={avatar} style={{...styles.avatar,width:size,height:size,borderRadius}}/>

@@ -37,7 +37,7 @@ export default {
   },
   iconGray:{
     color: '#464646',
-    fontSize: 30,
+    fontSize: 15,
   },
   headerImage:{
     resizeMode: 'cover', 

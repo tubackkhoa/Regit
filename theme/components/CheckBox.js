@@ -20,6 +20,9 @@ export default (variables = variable) => {
         height: variables.checkboxSizeLarge,
         borderWidth: variables.CheckboxBorderWidth * 2,
       },
+      '.square': {
+        borderRadius: 0,
+      },
       'NativeBase.Icon': {
         color: 'transparent',
         lineHeight: variables.CheckboxIconSize,

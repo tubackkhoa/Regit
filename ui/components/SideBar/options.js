@@ -2,7 +2,7 @@ export default {
   listItems: [
     {
       name: 'Network',
-      route: 'anatomy',
+      route: 'network',
       icon: 'network',
     },    
     {

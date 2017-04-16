@@ -216,8 +216,8 @@ export default (variables = variable) => {
       },
 
       '.last': {
-        marginLeft: -(variables.listItemPadding + 5),
-        paddingLeft: (variables.listItemPadding + 5) * 2,
+        // marginLeft: -(variables.listItemPadding + 5),
+        // paddingLeft: (variables.listItemPadding + 5) * 2,
         top: 1,
       },
 

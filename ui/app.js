@@ -13,6 +13,7 @@ import SideBar from './components/SideBar'
 import Preload from './containers/Preload'
 import Header from '~/ui/components/Header'
 import Footer from '~/ui/components/Footer'
+import Popover from '~/ui/components/Popover'
 
 // router => render component base on url
 // history.push => location match => return component using navigator push
@@ -111,7 +112,7 @@ export default class App extends Component {
       // we only pass this.page, route and navigator is for mapping or some event like will focus ...
       return (                                           
         <AfterInteractions placeholder={this.page.Preload || <Preload/>}>             
-          <this.page.Page route={this.page}/>
+          <this.page.Page route={this.page} app={this}/>
         </AfterInteractions>            
       )
     }
@@ -171,7 +172,7 @@ export default class App extends Component {
           content={router.route !== 'login' && <SideBar/>}
           onClose={closeDrawer}
         >           
-          <StatusBar hidden={ this.page.hiddenBar || (drawerState === 'opened' && material.platform === 'ios')} translucent />
+          <StatusBar hidden={ this.page.hiddenBar || (drawerState === 'opened' && material.platform === 'ios')} translucent />          
           <Header type={headerType} title={title} onLeftClick={this._onLeftClick} ref={ref=>this.header=ref} />
           <Navigator ref={ref=>this.navigator=ref}
               configureScene={this.constructor.configureScene}
@@ -180,6 +181,7 @@ export default class App extends Component {
           />
           <Footer type={footerType} route={router.route} onTabClick={this._onTabClick} ref={ref=>this.footer=ref} />
           <Toasts/>
+          <Popover ref={ref=>this.popover=ref}/>
         </Drawer>   
       </StyleProvider>          
     )

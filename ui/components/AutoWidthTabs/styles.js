@@ -2,7 +2,7 @@ import material from '~/theme/variables/material'
 
 export default {
   tabContainer: {    
-    width: material.deviceWidth,           
+    width: material.deviceWidth,               
   },
   tab: {
     borderBottomWidth:0,

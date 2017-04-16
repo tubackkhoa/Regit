@@ -7,6 +7,7 @@ import UserSetting from './containers/User/Setting'
 import Delegation from './containers/Delegation/Index'
 import DelegationDetail from './containers/Delegation/Detail'
 import ActivityLog from './containers/ActivityLog'
+import Network from './containers/Network'
 import ChangePassword from './containers/User/Action/ChangePassword'
 import ChangeEmail from './containers/User/Action/ChangeEmail'
 import ChangePIN from './containers/User/Action/ChangePIN'
@@ -96,5 +97,10 @@ export default {
         title: 'Activity Log',
         Page: ActivityLog,
         headerType: 'searchBack',
-    }
+    },
+    network:{
+        title: 'Network',
+        Page: Network,
+        headerType: 'searchBack',
+    },
 }
