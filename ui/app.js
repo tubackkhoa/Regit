@@ -106,16 +106,16 @@ export default class App extends Component {
 
   // we can use events to pass between header and footer and page via App container or store
   _renderPage = (route) => {   
-    // if(this.page.path && route.path !== this.page.path) {
-    //   // console.log('will focus')
-    // }  else {                
+    if(this.page.path && route.path !== this.page.path) {
+      // console.log('will focus')
+    }  else {                
       // we only pass this.page, route and navigator is for mapping or some event like will focus ...
       return (                                           
         <AfterInteractions placeholder={this.page.Preload || <Preload/>}>             
           <this.page.Page route={this.page} app={this}/>
         </AfterInteractions>            
       )
-    // }
+    }
   }
 
   _onLeftClick=(type)=>{
