@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { RefreshControl } from 'react-native'
 import {             
     Button, Icon, List, ListItem, Switch,
     Container, Text, Item, Input, Left, Body, Right, View,

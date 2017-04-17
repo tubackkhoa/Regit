@@ -10,7 +10,6 @@ import * as authActions from '~/store/actions/auth'
 import * as accountSelectors from '~/store/selectors/account'
 import * as commonActions from '~/store/actions/common'
 import * as authSelectors from '~/store/selectors/auth'
-import * as accountActions from '~/store/actions/account'
 
 import options from './options'
 import routes from '~/ui/routes'
@@ -24,14 +23,8 @@ import {
 @connect(state=>({
   token: authSelectors.getToken(state),
   profile: accountSelectors.getProfile(state),
-}), {...authActions, ...accountActions, ...commonActions})
-export default class extends Component {
-
-  componentDidMount(){    
-    if(!this.props.profile){      
-      this.props.getProfile(this.props.token)
-    }    
-  }
+}), {...authActions, ...commonActions})
+export default class extends Component {  
 
   _handleLogout = (e) => {    
     this.props.logout(this.props.token)       

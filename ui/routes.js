@@ -14,6 +14,7 @@ import ChangePIN from './containers/User/Action/ChangePIN'
 import ChangePhoneNumber from './containers/User/Action/ChangePhoneNumber' 
 import ChangeSecurityQuestion from './containers/User/Action/ChangeSecurityQuestion'
 import CloseAccount from './containers/User/Action/CloseAccount'
+import Vault from './containers/Vault'
 
 // we can use animationType object for each route via Navigator.SceneConfigs
 export default {
@@ -102,5 +103,9 @@ export default {
         title: 'Network',
         Page: Network,
         headerType: 'searchBack',
+    },
+    vault:{
+        title: 'Vault',
+        Page: Vault,        
     },
 }
