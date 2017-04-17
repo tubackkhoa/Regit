@@ -110,6 +110,12 @@ export default class App extends Component {
       // console.log('will focus')
     }  else {                
       // we only pass this.page, route and navigator is for mapping or some event like will focus ...
+      // first time not show please waiting
+      if(!this.navigator) {
+        return (
+          <this.page.Page route={this.page} app={this}/>
+        )
+      }
       return (                                           
         <AfterInteractions placeholder={this.page.Preload || <Preload/>}>             
           <this.page.Page route={this.page} app={this}/>

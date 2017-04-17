@@ -1,5 +1,5 @@
 import {Component, PropTypes} from 'react'
-import {InteractionManager} from 'react-native'
+import { InteractionManager, Platform } from 'react-native'
 
 export default class AfterInteractions extends Component {
 
@@ -22,8 +22,11 @@ export default class AfterInteractions extends Component {
 
   componentDidMount() {
     this.interactionHandle = InteractionManager.runAfterInteractions(() => {
-      this.setState({interactionsComplete: true})
       this.interactionHandle = null
+      if(Platform.OS === 'android')
+        setTimeout(()=> this.setState({interactionsComplete: true}), 100)
+      else
+        this.setState({interactionsComplete: true})
     })
   }
 
