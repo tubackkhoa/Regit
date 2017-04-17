@@ -53,8 +53,7 @@ export default {
     },       
     login: {
         title: 'Login',
-        Page: Login,
-        hiddenBar: true,
+        Page: Login,        
         headerType: 'none',
         footerType: 'none',
     },   

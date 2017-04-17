@@ -51,6 +51,7 @@ const requestLoginAsync = createRequestSaga({
     cancel: 'app/logout',
     success: [
         (data) => saveLoggedUser(data),
+        ({access_token}) => getProfile(access_token),
         () => setAuthState(true),                   
         () => forwardTo('home'), 
         () => setToast('Logged successfully!!!'),            

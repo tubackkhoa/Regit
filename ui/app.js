@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BackAndroid, NativeModules, StatusBar, Navigator } from 'react-native'
+import { BackAndroid, NativeModules, Navigator } from 'react-native'
 import { Drawer, StyleProvider } from 'native-base'
 
 import getTheme from '~/theme/components'
@@ -178,7 +178,10 @@ export default class App extends Component {
           content={router.route !== 'login' && <SideBar/>}
           onClose={closeDrawer}
         >           
-          <StatusBar hidden={ this.page.hiddenBar || (drawerState === 'opened' && material.platform === 'ios')} translucent />          
+          {
+            // each Page will overide StatusBar
+            // <StatusBar hidden={ this.page.hiddenBar || (drawerState === 'opened' && material.platform === 'ios')} translucent />          
+          }
           <Header type={headerType} title={title} onLeftClick={this._onLeftClick} ref={ref=>this.header=ref} />
           <Navigator ref={ref=>this.navigator=ref}
               configureScene={this.constructor.configureScene}

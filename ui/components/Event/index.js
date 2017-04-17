@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Image } from 'react-native'
 import { connect } from 'react-redux'
 import { View,
-  Container, Header, Title, Content, Button, Spinner,
+  Container, Header, Title, Content, Button,
   Card, CardItem, Text, Thumbnail, Left, Right, Body, 
 } from 'native-base'
 import { API_BASE } from '~/store/constants/api'
@@ -22,7 +22,7 @@ export default class extends Component {
   render() {
     const {profile} = this.props
     if(!profile)
-      return <Spinner/>
+      return false
 
     const avatar = {uri: (API_BASE + profile.PhotoUrl)}
     return (      
