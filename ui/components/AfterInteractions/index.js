@@ -14,9 +14,11 @@ export default class AfterInteractions extends Component {
     renderPlaceholder: null
   }
 
-  state = {interactionsComplete: false}
-
-  interactionHandle = null
+  constructor(props) {
+    super(props)
+    this.interactionHandle = null
+    this.state = {interactionsComplete: false}
+  }
 
   componentDidMount() {
     this.interactionHandle = InteractionManager.runAfterInteractions(() => {
@@ -38,18 +40,10 @@ export default class AfterInteractions extends Component {
       renderPlaceholder
     } = this.props
 
-    if (this.state.interactionsComplete) {
-      return children
+    if (!this.state.interactionsComplete) {
+      return placeholder || (renderPlaceholder && renderPlaceholder())
     }
 
-    if (placeholder) {
-      return placeholder
-    }
-
-    if (renderPlaceholder) {
-      return renderPlaceholder()
-    }
-
-    return null
+    return children    
   }
 }

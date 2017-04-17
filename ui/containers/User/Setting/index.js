@@ -39,13 +39,11 @@ export default class extends Component {
 
         <View regit>
           {option.items.map((item, index) =>
-            <ListItem key={index} last={index===option.items.length-1}>                                                
+            <ListItem key={index} onPress={e=>forwardTo(item.route)} last={index===option.items.length-1}>                                                
               <Text>{item.title}</Text>             
               {item.type === 'toggle' 
               ? <Field name={item.name} component={SwitchField} />           
-              : <Button iconRight noPadder transparent onPress={e=>forwardTo(item.route)}>
-                  <Icon gray style={styles.iconRight} name="keyboard-arrow-right" />                        
-                </Button>
+              : <Icon gray style={styles.iconRight} name="keyboard-arrow-right" />                
               }
             </ListItem>
           )}          
