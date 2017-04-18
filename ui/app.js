@@ -175,7 +175,7 @@ export default class App extends Component {
           open={drawerState === 'opened'}
           type="displace"             
           tweenDuration={200}
-          content={router.route !== 'login' && <SideBar/>}
+          content={<SideBar/>}
           onClose={closeDrawer}
         >           
           {

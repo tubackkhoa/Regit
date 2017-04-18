@@ -1,7 +1,7 @@
-import {Component, PropTypes} from 'react'
+import { PureComponent, PropTypes } from 'react'
 import { InteractionManager, Platform } from 'react-native'
 
-export default class AfterInteractions extends Component {
+export default class extends PureComponent {
 
   static propTypes = {
     children: PropTypes.any,
