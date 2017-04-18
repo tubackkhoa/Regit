@@ -1,5 +1,5 @@
 import {Component, PropTypes} from 'react'
-import {InteractionManager} from 'react-native'
+import { InteractionManager, Platform } from 'react-native'
 
 export default class AfterInteractions extends Component {
 
@@ -14,14 +14,19 @@ export default class AfterInteractions extends Component {
     renderPlaceholder: null
   }
 
-  state = {interactionsComplete: false}
-
-  interactionHandle = null
+  constructor(props) {
+    super(props)
+    this.interactionHandle = null
+    this.state = {interactionsComplete: false}
+  }
 
   componentDidMount() {
     this.interactionHandle = InteractionManager.runAfterInteractions(() => {
-      this.setState({interactionsComplete: true})
       this.interactionHandle = null
+      if(Platform.OS === 'android')
+        setTimeout(()=> this.setState({interactionsComplete: true}), 100)
+      else
+        this.setState({interactionsComplete: true})
     })
   }
 
@@ -38,18 +43,10 @@ export default class AfterInteractions extends Component {
       renderPlaceholder
     } = this.props
 
-    if (this.state.interactionsComplete) {
-      return children
+    if (!this.state.interactionsComplete) {
+      return placeholder || (renderPlaceholder && renderPlaceholder())
     }
 
-    if (placeholder) {
-      return placeholder
-    }
-
-    if (renderPlaceholder) {
-      return renderPlaceholder()
-    }
-
-    return null
+    return children    
   }
 }

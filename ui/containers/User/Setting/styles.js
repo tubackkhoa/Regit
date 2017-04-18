@@ -14,5 +14,6 @@ export default {
   },
   iconRight: {
     marginRight:-10,
+    fontSize: 25,
   }
 }

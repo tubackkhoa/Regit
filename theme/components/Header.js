@@ -303,7 +303,7 @@ export default (variables = variable) => {
     shadowOffset: (platformStyle==='material') ? {width: 0, height: 2} : undefined,
     shadowOpacity: (platformStyle==='material') ?  0.2 : undefined,
     shadowRadius: (platformStyle==='material') ? 1.2 : undefined,
-    marginTop:(platform === 'ios') ? 0 : 20,
+    marginTop:0,
     top: 0,
     left: 0,
     right: 0,

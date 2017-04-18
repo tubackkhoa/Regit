@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { KeyboardAvoidingView } from 'react-native'
 import { 
   Container,   
   Form, 
@@ -46,8 +47,8 @@ export default class extends Component {
 
     return (
       <Container style={styles.container}>
-        <Content>                    
-          
+
+        <Content>                                
           <Thumbnail style={styles.logo} source={logo} />        
           
           <Form style={styles.form}>
@@ -58,9 +59,9 @@ export default class extends Component {
                 style={styles.button}>
                 <Text>Sign in</Text>
               </Button>
-
-              <Text style={styles.label}>Forgot password?</Text>
-
+              <KeyboardAvoidingView>
+                <Text style={styles.label}>Forgot password?</Text>
+              </KeyboardAvoidingView>
               <Button bordered style={styles.outlineButton} onPress={()=>setToast('hehe')}>
                 <Text style={styles.whiteColor}>Sign up</Text>
               </Button>              
