@@ -38,7 +38,7 @@ export default class extends Component {
   }
 
   render() {    
-    const { handleSubmit, submitting, setToast, loginRequest } = this.props          
+    const { handleSubmit, submitting, forwardTo, loginRequest } = this.props          
     if(loginRequest.status === 'pending'){
       return (
         <Preload/>
@@ -62,7 +62,7 @@ export default class extends Component {
               <KeyboardAvoidingView>
                 <Text style={styles.label}>Forgot password?</Text>
               </KeyboardAvoidingView>
-              <Button bordered style={styles.outlineButton} onPress={()=>setToast('hehe')}>
+              <Button bordered style={styles.outlineButton} onPress={()=>forwardTo('signup1')}>
                 <Text style={styles.whiteColor}>Sign up</Text>
               </Button>              
 
