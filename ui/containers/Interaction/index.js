@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {             
-    Button, List, ListItem, Switch,
+    Button, List, ListItem, Switch, Image,
     Container, Text, Item, Input, Left, Body, Right, View,
 } from 'native-base'
 
@@ -15,19 +15,20 @@ import * as commonActions from '~/store/actions/common'
 import styles from './styles'
 import material from '~/theme/variables/material'
 
-
 @connect(null, commonActions)
 export default class extends Component {
+
+
 
   renderActions(){
     return(
       <View style={{
         marginTop: 10,
-      }}>
+      }}>             
         <Text note bold style={{
           marginLeft: 10,
           marginBottom:3,
-          fontSize:12,
+          fontSize:12,          
         }}>NEW INTERACTION</Text>
         <View row style={{
           backgroundColor: '#fff',
