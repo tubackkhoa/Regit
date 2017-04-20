@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+
 import {             
     Button, List, ListItem, Switch, Image,
     Container, Text, Item, Input, Left, Body, Right, View,
 } from 'native-base'
 
+import Modal from '~/ui/components/Modal'
 import Icon from '~/ui/elements/Icon'
 import IconMessage from '~/ui/elements/IconMessage'
 import Content from '~/ui/components/Content'
@@ -18,6 +20,35 @@ import material from '~/theme/variables/material'
 @connect(null, commonActions)
 export default class extends Component {
 
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+      modalOpen: false
+    }
+  }
+
+  renderModal(){
+    return (
+      <View regit style={styles.modalContent}>
+        <ListItem>                                            
+            <Text active>Contact - Home phone</Text>                      
+        </ListItem>        
+        <ListItem>                                            
+            <Text>Basic Information</Text>                      
+        </ListItem> 
+        <ListItem>                                            
+            <Text>Current Address</Text>                      
+        </ListItem> 
+        <ListItem>                                            
+            <Text>Employments</Text>                      
+        </ListItem> 
+        <ListItem last>                                            
+            <Text>Others</Text>                      
+        </ListItem> 
+      </View>
+    )
+  }
 
 
   renderActions(){
@@ -36,9 +67,9 @@ export default class extends Component {
           paddingBottom: 10,
           justifyContent: 'space-around',
         }}>
-          <IconMessage size={12} color={material.grayColor} icon="cloud-upload" message="Push Form" />
-          <IconMessage size={12} color="#cccccc" icon="event" message="Event" />
-          <IconMessage size={12} color="#cccccc" icon="sync" message="Manual Sync" />
+          <IconMessage onPress={e=>this.setState({modalOpen:true})} size={12} color={material.grayColor} icon="cloud-upload" message="Push Form" />
+          <IconMessage onPress={e=>this.setState({modalOpen:true})} size={12} color="#cccccc" icon="event" message="Event" />
+          <IconMessage onPress={e=>this.setState({modalOpen:true})} size={12} color="#cccccc" icon="sync" message="Manual Sync" />
         </View>
       </View>
     )
@@ -170,7 +201,10 @@ export default class extends Component {
   render() {
        
     return (                 
-        <Container>         
+        <Container>       
+          <Modal full title="New Push Form" onCloseClick={e=>this.setState({modalOpen:false})} open={this.state.modalOpen}>
+            {this.renderModal()}
+          </Modal>    
           {this.renderActions()}           
             <Content padder>              
               {this.renderSearchResult()}

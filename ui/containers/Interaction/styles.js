@@ -1,6 +1,10 @@
 import material from '~/theme/variables/material'
 
 export default {
+  modalContent: {
+    margin: 10,
+    marginTop: 20,
+  },
   itemHeader: {    
     height: 35,   
     justifyContent: 'space-between',   
