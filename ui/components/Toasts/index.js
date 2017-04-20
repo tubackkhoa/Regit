@@ -1,8 +1,7 @@
 import React, { PropTypes, Component } from 'react'
-import { connect } from 'react-redux'
 import { View, Modal } from 'react-native'
 import { Text, Button } from 'native-base'
-
+import { connect } from 'react-redux'
 // for convenient, we can just import one
 import { clearToast } from '~/store/actions/common'
 import { getToast } from '~/store/selectors/common'
@@ -23,6 +22,26 @@ export default class extends Component {
     }
   }
 
+  renderToastMessage(message, levelProps){
+    return (
+      <Button 
+        full  
+        iconRight            
+        {...levelProps}
+        onPress={() => this._closeToast(100)}>
+          <Text style={{color:'#fff'}}>{message}</Text>        
+      </Button> 
+    )
+  }
+
+  renderToastView(message){
+    return (
+      <Button block transparent onPress={() => this._closeToast(100)}>
+        {message}
+      </Button>
+    )
+  }
+
   render(){
     // we can display close all or something
     // for this to show toast only when cross form, for update call Toast.show directly
@@ -40,14 +59,8 @@ export default class extends Component {
         <View style={{            
             flex: 1,
             justifyContent: (position==='top') ? 'flex-start' : (position==='bottom') ? 'flex-end' : (position==='center') ? 'center' : 'flex-start'
-          }} >            
-            <Button 
-              full  
-              iconRight            
-              {...levelProps}
-              onPress={() => this._closeToast(100)}>
-              <Text style={{color:'#fff'}}>{message}</Text>
-            </Button>      
+          }} >
+            {typeof message === 'string' ? this.renderToastMessage(message, levelProps) : this.renderToastView(message)}      
         </View>
       </Modal>
     )

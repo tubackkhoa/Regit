@@ -153,7 +153,7 @@ class DatePicker extends Component {
     if (date instanceof Date) {
       return Moment(date).format(displayFormat)
     } else {
-      return Moment(this.getDate(date)).format(displayFormat)
+      return date ? Moment(this.getDate(date)).format(displayFormat) : null
     }
   }
 

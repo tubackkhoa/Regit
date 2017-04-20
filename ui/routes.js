@@ -15,6 +15,8 @@ import ChangePhoneNumber from './containers/User/Action/ChangePhoneNumber'
 import ChangeSecurityQuestion from './containers/User/Action/ChangeSecurityQuestion'
 import CloseAccount from './containers/User/Action/CloseAccount'
 import Vault from './containers/Vault'
+import Message from './containers/Message'
+import Interaction from './containers/Interaction'
 
 // we can use animationType object for each route via Navigator.SceneConfigs
 export default {
@@ -107,4 +109,15 @@ export default {
         title: 'Vault',
         Page: Vault,        
     },
+    message:{
+        title: 'Message',
+        Page: Message,    
+        footerType: 'none',
+        headerType: 'searchBack',    
+    },
+    interaction:{
+        title: 'Interaction',
+        Page: Interaction,
+    }
+
 }

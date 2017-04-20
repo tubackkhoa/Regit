@@ -17,7 +17,7 @@ export default {
     },
     {
       name: 'Manage Interaction',
-      route: 'searchbar',
+      route: 'interaction',
       icon: 'interaction',
     },
     {
