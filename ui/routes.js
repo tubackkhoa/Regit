@@ -2,6 +2,12 @@ import Home from './containers/Home'
 import NotFound from './containers/NotFound'
 import Notification from './containers/Notification'
 import Login from './containers/Login'
+import SignUpStep1 from './containers/SignUp/Step1'
+import SignUpStep2 from './containers/SignUp/Step2'
+import SignUpStep3 from './containers/SignUp/Step3'
+import SignUpStep4 from './containers/SignUp/Step4'
+import SignUpStep5 from './containers/SignUp/Step5'
+import SignUpStep6 from './containers/SignUp/Step6'
 import UserProfile from './containers/User/Profile'
 import UserSetting from './containers/User/Setting'
 import Delegation from './containers/Delegation/Index'
@@ -15,6 +21,8 @@ import ChangePhoneNumber from './containers/User/Action/ChangePhoneNumber'
 import ChangeSecurityQuestion from './containers/User/Action/ChangeSecurityQuestion'
 import CloseAccount from './containers/User/Action/CloseAccount'
 import Vault from './containers/Vault'
+import Message from './containers/Message'
+import Interaction from './containers/Interaction'
 
 // we can use animationType object for each route via Navigator.SceneConfigs
 export default {
@@ -56,7 +64,43 @@ export default {
         Page: Login,        
         headerType: 'none',
         footerType: 'none',
+    },  
+    signup1: {
+        title: 'Sign Up',
+        Page: SignUpStep1,        
+        headerType: 'back',
+        footerType: 'none',
     },   
+    signup2: {
+        title: 'Step 2',
+        Page: SignUpStep2,        
+        headerType: 'back',
+        footerType: 'none',
+    }, 
+    signup3: {
+        title: 'Step 3',
+        Page: SignUpStep3,        
+        headerType: 'back',
+        footerType: 'none',
+    }, 
+    signup4: {
+        title: 'Step 4',
+        Page: SignUpStep4,        
+        headerType: 'back',
+        footerType: 'none',
+    },
+    signup5: {
+        title: 'Step 5',
+        Page: SignUpStep5,        
+        headerType: 'back',
+        footerType: 'none',
+    },
+    signup6: {
+        title: 'Step 6',
+        Page: SignUpStep6,        
+        headerType: 'back',
+        footerType: 'none',
+    },
     'user/action/changePassword':{   
         title: 'Change Password',
         Page: ChangePassword,
@@ -107,4 +151,15 @@ export default {
         title: 'Vault',
         Page: Vault,        
     },
+    message:{
+        title: 'Message',
+        Page: Message,    
+        footerType: 'none',
+        headerType: 'searchBack',    
+    },
+    interaction:{
+        title: 'Interaction',
+        Page: Interaction,
+    },
+
 }

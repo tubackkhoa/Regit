@@ -18,10 +18,13 @@ export default class extends PureComponent {
     super(props)
     this.interactionHandle = null
     this.state = {interactionsComplete: false}
+    // not too long
+    this.timer = setTimeout(()=>this.setState({interactionsComplete: true}), props.timeout || 3000)
   }
 
   componentDidMount() {
     this.interactionHandle = InteractionManager.runAfterInteractions(() => {
+      clearTimeout(this.timer)
       this.interactionHandle = null
       if(Platform.OS === 'android')
         setTimeout(()=> this.setState({interactionsComplete: true}), 300)
@@ -31,6 +34,7 @@ export default class extends PureComponent {
   }
 
   componentWillUnmount() {
+    clearTimeout(this.timer)
     if (this.interactionHandle) {
       this.interactionHandle.cancel()
     }
