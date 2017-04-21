@@ -22,22 +22,22 @@ export default {
     },
     {
       name: 'Calendar',
-      route: 'spinner',
+      route: 'calendar',
       icon: 'calendar',
     },
     {
       name: 'Reminder',
-      route: 'tab',
+      route: 'calendar',
       icon: 'reminder',
     },
     {
       name: 'Poll',
-      route: 'tabs',
+      route: 'calendar',
       icon: 'poll',
     },
     {
       name: 'Help & Support',
-      route: 'thumbnail',
+      route: 'calendar',
       icon: 'help',    
     },
 

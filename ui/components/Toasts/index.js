@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import { View, Modal } from 'react-native'
+import { View, Modal, TouchableOpacity } from 'react-native'
 import { Text, Button } from 'native-base'
 import { connect } from 'react-redux'
 // for convenient, we can just import one
@@ -36,9 +36,9 @@ export default class extends Component {
 
   renderToastView(message){
     return (
-      <Button block transparent onPress={() => this._closeToast(100)}>
-        {message}
-      </Button>
+      <TouchableOpacity style={{alignSelf:'center',backgroundColor:'transparent'}} onPress={() => this._closeToast(100)}>
+        <View>{message}</View>
+      </TouchableOpacity>
     )
   }
 

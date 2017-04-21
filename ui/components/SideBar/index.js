@@ -58,8 +58,8 @@ export default class extends Component {
               <Icon onPress={e=>this.navigateTo('user/profile')} name="edit" style={styles.iconEdit} />
             </View>
           </View>
-          {options.listItems.map(item =>
-              <ListItem key={item.route} button onPress={e => this.navigateTo(item.route)} >
+          {options.listItems.map((item, index) =>
+              <ListItem key={index} button onPress={e => this.navigateTo(item.route)} >
                 <Left>
                   <Icon name={item.icon} style={styles.icon} />                  
                   <Text style={styles.iconText}>{item.name}</Text>

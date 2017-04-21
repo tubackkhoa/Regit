@@ -10,6 +10,7 @@ export default {
     paddingRight:0,
     backgroundColor: 'transparent',
     marginBottom: 20,
+    borderWidth:0,
   },
   actionSheet:{    
     width: '100%',    
@@ -29,6 +30,7 @@ export default {
   inputStyle:{
     paddingLeft:15,
     paddingRight:15,    
+    width: '100%',
     borderRadius: 4,
     height: 45,
     backgroundColor: '#fff',

@@ -67,9 +67,15 @@ export default class extends Component {
           paddingBottom: 10,
           justifyContent: 'space-around',
         }}>
-          <IconMessage onPress={e=>this.setState({modalOpen:true})} size={12} color={material.grayColor} icon="cloud-upload" message="Push Form" />
-          <IconMessage onPress={e=>this.setState({modalOpen:true})} size={12} color="#cccccc" icon="event" message="Event" />
-          <IconMessage onPress={e=>this.setState({modalOpen:true})} size={12} color="#cccccc" icon="sync" message="Manual Sync" />
+          <Button transparent onPress={e=>this.setState({modalOpen:true})}>
+            <IconMessage size={12} color={material.grayColor} icon="cloud-upload" message="Push Form" />
+          </Button>
+          <Button transparent onPress={e=>this.setState({modalOpen:true})}>
+            <IconMessage size={12} color="#cccccc" icon="event" message="Event" />
+          </Button>
+          <Button transparent onPress={e=>this.setState({modalOpen:true})}>
+            <IconMessage size={12} color="#cccccc" icon="sync" message="Manual Sync" />
+          </Button>
         </View>
       </View>
     )
