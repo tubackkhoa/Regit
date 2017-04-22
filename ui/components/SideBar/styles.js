@@ -25,8 +25,7 @@ export default {
   listItemContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'center',
-    backgroundColor: '#363636',   
+    alignItems: 'center',    
   },
   iconContainer: {
     width: 37,

@@ -23,6 +23,7 @@ import CloseAccount from './containers/User/Action/CloseAccount'
 import Vault from './containers/Vault'
 import Message from './containers/Message'
 import Interaction from './containers/Interaction'
+import Calendar from './containers/Calendar'
 
 // we can use animationType object for each route via Navigator.SceneConfigs
 export default {
@@ -160,6 +161,10 @@ export default {
     interaction:{
         title: 'Interaction',
         Page: Interaction,
+    },
+    calendar:{
+        title: 'Calendar',
+        Page: Calendar,
     },
 
 }

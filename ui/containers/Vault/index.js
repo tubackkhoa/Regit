@@ -23,7 +23,7 @@ const copiedMessage = (
 export default class extends Component {
 
   _onCopy = (e)=>{
-    this.props.setToast(copiedMessage, 'info', 500, 'center')
+    this.props.setToast(copiedMessage, 'info', 50000, 'center')
   }
 
   renderSearchResult(){

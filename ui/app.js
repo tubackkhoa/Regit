@@ -48,14 +48,14 @@ export default class App extends Component {
 
   static configureScene(route) {
       const {animationType = 'PushFromRight'} = routes[route.path] || {}
-      return Navigator.SceneConfigs[animationType]
+      // return Navigator.SceneConfigs[animationType]
       // Navigator.SceneConfigs[animationType]
       // use default as PushFromRight, do not use HorizontalSwipeJump or it can lead to swipe horizontal unwanted
-      // return {
-      //   ...Navigator.SceneConfigs[animationType], 
-      //   gestures: null,
-      //   defaultTransitionVelocity: 20,
-      // }
+      return {
+        ...Navigator.SceneConfigs[animationType], 
+        gestures: null,
+        defaultTransitionVelocity: 20,
+      }
   }
 
   constructor(props) {
