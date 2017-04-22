@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 import {
   Dimensions,
   ScrollView,
@@ -6,22 +6,22 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
-} from 'react-native';
+} from 'react-native'
 
-import Day from './Day';
+import Day from './Day'
 
-import moment from 'moment';
+import moment from 'moment'
 
 const styles = StyleSheet.create(require('./styles').default)
 
-const DEVICE_WIDTH = Dimensions.get('window').width;
-const VIEW_INDEX = 2;
+const DEVICE_WIDTH = Dimensions.get('window').width
+const VIEW_INDEX = 2
 
 function getNumberOfWeeks(month, weekStart) {
-  const firstDay = moment(month).startOf('month').day();
-  const offset = (firstDay - weekStart + 7) % 7;
-  const days = moment(month).daysInMonth();
-  return Math.ceil((offset + days) / 7);
+  const firstDay = moment(month).startOf('month').day()
+  const offset = (firstDay - weekStart + 7) % 7
+  const days = moment(month).daysInMonth()
+  return Math.ceil((offset + days) / 7)
 }
 
 export default class extends Component {
@@ -30,7 +30,7 @@ export default class extends Component {
     currentMonthMoment: moment(this.props.startDate),
     selectedMoment: moment(this.props.selectedDate),
     rowHeight: null,
-  };
+  }
 
   static propTypes = {
     currentMonth: PropTypes.any,
@@ -60,7 +60,7 @@ export default class extends Component {
     titleFormat: PropTypes.string,
     today: PropTypes.any,
     weekStart: PropTypes.number,
-  };
+  }
 
   static defaultProps = {
     customStyle: {},
@@ -78,7 +78,7 @@ export default class extends Component {
     startDate: moment().format('YYYY-MM-DD'),
     titleFormat: 'MMMM YYYY',
     weekStart: 1,
-  };
+  }
 
   componentDidMount() {
     // fixes initial scrolling bug on Android
@@ -86,96 +86,96 @@ export default class extends Component {
   }
 
   componentDidUpdate() {
-    this.scrollToItem(VIEW_INDEX);
+    this.scrollToItem(VIEW_INDEX)
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectedDate && this.props.selectedDate !== nextProps.selectedDate) {
-      this.setState({selectedMoment: nextProps.selectedDate});
+      this.setState({selectedMoment: nextProps.selectedDate})
     }
     if (nextProps.currentMonth) {
-      this.setState({currentMonthMoment: moment(nextProps.currentMonth)});
+      this.setState({currentMonthMoment: moment(nextProps.currentMonth)})
     }
   }
 
   getMonthStack(currentMonth) {
     if (this.props.scrollEnabled) {
-      const res = [];
+      const res = []
       for (let i = -VIEW_INDEX; i <= VIEW_INDEX; i++) {
-        res.push(moment(currentMonth).add(i, 'month'));
+        res.push(moment(currentMonth).add(i, 'month'))
       }
-      return res;
+      return res
     }
-    return [moment(currentMonth)];
+    return [moment(currentMonth)]
   }
 
  prepareEventDates(eventDates, events) {
-    const parsedDates = {};
+    const parsedDates = {}
 
     // Dates without any custom properties
     eventDates.forEach(event => {
-      const date = moment(event);
-      const month = moment(date).startOf('month').format();
-      parsedDates[month] = parsedDates[month] || {};
-      parsedDates[month][date.date() - 1] = {};
-    });
+      const date = moment(event)
+      const month = moment(date).startOf('month').format()
+      parsedDates[month] = parsedDates[month] || {}
+      parsedDates[month][date.date() - 1] = {}
+    })
 
     // Dates with custom properties
     if (events) {
       events.forEach(event => {
         if (event.date) {
-            const date = moment(event.date);
-            const month = moment(date).startOf('month').format();
-            parsedDates[month] = parsedDates[month] || {};
-            parsedDates[month][date.date() - 1] = event;
+            const date = moment(event.date)
+            const month = moment(date).startOf('month').format()
+            parsedDates[month] = parsedDates[month] || {}
+            parsedDates[month][date.date() - 1] = event
         }
-      });
+      })
     }
-    return parsedDates;
+    return parsedDates
   }
 
   selectDate(date) {
     if (this.props.selectedDate === undefined) {
-      this.setState({ selectedMoment: date });
+      this.setState({ selectedMoment: date })
     }
-    this.props.onDateSelect && this.props.onDateSelect(date ? date.format(): null );
+    this.props.onDateSelect && this.props.onDateSelect(date ? date.format(): null )
   }
 
   onPrev = () => {
-    const newMoment = moment(this.state.currentMonthMoment).subtract(1, 'month');
-    this.setState({ currentMonthMoment: newMoment });
-    this.props.onTouchPrev && this.props.onTouchPrev(newMoment);
+    const newMoment = moment(this.state.currentMonthMoment).subtract(1, 'month')
+    this.setState({ currentMonthMoment: newMoment })
+    this.props.onTouchPrev && this.props.onTouchPrev(newMoment)
   }
 
   onNext = () => {
-    const newMoment = moment(this.state.currentMonthMoment).add(1, 'month');
-    this.setState({ currentMonthMoment: newMoment });
-    this.props.onTouchNext && this.props.onTouchNext(newMoment);
+    const newMoment = moment(this.state.currentMonthMoment).add(1, 'month')
+    this.setState({ currentMonthMoment: newMoment })
+    this.props.onTouchNext && this.props.onTouchNext(newMoment)
   }
 
   scrollToItem(itemIndex) {
-    const scrollToX = itemIndex * this.props.width;
+    const scrollToX = itemIndex * this.props.width
     if (this.props.scrollEnabled && this._calendar) {
-      this._calendar.scrollTo({ y: 0, x: scrollToX, animated: false });
+      this._calendar.scrollTo({ y: 0, x: scrollToX, animated: false })
     }
   }
 
   scrollEnded(event) {
-    const position = event.nativeEvent.contentOffset.x;
-    const currentPage = position / this.props.width;
-    const newMoment = moment(this.state.currentMonthMoment).add(currentPage - VIEW_INDEX, 'month');
-    this.setState({ currentMonthMoment: newMoment });
+    const position = event.nativeEvent.contentOffset.x
+    const currentPage = position / this.props.width
+    const newMoment = moment(this.state.currentMonthMoment).add(currentPage - VIEW_INDEX, 'month')
+    this.setState({ currentMonthMoment: newMoment })
 
     if (currentPage < VIEW_INDEX) {
-      this.props.onSwipePrev && this.props.onSwipePrev(newMoment);
+      this.props.onSwipePrev && this.props.onSwipePrev(newMoment)
     } else if (currentPage > VIEW_INDEX) {
-      this.props.onSwipeNext && this.props.onSwipeNext(newMoment);
+      this.props.onSwipeNext && this.props.onSwipeNext(newMoment)
     }
   }
 
   onWeekRowLayout = (event) => {
     if (this.state.rowHeight !== event.nativeEvent.layout.height) {
-      this.setState({ rowHeight: event.nativeEvent.layout.height });
+      this.setState({ rowHeight: event.nativeEvent.layout.height })
     }
   }
 
@@ -185,7 +185,7 @@ export default class extends Component {
       renderIndex = 0,
       weekRows = [],
       days = [],
-      startOfArgMonthMoment = argMoment.startOf('month');
+      startOfArgMonthMoment = argMoment.startOf('month')
 
     const
       selectedMoment = moment(this.state.selectedMoment),
@@ -196,15 +196,15 @@ export default class extends Component {
       offset = (startOfArgMonthMoment.isoWeekday() - weekStart + 7) % 7,
       argMonthIsToday = argMoment.isSame(todayMoment, 'month'),
       selectedIndex = moment(selectedMoment).date() - 1,
-      selectedMonthIsArg = selectedMoment.isSame(argMoment, 'month');
+      selectedMonthIsArg = selectedMoment.isSame(argMoment, 'month')
 
     const events = (eventsMap !== null)
       ? eventsMap[argMoment.startOf('month').format()]
-      : null;
+      : null
 
     do {
-      const dayIndex = renderIndex - offset;
-      const isoWeekday = (renderIndex + weekStart) % 7;
+      const dayIndex = renderIndex - offset
+      const isoWeekday = (renderIndex + weekStart) % 7
 
       if (dayIndex >= 0 && dayIndex < argMonthDaysCount) {
         days.push((
@@ -213,7 +213,7 @@ export default class extends Component {
             isWeekend={isoWeekday === 0 || isoWeekday === 6}
             key={`${renderIndex}`}
             onPress={() => {
-              !this.props.disabled && this.selectDate(moment(startOfArgMonthMoment).set('date', dayIndex + 1));
+              !this.props.disabled && this.selectDate(moment(startOfArgMonthMoment).set('date', dayIndex + 1))
             }}
             caption={`${dayIndex + 1}`}
             isToday={argMonthIsToday && (dayIndex === todayIndex)}
@@ -222,9 +222,9 @@ export default class extends Component {
             showEventIndicators={this.props.showEventIndicators}
             customStyle={this.props.customStyle}
           />
-        ));
+        ))
       } else {
-        days.push(<Day key={`${renderIndex}`} filler customStyle={this.props.customStyle} />);
+        days.push(<Day key={`${renderIndex}`} filler customStyle={this.props.customStyle} />)
       }
       if (renderIndex % 7 === 6) {
         weekRows.push(
@@ -234,22 +234,22 @@ export default class extends Component {
             style={[styles.weekRow, this.props.customStyle.weekRow]}
           >
             {days}
-          </View>);
-        days = [];
+          </View>)
+        days = []
         if (dayIndex + 1 >= argMonthDaysCount) {
-          break;
+          break
         }
       }
-      renderIndex += 1;
+      renderIndex += 1
     } while (true)
-    const containerStyle = [styles.monthContainer, this.props.customStyle.monthContainer];
-    return <View key={argMoment.month()} style={containerStyle}>{weekRows}</View>;
+    const containerStyle = [styles.monthContainer, this.props.customStyle.monthContainer]
+    return <View key={argMoment.month()} style={containerStyle}>{weekRows}</View>
   }
 
   renderHeading(titleFormat) {
-    const headings = [];
+    const headings = []
     for (let i = 0; i < 7; i++) {
-      const j = (i + this.props.weekStart) % 7;
+      const j = (i + this.props.weekStart) % 7
       headings.push(
         <Text
           key={i}
@@ -259,18 +259,18 @@ export default class extends Component {
         >
           {this.props.dayHeadings[j]}
         </Text>
-      );
+      )
     }
 
     return (
       <View style={[styles.calendarHeading, this.props.customStyle.calendarHeading]}>
         {headings}
       </View>
-    );
+    )
   }
 
   renderTopBar() {
-    let localizedMonth = this.props.monthNames[this.state.currentMonthMoment.month()];
+    let localizedMonth = this.props.monthNames[this.state.currentMonthMoment.month()]
     return this.props.showControls
     ? (
         <View style={[styles.calendarControls, this.props.customStyle.calendarControls]}>
@@ -301,13 +301,13 @@ export default class extends Component {
           {this.state.currentMonthMoment.format(this.props.titleFormat)}
         </Text>
       </View>
-    );
+    )
   }
 
   render() {
-    const calendarDates = this.getMonthStack(this.state.currentMonthMoment);
-    const eventDatesMap = this.prepareEventDates(this.props.eventDates, this.props.events);
-    const numOfWeeks = getNumberOfWeeks(this.state.currentMonthMoment, this.props.weekStart);
+    const calendarDates = this.getMonthStack(this.state.currentMonthMoment)
+    const eventDatesMap = this.prepareEventDates(this.props.eventDates, this.props.events)
+    const numOfWeeks = getNumberOfWeeks(this.state.currentMonthMoment, this.props.weekStart)
     const {showDayHeadings} = this.props
     return (
       <View style={[styles.calendarContainer, this.props.customStyle.calendarContainer]}>
@@ -336,6 +336,6 @@ export default class extends Component {
           </View>
         }
       </View>
-    );
+    )
   }
 }

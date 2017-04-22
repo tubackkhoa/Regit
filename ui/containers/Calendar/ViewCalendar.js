@@ -4,7 +4,7 @@ import {
   Text,
 } from 'native-base'
 
-import Calendar from './Calendar'
+import Calendar from '~/ui/components/Calendar'
 import options from './options'
 
 export default class extends Component {
@@ -35,6 +35,7 @@ export default class extends Component {
             }}>     
               {monthRow.map(month=>
                 <Calendar  
+                  width={options.calendarStyles.monthContainer.width}
                   disabled
                   key={month}            
                   customStyle={options.calendarStyles}                                                     
