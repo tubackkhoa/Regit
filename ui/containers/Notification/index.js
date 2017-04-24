@@ -70,7 +70,7 @@ export default class extends Component {
   }
 
   render() {
-
+    // we store the page so we must not set removeClippedSubviews to true, sometime it is for tab too
     const {notifications, notificationRequest} = this.props    
     
     return (          
@@ -82,7 +82,8 @@ export default class extends Component {
               style={styles.container} refreshing={this.state.refreshing} 
             >              
               {notifications && 
-                <List                   
+                <List
+                  removeClippedSubviews={false}                    
                   pageSize={notifications.take}                  
                   dataArray={notifications.data} renderRow={(item) =>
                     <ListItem noBorder style={styles.listItemContainer}>                    
