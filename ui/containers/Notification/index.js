@@ -71,8 +71,7 @@ export default class extends Component {
 
   render() {
 
-    const {notifications, notificationRequest} = this.props
-    
+    const {notifications, notificationRequest} = this.props    
     
     return (          
        
@@ -84,8 +83,7 @@ export default class extends Component {
             >              
               {notifications && 
                 <List                   
-                  pageSize={notifications.take}
-                  onEndReached={this._loadMore} 
+                  pageSize={notifications.take}                  
                   dataArray={notifications.data} renderRow={(item) =>
                     <ListItem noBorder style={styles.listItemContainer}>                    
                         <Icon name={options.iconMap[item.Type] || 'network'} style={styles.icon}/>                    
