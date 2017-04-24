@@ -2,6 +2,7 @@ import { fork } from 'redux-saga/effects'
 import asyncAuthWatchers from './auth'
 import asyncAccountWatchers from './account'
 import asyncDataWatchers from './data'
+import asyncNotificationWatchers from './notification'
 
 // saga must be a function like generator of other functions
 const rootSaga = function* () {
@@ -9,6 +10,7 @@ const rootSaga = function* () {
     ...asyncAuthWatchers.map(watcher => fork(watcher)),
     ...asyncAccountWatchers.map(watcher => fork(watcher)),
     ...asyncDataWatchers.map(watcher => fork(watcher)),
+    ...asyncNotificationWatchers.map(watcher => fork(watcher)),
   ]
 }
 

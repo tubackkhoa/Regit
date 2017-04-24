@@ -10,13 +10,9 @@ export default {
   /**
   * Logs the current user out
   */
-  getProfile (accessToken) {
+  getNotification(accessToken, start=0, take=10) {
     // return fetchJsonWithToken(token, `/logout`)
-    return apiGet('/Api/AccountSettings/Profile', {}, accessToken)
+    return apiGet('/Api/Notifications/GetNotificationByAccountId', {start, take}, accessToken)
   },
-
-  getBusinessProfile(accessToken) {
-    return apiGet('/Api/BusinessAccount/BusinessAccountProfile', {}, accessToken)
-  }
 
 }

@@ -13,7 +13,7 @@ import * as accountSelectors from '~/store/selectors/account'
 import Icon from '~/ui/elements/Icon'
 import material from '~/theme/variables/material'
 import options from './options'
-import { getTextParts } from '../shared/utils'
+import { getTextParts } from '~/ui/shared/utils'
 import styles from '../shared/styles'
 
 import { API_BASE } from '~/store/constants/api'

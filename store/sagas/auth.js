@@ -16,35 +16,6 @@ import {
 
 import { closeDrawer } from '~/store/actions/common'
 
-const requestLoginFacebookAsync = createRequestSaga({
-    request: api.auth.loginFacebook,
-    key: 'loginFacebook',
-    cancel: 'app/logout',
-    success: [
-        (data) => saveLoggedUser(data),
-        () => setAuthState(true),
-        () => setToast('Logged successfully!!!'),        
-    ],
-    failure: [
-        () => setToast('Couldn\'t login', 'error')
-    ],
-})
-
-
-const requestLoginGoogleAsync = createRequestSaga({
-    request: api.auth.loginGoogle,
-    key: 'loginGoogle',
-    cancel: 'app/logout',
-    success: [
-        (data) => saveLoggedUser(data),
-        () => setAuthState(true),
-        () => setToast('Logged successfully!!!'),        
-    ],
-    failure: [
-        () => setToast('Couldn\'t login', 'error')
-    ],
-})
-
 const requestLoginAsync = createRequestSaga({
     request: api.auth.login,
     key: 'login',
