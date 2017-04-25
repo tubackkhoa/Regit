@@ -30,6 +30,7 @@ const configureStore = callback =>   {
       // if you use getStoredState then no need to use auto hydrate to get state back
       autoRehydrate(),
       applyMiddleware(...middleware),      
+      window.devToolsExtension ? window.devToolsExtension() : x => x
     )
   )
 

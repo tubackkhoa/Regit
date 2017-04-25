@@ -61,7 +61,8 @@ export default class App extends Component {
   constructor(props) {
     super(props)        
     // default is not found page, render must show error
-    this.page = getPage(props.router.route) || routes.notFound            
+    this.page = getPage(props.router.route) || routes.notFound      
+    this.pageInstances = {}      
   }
 
   // replace view from stack, hard code but have high performance
@@ -82,10 +83,12 @@ export default class App extends Component {
 
         // console.log(this.navigator.state)      
         if(destIndex !==-1){          
-          this.navigator._jumpN(destIndex - this.navigator.state.presentedIndex)
-        } else {                  
+          // trigger will focus, the first time should be did mount
+          this.handlePageWillFocus(path)
+          this.navigator._jumpN(destIndex - this.navigator.state.presentedIndex)          
+        } else {                            
           this.navigator.state.presentedIndex = this.navigator.state.routeStack.length
-          this.navigator.push({title, path})
+          this.navigator.push({title, path})                    
         }  
       } else {
         // no need to push to route
@@ -105,6 +108,14 @@ export default class App extends Component {
     return false
   }
 
+  // render a component from current page, then pass the params to Page
+  renderComponentFromPage(page){
+    const {Page, ...route} = page
+    return (
+      <Page ref={ref=>route.path && (this.pageInstances[route.path]=ref)} route={route} app={this}/>
+    )
+  }
+
   // we can use events to pass between header and footer and page via App container or store
   _renderPage = (route) => {   
     if(this.page.path && route.path !== this.page.path) {
@@ -113,13 +124,11 @@ export default class App extends Component {
       // we only pass this.page, route and navigator is for mapping or some event like will focus ...
       // first time not show please waiting
       if(!this.navigator) {
-        return (
-          <this.page.Page route={this.page} app={this}/>
-        )
+        return this.renderComponentFromPage(this.page)
       }
       return (                                           
         <AfterInteractions placeholder={this.page.Preload || <Preload/>}>             
-          <this.page.Page route={this.page} app={this}/>
+          {this.renderComponentFromPage(this.page)}
         </AfterInteractions>            
       )
     }
@@ -166,6 +175,31 @@ export default class App extends Component {
     })
   }
 
+  // we need didFocus, it is like componentDidMount for the second time
+  handlePageWillFocus(path){    
+    // currently we support only React.Component instead of check the existing method
+    // when we extend the Component, it is still instanceof
+    let component = this.pageInstances[path]   
+    // may be something wrong
+    if(!component)
+      return
+
+    let whatdog = 10
+    // maybe connect, check name of constructor is _class means it is a component :D
+    if(component.constructor.name !== '_class'){
+      component = component._reactInternalInstance._renderedComponent
+      while(component._instance.constructor.name !== '_class' && whatdog > 0){
+        component = component._renderedComponent
+        whatdog--
+      }
+      component = component._instance
+    }
+    
+    // check method
+    component.componentWillFocus && component.componentWillFocus()    
+
+  }
+
   render() {    
     const {router, drawerState, closeDrawer} = this.props   
     const {title, path, headerType, footerType} = this.page 
@@ -187,7 +221,7 @@ export default class App extends Component {
           <Navigator ref={ref=>this.navigator=ref}
               configureScene={this.constructor.configureScene}
               initialRoute={{title, path}}
-              renderScene={this._renderPage}                
+              renderScene={this._renderPage}                           
           />
           <Footer type={footerType} route={router.route} onTabClick={this._onTabClick} ref={ref=>this.footer=ref} />
           <Toasts/>

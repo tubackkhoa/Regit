@@ -149,9 +149,9 @@ export default class extends Component {
     return (          
        
         <Container>   
-        <Content padder style={{backgroundColor:'#fff'}}>  
+          <Content padder style={{backgroundColor:'#fff'}}>  
 
-         <ViewCalendar/>                   
+           <ViewCalendar/>                   
 
           </Content>
 
