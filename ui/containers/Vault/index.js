@@ -10,6 +10,7 @@ import Content from '~/ui/components/Content'
 
 import { connect } from 'react-redux'
 
+import * as commonSelectors from '~/store/selectors/common'
 import * as commonActions from '~/store/actions/common'
 
 import styles from './styles'
@@ -19,11 +20,19 @@ const copiedMessage = (
   <IconMessage size={30} message="Copied   " />
 )
 
-@connect(null, commonActions)
+@connect(state=>({
+  searchString: commonSelectors.getSearchString(state),
+}), commonActions)
 export default class extends Component {
 
   _onCopy = (e)=>{
     this.props.setToast(copiedMessage, 'info', 500, 'center')
+  }
+
+  componentWillReceiveProps({searchString}){
+    if(searchString !== this.props.searchString){
+      // console.log('do search', searchString)
+    }
   }
 
   renderSearchResult(){

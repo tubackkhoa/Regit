@@ -82,8 +82,12 @@ export default class extends Component {
     this.state.scrollY.setValue(offsetY)
   }
 
+  _handleSave = (data)=>{
+    console.log(data)
+  }
+
   render() {        
-    const {initialValues:profile, route, goBack, countries, cities} = this.props
+    const {initialValues:profile, route, goBack, countries, cities, handleSubmit} = this.props
     const {avatar, scrollY} = this.state    
     // no header or footer
     const opacity = scrollY.interpolate({
@@ -110,7 +114,7 @@ export default class extends Component {
         <Button transparent style={styles.buttonLeft} onPress={()=>goBack()}>
           <Text style={styles.iconGray}>Cancel</Text>
         </Button>
-        <Button transparent style={styles.buttonRight}>
+        <Button onPress={handleSubmit(this._handleSave)} transparent style={styles.buttonRight}>
           <Text style={styles.iconGray}>Save</Text>
         </Button>                     
         <Animated.View style={{...styles.avatarContainer,top}}>      

@@ -16,3 +16,6 @@ export const getDrawerState = (state) =>
 
 export const getRouter = (state) => 
   state.router  
+
+export const getSearchString = (state) =>
+  state.ui.search

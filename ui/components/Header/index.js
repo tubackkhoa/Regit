@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
-
+import { connect } from 'react-redux'
 import {         
     Header, Left, Right, Body,           
     Text, Title, Button, Item, Input,
 } from 'native-base'
+
+import * as commonActions from '~/store/actions/common'
+
 import Icon from '~/ui/elements/Icon'
 import styles from './styles'
 
+@connect(null, commonActions)
 export default class extends Component {
 
   constructor(props) {
@@ -39,6 +43,7 @@ export default class extends Component {
     return this.renderHeader(left, center)    
   }
 
+  // public data not event
   renderHeaderSearch(iconName="menu"){    
     const left = (
       <Button transparent onPress={this._leftClick}>
@@ -48,7 +53,7 @@ export default class extends Component {
     const center = (
       <Item style={styles.searchContainer}>
           <Icon name="search" style={styles.searchIcon} />
-          <Input placeholderTextColor="#a7e7ff" style={styles.searchInput} placeholder="Regit Search" />                        
+          <Input autoCorrect={false} onChangeText={value=>this.props.search(value)} placeholderTextColor="#a7e7ff" style={styles.searchInput} placeholder="Regit Search" />                        
       </Item>
     )
     const right = (
