@@ -1,5 +1,5 @@
 
-export const notificationReducer = (state={hasMore:true, start:0, take: 10, data:[]}, {type, payload}) => {
+export const notification = (state={hasMore:true, start:0, take: 10, data:[]}, {type, payload}) => {
   switch (type) {   
     // we can store current page? for paging...
     case 'app/replaceNotification':             

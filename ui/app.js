@@ -72,8 +72,9 @@ export default class App extends Component {
       this.page = getPage(router.route)      
       if(this.page){   
         const {headerType, footerType, title, path} = this.page
-        // show header and footer
+        // show header and footer, and clear search string
         this.header.show(headerType, title)
+        this.header._search('')
         this.footer.show(footerType, router.route)
         
         // return console.warn('Not found: ' + router.route)
@@ -112,7 +113,7 @@ export default class App extends Component {
   renderComponentFromPage(page){
     const {Page, ...route} = page
     return (
-      <Page ref={ref=>route.path && (this.pageInstances[route.path]=ref)} route={route} app={this}/>
+      <Page ref={ref=>route.path && (this.pageInstances[route.path]=this.getPageInstance(ref))} route={route} app={this}/>
     )
   }
 
@@ -175,28 +176,29 @@ export default class App extends Component {
     })
   }
 
-  // we need didFocus, it is like componentDidMount for the second time
-  handlePageWillFocus(path){    
-    // currently we support only React.Component instead of check the existing method
-    // when we extend the Component, it is still instanceof
-    let component = this.pageInstances[path]   
-    // may be something wrong
-    if(!component)
-      return
-
+  getPageInstance(ref){
     let whatdog = 10
+    let component = ref
     // maybe connect, check name of constructor is _class means it is a component :D
-    if(component.constructor.name !== '_class'){
+    if(component && component.constructor.name.substr(0,6) !== '_class'){
       component = component._reactInternalInstance._renderedComponent
-      while(component._instance.constructor.name !== '_class' && whatdog > 0){
+      while(component._instance && component._instance.constructor.name.substr(0,6) !== '_class' && whatdog > 0){
         component = component._renderedComponent
         whatdog--
       }
       component = component._instance
     }
+    return component
+  }
+
+  // we need didFocus, it is like componentDidMount for the second time
+  handlePageWillFocus(path){    
+    // currently we support only React.Component instead of check the existing method
+    // when we extend the Component, it is still instanceof
+    let component = this.pageInstances[path]  
     
     // check method
-    component.componentWillFocus && component.componentWillFocus()    
+    component && component.componentWillFocus && component.componentWillFocus()    
 
   }
 
@@ -217,7 +219,7 @@ export default class App extends Component {
             // each Page will overide StatusBar
             // <StatusBar hidden={ this.page.hiddenBar || (drawerState === 'opened' && material.platform === 'ios')} translucent />          
           }
-          <Header type={headerType} title={title} onLeftClick={this._onLeftClick} ref={ref=>this.header=ref} />
+          <Header type={headerType} title={title} onLeftClick={this._onLeftClick} onItemRef={ref=>this.header=ref} />
           <Navigator ref={ref=>this.navigator=ref}
               configureScene={this.constructor.configureScene}
               initialRoute={{title, path}}

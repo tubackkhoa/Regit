@@ -13,7 +13,8 @@ const sagaMiddleware = createSagaMiddleware()
 
 const middleware = [sagaMiddleware]
 
-if (__DEV__) {
+// only use logger when there is not devTools
+if (__DEV__ && !window.devToolsExtension) {
   // we use require for dynamic import  
   const loggerMiddleware = require('./logger').default
   // add logger for development

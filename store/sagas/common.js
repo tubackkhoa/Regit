@@ -6,6 +6,7 @@ import {
   markRequestSuccess,
   markRequestCancelled,
   markRequestFailed,
+  invokeCallback,
   setToast,
   forwardTo,
 } from '~/store/actions/common'
@@ -33,7 +34,13 @@ export const createRequestSaga = ({request, key, start, stop, success, failure, 
   // we may not needs this if we use redux-saga, of course we can use both
   return function* (action) {    
     // default is empty
-    const args = action.args || []
+    let args = action.args || []
+    // check to see if we have success callback that pass as a param, so that it will be callback from where it was born
+    // with this way we can make something like cleaning the messages
+    let successCallback = typeof args[args.length-1] === 'function' ? args[args.length-1] : null
+    if(successCallback){
+      args = args.slice(0, -1)
+    }
     const requestKey = (typeof key === 'function') ? key(...args) : key
     // for key, we render unique key using action.args
     // but for actionCreator when callback, we should pass the whole action
@@ -78,6 +85,12 @@ export const createRequestSaga = ({request, key, start, stop, success, failure, 
         if(success) for(let actionCreator of success){          
           yield put(actionCreator(data, action))
         }        
+
+        // check if the last param is action, should call it as actionCreator
+        if(successCallback) {
+          yield put(invokeCallback(successCallback, data, action))        
+        } 
+        // finally mark the request success
         yield put(markRequestSuccess(requestKey))
       }            
       

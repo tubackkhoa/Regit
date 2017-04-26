@@ -5,23 +5,23 @@ import { createRequestSaga } from '~/store/sagas/common'
 import { setToast, noop, forwardTo } from '~/store/actions/common'
 
 import {
-    replaceProfile,
-} from '~/store/actions/account'
+    replaceActiveCampaign,    
+} from '~/store/actions/campaign'
 
 
-const requestGetProfile = createRequestSaga({
-    request: api.account.getProfile,
-    key: 'getProfile',    
+const requestGetActiveCampaign = createRequestSaga({
+    request: api.campaign.getActiveCampaign,
+    key: 'getActiveCampaign',    
     success: [
-        (data) => replaceProfile(data),       
+        (data) => replaceActiveCampaign(data),           
     ],
     failure: [
-        () => setToast('Couldn\'t get profile', 'error')
+        () => setToast('Couldn\'t get active campaign', 'error')
     ],
 })
 
 
-// root saga reducer
+// saga reducer
 export default [
     // like case return, this is take => call
     // inner function we use yield*
@@ -29,9 +29,8 @@ export default [
     function* fetchWatcher() {
         // use takeLatest instead of take every, so double click in short time will not trigger more fork
         yield [
-            takeLatest('app/getProfile', requestGetProfile),            
+            takeLatest('app/getActiveCampaign', requestGetActiveCampaign),                        
         ]
     },
 ]
-
 

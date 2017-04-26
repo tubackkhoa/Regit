@@ -17,6 +17,10 @@ export default {
   avatarContainer:{
     borderTopWidth: material.platform === 'android' ? 1 : 0,
   },
+  avatar: {
+    width: 50,
+    height: 50,
+  },
   firstCard:{    
     borderTopLeftRadius:5,
     borderTopRightRadius: 5,             

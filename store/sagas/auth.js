@@ -16,7 +16,7 @@ import {
 
 import { closeDrawer } from '~/store/actions/common'
 
-const requestLoginAsync = createRequestSaga({
+const requestLogin = createRequestSaga({
     request: api.auth.login,
     key: 'login',
     cancel: 'app/logout',
@@ -33,7 +33,7 @@ const requestLoginAsync = createRequestSaga({
 })
 
 
-const requestLogoutAsync = createRequestSaga({
+const requestLogout = createRequestSaga({
     request: api.auth.logout,
     key: 'logout',
     success: [
@@ -55,21 +55,14 @@ export default [
     // like case return, this is take => call
     // inner function we use yield*
     // from direct watcher we just yield value
-    function* asyncLoginFetchWatcher() {
+    // other watcher may be background workers
+    function* fetchWatcher() {
         // use takeLatest instead of take every, so double click in short time will not trigger more fork
-        yield [
-            // takeLatest('app/loginFacebook', requestLoginFacebookAsync),
-            // takeLatest('app/loginGoogle', requestLoginGoogleAsync),
-            takeLatest('app/login', requestLoginAsync),
+        yield [            
+            takeLatest('app/login', requestLogin),
+            takeLatest('app/logout', requestLogout),
         ]
     },
-
-    function* asyncLogoutFetchWatcher() {
-        // use takeLatest instead of take every, so double click in short time will not trigger more fork
-        yield [
-            takeLatest('app/logout', requestLogoutAsync),
-        ]
-    }
 ]
 
 
