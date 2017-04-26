@@ -15,6 +15,13 @@ export const getBusinessNetwork = (...args) => ({
   args,
 })
 
+// basically, we do not need to update this payload into reducer
+// we just use invokeCallback to get the temporary data to bind
+export const getFollowTransactions = (...args)=>({
+  type: 'app/getFollowTransactions',
+  args,
+})
+
 
 // action creators
 export const replaceNetworks = (data) => ({

@@ -2,17 +2,20 @@ import { apiGet, apiPost } from '~/store/api/common'
 
 export default {
 
-  getNetworks() {    
-    return apiGet('/Api/Networks')
+  getNetworks(accessToken) {    
+    return apiGet('/Api/Networks', {}, accessToken)
   },
 
-  getNetwork(id, name) {
-    return apiGet('/Api/Data/Country/City', {countryCode})
+  getNetwork(accessToken, networkId) {    
+    return apiGet('/Api/Networks/Friends', {networkId}, accessToken)
   },  
 
-  getBusinessNetwork(Start=0, Length=10, UserId='') {
-    return apiGet('/Api/AccountSettings/Followee', {Start, Length, UserId})
+  getBusinessNetwork(accessToken, Start=0, Length=10, UserId='') {
+    return apiGet('/Api/AccountSettings/Followee', {Start, Length, UserId}, accessToken)
   },  
+
+  getFollowTransactions(accessToken, ToUser, FromUser='', Length=7, TransactionType=0){
+    return apiGet('/Api/AccountSettings/GetFollowTransactions', {FromUser, ToUser, Length, TransactionType}, accessToken)
+  },
 
 }
-

@@ -120,6 +120,9 @@ export const createRequestSaga = ({request, key, start, stop, success, failure, 
         yield put(actionCreator(reason, action))
       }        
       yield put(markRequestFailed(reason, requestKey))
+
+      console.log(reason)
+      
     } finally {
       if(stop) for(let actionCreator of stop){          
         yield put(actionCreator(reason, action))

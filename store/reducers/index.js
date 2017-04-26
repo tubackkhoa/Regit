@@ -6,7 +6,8 @@ import { account } from './account'
 import { data } from './data'
 import { notification } from './notification'
 import { campaign } from './campaign'
-
+import { network } from './network'
+import { delegation } from './delegation'
 
 // a rootReducer is like a single state, key is function return a sub state value
 const rootReducer = combineReducers({    
@@ -24,6 +25,8 @@ const rootReducer = combineReducers({
   data,
   notification,
   campaign,
+  network,
+  delegation,
 })
 
 export default rootReducer

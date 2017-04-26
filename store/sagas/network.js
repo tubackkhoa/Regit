@@ -26,7 +26,7 @@ const requestGetNetwork = createRequestSaga({
     request: api.network.getNetwork,
     key: 'getNetwork',    
     success: [
-        (data, args:[Id, name]) => replaceNetwork({name, data:{...data, Id}}),           
+        (data, {args:[token, Id, Name]}) => replaceNetwork({Name, data:{...data, Id}}),           
     ],
     failure: [
         () => setToast('Couldn\'t get network', 'error')
@@ -44,6 +44,13 @@ const requestGetBusinessNetwork = createRequestSaga({
     ],
 })
 
+// no need to callback, currently if fail, we can check the status
+// other wise if we just need the callback data, we can use invokeCallback
+const requestGetFollowTransactions = createRequestSaga({
+    request: api.network.getFollowTransactions,
+    key: 'getFollowTransactions',    
+})
+
 // saga reducer
 export default [
     // like case return, this is take => call
@@ -53,8 +60,10 @@ export default [
         // use takeLatest instead of take every, so double click in short time will not trigger more fork
         yield [
             takeLatest('app/getNetworks', requestGetNetworks), 
-            takeLatest('app/getNetwork', requestGetNetwork), 
-            takeLatest('app/getBusinessNetwork', requestGetBusinessNetwork),                        
+            // call multi-time
+            takeEvery('app/getNetwork', requestGetNetwork), 
+            takeLatest('app/getBusinessNetwork', requestGetBusinessNetwork), 
+            takeLatest('app/getFollowTransactions', requestGetFollowTransactions),                       
         ]
     },
 ]

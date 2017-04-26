@@ -40,8 +40,7 @@ export default class extends Component {
   componentDidMount(){
     const {token, activeCampaign, getActiveCampaign} = this.props
     if(!activeCampaign.NewFeedsItemsList) 
-      getActiveCampaign(token)   
-    console.log('mount')
+      getActiveCampaign(token)       
   }
 
   componentWillFocus(){
@@ -58,7 +57,7 @@ export default class extends Component {
 
   render() {
     const { activeCampaign } = this.props
-    console.log(activeCampaign)
+  
     return (          
        
         <Container>
@@ -66,7 +65,7 @@ export default class extends Component {
             <Content padder refreshing={this.state.refreshing} 
                 onRefresh={this._onRefresh}                
             >             
-              {activeCampaign.NewFeedsItemsList.map(feed=>
+              {activeCampaign.NewFeedsItemsList && activeCampaign.NewFeedsItemsList.map(feed=>
                 <Event feed={feed} key={feed.CampaignId} />
               )}              
             </Content>            

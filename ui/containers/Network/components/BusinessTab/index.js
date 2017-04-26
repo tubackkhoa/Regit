@@ -6,68 +6,62 @@ import {
 
 import Modal from '~/ui/components/Modal'
 import Content from '~/ui/components/Content'
+import moment from 'moment'
 import { connect } from 'react-redux'
-// import * as commonActions from '~/store/actions/common'
-import * as accountSelectors from '~/store/selectors/account'
+import * as networkActions from '~/store/actions/network'
+// import * as accountSelectors from '~/store/selectors/account'
 
 import Icon from '~/ui/elements/Icon'
-import material from '~/theme/variables/material'
+
 import options from './options'
-import { getTextParts } from '~/ui/shared/utils'
+// import { getTextParts } from '~/ui/shared/utils'
 import styles from '../shared/styles'
 
 import { API_BASE } from '~/store/constants/api'
 
-const renderTextParts = text => {
-  const parts = getTextParts(text)
-  return (
-    <Text small>
-      {parts[0]}
-      {parts[1] && <Text small bold link>{parts[1]}</Text>}
-      {parts[2]}
-    </Text>  
-  )
-}
-
 // should use margin not padding to tap
-@connect(state=>({  
-  profile: accountSelectors.getProfile(state),
-}))
+@connect(null, networkActions)
 export default class extends Component {  
 
   constructor(props) {
     super(props)
 
     this.state = {
-      modalOpen: false
+      modalOpen: false,
+      choosenFriend: {},
+      followTransactions: null,
     }
   }
 
 
-  showInfo(index){
-    this.setState({modalOpen:true})
+  showInfo(index, friend){
+    const {token, getFollowTransactions} = this.props
+    this.setState({
+      followTransactions: null,
+      choosenFriend: friend,
+      modalOpen:true,
+    })    
+    getFollowTransactions(token, friend.Id, followTransactions=>this.setState({followTransactions}))    
   }
 
-  renderList(){
-    const {profile} = this.props
-    const avatar = {uri: (API_BASE + profile.PhotoUrl)}
+  renderList(items){    
     return (
       <View rounded style={styles.content} >
-        {options.notifications.map((item,index) =>
-          <ListItem last={index===options.notifications.length-1} 
+        {items.map((item,index) =>
+          <ListItem last={index===items.length-1} 
             key={index} avatar noBorder style={styles.listItemContainer}>
               <Left>
-                  <Thumbnail square style={styles.thumb} source={avatar}/>
+                  <Thumbnail square style={styles.thumb} source={{uri:API_BASE + item.PhotoUrl}}/>
               </Left>
               <Body style={{marginLeft:10}}>
-                  <Text small>{item.user}</Text>                                          
+                  <Text small>{item.DisplayName}</Text>                                          
               </Body>
               <Right style={styles.rightButtonContainer}>                
-                <Button style={styles.buttonSmall} onPress={e=>this.showInfo(index)} iconLeft bordered>
+                <Button style={styles.buttonSmall} onPress={e=>this.showInfo(index, item)} iconLeft bordered>
                   <Icon style={styles.iconGraySmall} name="follow" />
                   <Text note style={styles.textSmall}>Following</Text> 
                 </Button>
-                <Button style={styles.buttonSmall} onPress={e=>this.showInfo(index)} iconLeft bordered>
+                <Button style={styles.buttonSmall} onPress={e=>this.showInfo(index, item)} iconLeft bordered>
                   <Icon style={styles.iconGraySmall} name="activity-small" />
                   <Text note style={styles.textSmall}>Logs</Text> 
                 </Button>
@@ -80,18 +74,12 @@ export default class extends Component {
 
   // padding for radius not overlapsed
   renderModal(){
-    const {profile} = this.props
-    const avatar = {uri: (API_BASE + profile.PhotoUrl)}
+    const {followTransactions, choosenFriend} = this.state
     return (
-      <View regit style={{        
-        width: material.deviceWidth - 10,        
-        height: material.deviceHeight - 70,  
-        paddingBottom:4,
-        overflow: 'hidden',   
-      }}>
+      <View regit style={styles.businessModalContainer}>
         <ListItem style={styles.itemHeader}>
             <Text style={styles.itemHeaderTextModal}>
-              Interaction History with Donkey Donus
+              Interaction History with {choosenFriend.DisplayName}
             </Text>
             <Button onPress={e=>this.setState({modalOpen:false})} style={{alignSelf:'center'}} transparent noPadder>
               <Icon style={styles.iconGray} name="close" />
@@ -99,16 +87,19 @@ export default class extends Component {
         </ListItem>
         <Content>
           <View regit>
-            {options.listItems.map((item, index) =>
-              <ListItem key={index} style={styles.itemBodyModal} last={index===options.listItems.length-1}>                                                
-                <Text style={styles.labelTime} small>{item.date}</Text>  
-                <View row style={{      
-                  justifyContent: 'flex-end',
-                }}>          
-                  {renderTextParts(item.title)}                           
-                </View>
-              </ListItem>
-            )}     
+            { followTransactions 
+              ? followTransactions.Transactions.map((item, index) =>
+                  <ListItem key={index} style={styles.itemBodyModal}>                                                
+                    <Text style={styles.labelTime} small>{moment(item.Date).format('DD MMM YYYY')}</Text>  
+                    <View row style={{      
+                      justifyContent: 'flex-end',
+                    }}>          
+                      <Text small>{item.Description}</Text>
+                    </View>
+                  </ListItem>
+                )
+              : <Text>Loading...</Text>
+            }   
           </View>
         </Content>
       </View>      
@@ -117,13 +108,22 @@ export default class extends Component {
 
   // flex means 100%
   render() {    
+    const {network} = this.props
+    if(!network.Data.length) {
+      return (
+        <Text>
+          You have no one in your business network. Add someone you trust from your normal network.
+        </Text>
+      )
+    }
+
     return (     
       <View style={{flex:1}}>  
         <Modal onCloseClick={e=>this.setState({modalOpen:false})} open={this.state.modalOpen}>          
             {this.renderModal()}          
         </Modal>                                      
         <Content>                       
-          {this.renderList()}                                
+          {this.renderList(network.Data)}                                
         </Content>   
       </View>  
     )

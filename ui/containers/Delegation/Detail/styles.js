@@ -19,7 +19,7 @@ export default {
     marginTop: 15,
     marginBottom: 10,
   },
-  textArea:{
+  textarea:{
     height: '100%',    
   },
   label: {

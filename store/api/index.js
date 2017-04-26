@@ -4,6 +4,7 @@ import data from './data'
 import notification from './notification'
 import campaign from './campaign'
 import network from './network'
+import delegation from './delegation'
 
 // we compose all api for each category here as single entry point
 // api will be an single entry point for all frame methods
@@ -15,4 +16,5 @@ export default {
   notification,
   campaign,
   network,
+  delegation,
 }

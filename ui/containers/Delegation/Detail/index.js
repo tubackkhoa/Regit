@@ -25,7 +25,7 @@ import styles from './styles'
 
 const formSelector = formValueSelector('DelegationForm')
 
-
+// base on id will select the initialValue
 @connect(state=>({  
   initialValues: {
     interaction: true,     
@@ -100,7 +100,7 @@ export default class extends Component {
 
 
               <Field label="Type a message" name="message" inputStyle={styles.textarea} style={styles.textareaContainer}
-               multiline component={InputField} />    
+               multiline autoCorrect={false} component={InputField} />    
 
               <View padder>
                 <Field label={
