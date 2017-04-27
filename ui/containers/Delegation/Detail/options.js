@@ -24,39 +24,6 @@ export default {
       title: 'Specify End date',
       name: 'endDateOption'
     },
-  ],
-       
-  items: [
-    {
-      title: 'Basic',      
-    },
-    {
-      title: 'Contact',
-    },
-    {
-      title: 'Address',
-    },
-    {
-      title: 'Financial',      
-    },
-    {
-      title: 'Government ID',
-    },
-    {
-      title: 'Education',      
-    },
-    {
-      title: 'Employment',      
-    },
-    {
-      title: 'Family',      
-    },
-    {
-      title: 'Membership',      
-    },
-    {
-      title: 'Others',      
-    },
-  ]
+  ],        
     
 }

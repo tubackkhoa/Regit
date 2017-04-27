@@ -57,7 +57,7 @@ export default class extends Component {
     const {forwardTo} = this.props    
     return (
       <View rounded style={styles.content} >
-        {listDelegation && listDelegation.Listitems.map((item) =>
+        {listDelegation && listDelegation.Listitems.map((item, index) =>
           <ListItem key={item.DelegationId} avatar noBorder style={styles.listItemContainer}>
               <Left>
                   <Thumbnail style={styles.thumb} source={{
@@ -77,7 +77,8 @@ export default class extends Component {
                   <Text>{item.Status}</Text>
                 </Button>
                 
-                <Button iconRight noPadder transparent onPress={e=>forwardTo(`delegation/detail/${item.id}`)}>
+                <Button iconRight noPadder transparent 
+                  onPress={e=>forwardTo(`delegation/detail/${index}/${item.Direction}`)}>
                   <Icon gray name="keyboard-arrow-right" /> 
                 </Button>
               </Right>
