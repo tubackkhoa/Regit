@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { BackAndroid, NativeModules, Navigator } from 'react-native'
 import { Drawer, StyleProvider } from 'native-base'
 
+import URL from 'url-parse'
+
 import getTheme from '~/theme/components'
 import material from '~/theme/variables/material'
 
@@ -25,15 +27,18 @@ import { getDrawerState, getRouter } from '~/store/selectors/common'
 import * as commonActions from '~/store/actions/common'
 import routes from './routes'
 
-const getPage = (pathname) => {  
+const getPage = (url) => {  
   for(route in routes) {
+    const pathname = url.split('?')[0]
     const match = matchPath(pathname, {
       path:route,
       exact: true,
       strict: false,
     })
     if(match) {      
-      return {...routes[route], ...match}
+      // update query and pathname
+      const {query} = new URL(url, null, true)      
+      return {...routes[route], ...match, url, pathname, query}
     }
   }  
 }

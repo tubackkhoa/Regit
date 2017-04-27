@@ -45,7 +45,7 @@ export default {
         title: 'Delegation',
         Page: Delegation,
     },
-    'delegation/detail/:id/:direction': {
+    'delegation/detail/:id': {
         title: 'Delegation Detail',
         Page: DelegationDetail,
         headerType: 'back',

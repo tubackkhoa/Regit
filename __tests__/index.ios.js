@@ -1,5 +1,6 @@
 import 'react-native';
 import React from 'react';
+import URL from 'url-parse'
 // import Index from '../index.ios.js';
 
 // Note: test renderer must be required after react-native.
@@ -28,6 +29,7 @@ const matchRoutes = (pathname) => {
 
 it('renders correctly', () => {
   const match = matchRoutes('delegation/detail/refresh')
-  
-  console.log(match)
+  const url = new URL('delegation/detail/refresh?key=value', null, true)
+  console.log(url)
+  // console.log(match)
 });

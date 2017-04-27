@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Image } from 'react-native'
 import { connect } from 'react-redux'
 import { View,
   Container, Header, Title, Content, Button,
@@ -8,6 +7,7 @@ import { View,
 import { API_BASE } from '~/store/constants/api'
 // import * as accountSelectors from '~/store/selectors/account'
 import moment from 'moment'
+import CacheableImage from '~/ui/components/CacheableImage'
 import RegitButton from '~/ui/elements/RegitButton'
 import Icon from '~/ui/elements/Icon'
 import styles from './styles'
@@ -19,6 +19,7 @@ export default class extends Component {
     const {feed} = this.props    
     const avatar = {uri: API_BASE + feed.BusinessImageUrl}
     const cardImage = {uri: API_BASE + feed.Image}
+
     return (      
         <Card style={styles.container}>
           <CardItem bordered style={styles.firstCard}>
@@ -33,7 +34,7 @@ export default class extends Component {
           </CardItem>
           <CardItem bordered style={styles.avatarContainer}>
             <Left>
-                <Thumbnail square style={styles.avatar} source={avatar} />
+                <CacheableImage style={styles.avatar} source={avatar} />
                 <Body>
                     <Text>{feed.BusinessName}</Text>
                     <Text note>{moment(feed.SpendEffectDate).format('DD MMM YYYY')}</Text>
@@ -56,7 +57,7 @@ export default class extends Component {
           </Body>
           </CardItem>
           <CardItem cardBody>
-              <Image style={styles.image} source={cardImage}/>
+            <CacheableImage style={styles.image} source={cardImage} />
           </CardItem>              
           <CardItem footer style={styles.footerContainer}>
               <RegitButton>Join</RegitButton>

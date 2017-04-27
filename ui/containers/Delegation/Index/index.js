@@ -78,7 +78,7 @@ export default class extends Component {
                 </Button>
                 
                 <Button iconRight noPadder transparent 
-                  onPress={e=>forwardTo(`delegation/detail/${index}/${item.Direction}`)}>
+                  onPress={e=>forwardTo(`delegation/detail/${index}?direction=${item.Direction}`)}>
                   <Icon gray name="keyboard-arrow-right" /> 
                 </Button>
               </Right>
