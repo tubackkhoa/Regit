@@ -24,7 +24,7 @@ import styles from './styles'
 @connect(state=>({  
   token: authSelectors.getToken(state),
   activeCampaign: campaignSelectors.getActiveCampaign(state),
-  getActiveCampaignRequest: commonSelectors.getRequest(state, 'getActiveCampaign'),  
+  // getActiveCampaignRequest: commonSelectors.getRequest(state, 'getActiveCampaign'),  
 }), {...campaignActions, ...commonActions})
 export default class extends Component {
 
@@ -52,7 +52,7 @@ export default class extends Component {
 
   _onRefresh =() => {
     this.setState({refreshing: true})                
-    this.props.getActiveCampaign(this.props.token, 0, 10, ()=>this.setState({refreshing: false}))   
+    this.props.getActiveCampaign(this.props.token, ()=>this.setState({refreshing: false}))   
   }    
 
   render() {
