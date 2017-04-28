@@ -48,16 +48,19 @@ export default class extends Component {
   }
 
   componentWillFocus(){
-    // make it like before
-    this.state.refreshing && this.setState({
-      refreshing: false,
-    })
+    // make it like before    
+    const {token, notifications, getNotification} = this.props
+    if(!notifications.data.length) {
+      getNotification(token)  
+    } else {
+      this.state.refreshing && this.setState({
+        refreshing: false,
+      })
+    }
   }
 
   componentWillMount(){
-    const {token, notifications, getNotification} = this.props
-    if(!notifications.data.length) 
-      getNotification(token)        
+    this.componentWillFocus()      
   }
 
   _onRefresh =() => {    

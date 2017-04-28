@@ -26,7 +26,11 @@ import styles from './styles'
 }), {...networkActions})
 export default class extends Component {  
 
-  componentDidMount(){
+  componentWillMount(){
+    this.componentWillFocus()
+  }
+
+  componentWillFocus(){
     const {token, networks, getNetworks, getNetwork, getBusinessNetwork} = this.props
     // later we have the network
     if(!networks['Business Network']){
@@ -35,7 +39,7 @@ export default class extends Component {
         getBusinessNetwork(token)
       })      
     }    
-  }
+  }  
 
   render() {
 

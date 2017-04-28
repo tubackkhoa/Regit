@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {             
-    Button, List, ListItem, Switch,
+    Button, List, ListItem, Switch, Spinner,
     Container, Text, Item, Input, Left, Body, Right, View,
 } from 'native-base'
 
@@ -67,12 +67,16 @@ export default class extends Component {
     ]
   }
 
-  componentDidMount(){
+  componentWillMount(){
+    this.componentWillFocus()
+  }
+
+  componentWillFocus(){
     const {token, vault, getVaultInformation} = this.props
     // later we have the network
     if(!vault.VaultInformation){
       getVaultInformation(token)
-    }    
+    }  
   }
 
   componentWillReceiveProps({searchString}){
@@ -117,9 +121,15 @@ export default class extends Component {
   }
 
   renderVault(){    
+    const {vault} = this.props
+    if(!vault.VaultInformation){
+      return (
+        <Spinner />
+      )
+    }
     const {selected} = this.state
-    const selectedOption = this.options[selected]    
-    const vaultInfo = this.props.vault.VaultInformation[selectedOption.key]
+    const selectedOption = this.options[selected]        
+    const vaultInfo = vault.VaultInformation[selectedOption.key]
     return ( 
       <View>        
         <Header options={this.options} selected={selected} onOptionSelect={this._optionSelect}/>
@@ -131,7 +141,7 @@ export default class extends Component {
 
   render() {
     const {searchString} = this.props
-    console.log('search',searchString)    
+    // console.log('search',searchString)    
     return (                 
         <Container>                    
             <Content padder>                            

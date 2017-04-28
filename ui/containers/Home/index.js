@@ -37,17 +37,21 @@ export default class extends Component {
     }    
   }
 
-  componentDidMount(){
-    const {token, activeCampaign, getActiveCampaign} = this.props
-    if(!activeCampaign.NewFeedsItemsList) 
-      getActiveCampaign(token)       
+  componentWillMount(){
+    this.componentWillFocus()
   }
 
   componentWillFocus(){
     // make it like before
-    this.state.refreshing && this.setState({
-      refreshing: false,
-    })
+    const {token, activeCampaign, getActiveCampaign} = this.props
+    if(!activeCampaign.NewFeedsItemsList) {
+      // so keep refreshing :D
+      getActiveCampaign(token)  
+    } else {
+      this.state.refreshing && this.setState({
+        refreshing: false,
+      })
+    }
   }
 
   _onRefresh =() => {
