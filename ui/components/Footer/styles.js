@@ -9,7 +9,8 @@ export default {
     color:material.tabBarTextColor,    
     paddingTop:2,
     marginLeft:5,
-    marginRight:5
+    marginRight:5,
+    fontSize: 18,
   },
   get footerIconActive() {
     return {...this.footerIcon, color: material.tabBarActiveTextColor}

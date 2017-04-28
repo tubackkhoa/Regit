@@ -11,6 +11,7 @@ export default class extends Component {
   static propTypes = {
       activityIndicatorProps: PropTypes.object,
       defaultSource: Image.propTypes.source,
+      placeholder: PropTypes.element, 
       useQueryParamsInCacheKey: PropTypes.oneOfType([
           PropTypes.bool,
           PropTypes.array
@@ -275,6 +276,11 @@ export default class extends Component {
             return this.renderCache()
         }
         
+        // maybe Icon or view
+        if(this.props.placeholder){
+            return this.props.placeholder
+        }
+
         if (this.props.defaultSource) {
             return this.renderDefaultSource()
         }

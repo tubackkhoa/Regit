@@ -25,7 +25,7 @@ import Content from '~/ui/components/Content'
 import Preload from '~/ui/containers/Preload'
 import { InputField } from '~/ui/elements/Form'
 import { validate } from './utils'
-import { logo } from '~/assets'
+import { logoSource } from '~/assets'
 
 @connect(state=>({  
   loginRequest: commonSelectors.getRequest(state, 'login'),  
@@ -49,7 +49,7 @@ export default class extends Component {
       <Container style={styles.container}>
 
         <Content>                                
-          <Thumbnail style={styles.logo} source={logo} />        
+          <Thumbnail style={styles.logo} source={logoSource} />        
           
           <Form style={styles.form}>
               

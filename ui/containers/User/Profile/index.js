@@ -31,7 +31,7 @@ import {
 } from '~/ui/elements/Form'
 
 import { validate } from './utils'
-import { profileCover } from '~/assets'
+import { profileCoverSource } from '~/assets'
 
 @connect(state=>({  
   initialValues: accountSelectors.getProfile(state),
@@ -124,13 +124,13 @@ export default class extends Component {
         
 
         <Content scrollEventThrottle={10} style={styles.container} onScroll={this._onScroll}>          
-          <Image style={styles.headerImage} source={profileCover}/>  
+          <Image style={styles.headerImage} source={profileCoverSource}/>  
           <Form style={styles.form}>            
             <Text style={styles.label}>DisplayName</Text>
             <Field name="DisplayName" component={InputField} />
-            <Toggle titleStyle={styles.label} title="Day of birth" text="Public" />            
+            <Toggle titleStyle={styles.label} title="Day of birth"/>            
             <Field name="Birthdate" displayFormat="DD MMMM YYYY" component={DateField} icon="keyboard-arrow-down" />
-            <Toggle titleStyle={styles.label} title="Location" text="Public" />            
+            <Toggle titleStyle={styles.label} title="Location"/>            
             <Field name="Country" onSelected={this._onChangeCountries} component={DropdownField} 
               header="Select Country" items={this.makeItems(countries)} />            
             <Field name="City" component={DropdownField} 

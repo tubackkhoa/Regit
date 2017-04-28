@@ -140,7 +140,7 @@ export default {
 
 
     // Footer
-  footerHeight: 55,
+  footerHeight: 50,
   footerDefaultBg: '#FFF',
 
 
@@ -304,4 +304,5 @@ export default {
 
   // color theme
   grayColor: '#959595',  
+  backgroundColor: '#e6e7e8',
 };
