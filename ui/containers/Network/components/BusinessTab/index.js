@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import {                 
-    Button, Container, ListItem, TabHeading, Thumbnail,
+    Button, Container, ListItem, TabHeading,
     Text, Item, View, Input, Left, Body, Tab, Right, Form,
 } from 'native-base'
 
 import Modal from '~/ui/components/Modal'
+import CacheableImage from '~/ui/components/CacheableImage'
 import Content from '~/ui/components/Content'
 import moment from 'moment'
 import { connect } from 'react-redux'
@@ -51,7 +52,7 @@ export default class extends Component {
           <ListItem last={index===items.length-1} 
             key={index} avatar noBorder style={styles.listItemContainer}>
               <Left>
-                  <Thumbnail square style={styles.thumb} source={{uri:API_BASE + item.PhotoUrl}}/>
+                  <CacheableImage square style={styles.thumb} source={{uri:API_BASE + item.PhotoUrl}}/>
               </Left>
               <Body style={{marginLeft:10}}>
                   <Text small>{item.DisplayName}</Text>                                          

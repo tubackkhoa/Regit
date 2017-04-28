@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {                 
-    Button, Container, ListItem, TabHeading, Thumbnail,
+    Button, Container, ListItem, TabHeading,
     Text, Item, View, Input, Left, Body, Tab, Right,
 } from 'native-base'
 
@@ -13,6 +13,7 @@ import * as delegationSelectors from '~/store/selectors/delegation'
 
 import moment from 'moment'
 
+import CacheableImage from '~/ui/components/CacheableImage'
 import AutoWidthTabs from '~/ui/components/AutoWidthTabs'
 
 import Icon from '~/ui/elements/Icon'
@@ -60,7 +61,7 @@ export default class extends Component {
         {listDelegation && listDelegation.Listitems.map((item, index) =>
           <ListItem key={item.DelegationId} avatar noBorder style={styles.listItemContainer}>
               <Left>
-                  <Thumbnail style={styles.thumb} source={{
+                  <CacheableImage style={styles.thumb} source={{
                     uri: API_BASE + (listDelegation.Direction === 'DelegationOut' ? item.ToPhotoUrl : item.FromPhotoUrl)
                   }}/>
               </Left>

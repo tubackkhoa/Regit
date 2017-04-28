@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import {                 
-    Button, Container, ListItem, TabHeading, Thumbnail,
+    Button, Container, ListItem, TabHeading,
     Text, Item, View, Input, Left, Body, Tab, Right,
 } from 'native-base'
 
+import CacheableImage from '~/ui/components/CacheableImage'
 import Content from '~/ui/components/Content'
 // import { connect } from 'react-redux'
 // import * as commonActions from '~/store/actions/common'
@@ -63,7 +64,7 @@ export default class extends Component {
           <ListItem ref={ref=>this.listItems[index]=ref} last={index===friends.length-1} 
             key={item.Id} avatar noBorder style={styles.listItemContainer}>
               <Left>
-                  <Thumbnail square style={styles.thumb} source={{uri: API_BASE + item.Avatar}}/>
+                  <CacheableImage square style={styles.thumb} source={{uri: API_BASE + item.Avatar}}/>
               </Left>
               <Body style={{marginLeft:10}}>
                   <Text small>{item.DisplayName}</Text>                                          

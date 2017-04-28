@@ -21,7 +21,7 @@ export default class extends Component {
         <Text note small>{label}</Text>
         {!!displayValue && 
           <Toggle style={styles.buttonSmall} iconStyle={styles.iconSmall} titleStyle={styles.label} 
-            trueText={value} falseText={displayValue} checked={!privacy} />
+            trueText={displayValue} falseText={displayValue} checked={!privacy} />
         }
       </ListItem> 
     ) 

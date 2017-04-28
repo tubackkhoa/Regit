@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import {                 
-    Button, Container, ListItem, TabHeading, Thumbnail,
+    Button, Container, ListItem, TabHeading,
     Text, Item, View, Input, Left, Body, Tab, Right, Form,
 } from 'native-base'
 
 import Modal from '~/ui/components/Modal'
+import CacheableImage from '~/ui/components/CacheableImage'
 import Content from '~/ui/components/Content'
 import { connect } from 'react-redux'
 // import * as commonActions from '~/store/actions/common'
@@ -132,7 +133,7 @@ export default class extends Component {
       <View regit padder style={styles.trustedModalContainer}>
         {choosenFriend &&
           <View row>
-            <Thumbnail style={styles.thumbLarge} square source={{uri:API_BASE + choosenFriend.Avatar}}/>  
+            <CacheableImage style={styles.thumbLarge} square source={{uri:API_BASE + choosenFriend.Avatar}}/>  
             <Text small>{choosenFriend.DisplayName}</Text>
           </View>
         }
