@@ -64,24 +64,24 @@ export default class App extends Component {
   }
 
   constructor(props) {
-    super(props)        
+    super(props)
     // default is not found page, render must show error
     this.page = getPage(props.router.route) || routes.notFound      
     this.pageInstances = {}      
   }
 
   // replace view from stack, hard code but have high performance
-  componentWillReceiveProps({router, drawerState}){         
+  componentWillReceiveProps({router, drawerState}){
     // process for route change only
-    if(router.route !== this.props.router.route){                
-      this.page = getPage(router.route)      
-      if(this.page){   
+    if(router.route !== this.props.router.route){
+      this.page = getPage(router.route)
+      if(this.page){
         const {headerType, footerType, title, path} = this.page
         // show header and footer, and clear search string
         this.header.show(headerType, title)
         this.header._search('')
         this.footer.show(footerType, router.route)
-        
+
         // return console.warn('Not found: ' + router.route)
         // check if page is mounted
         const destIndex = this.navigator.state.routeStack
@@ -100,7 +100,7 @@ export default class App extends Component {
         // no need to push to route
         this.page = routes.notFound
         this.props.setToast('Route not found: ' + router.route, 'danger')
-      }         
+      }
     }
 
     // check drawer
