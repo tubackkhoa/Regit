@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
 import { Platform } from 'react-native'
 import { connect } from 'react-redux'
-import { Content,Text, List, ListItem, Icon as IconNB, 
+import { Content,Text, List, ListItem, 
   Container, Left, Right, Badge, Button, View, StyleProvider, getTheme, variables,
   Spinner, Thumbnail,
 } from 'native-base'
+
+import CacheableImage from '~/ui/components/CacheableImage'
 
 import * as authActions from '~/store/actions/auth'
 import * as accountSelectors from '~/store/selectors/account'
 import * as commonActions from '~/store/actions/common'
 import * as authSelectors from '~/store/selectors/auth'
+
 
 import options from './options'
 import routes from '~/ui/routes'
@@ -49,8 +52,10 @@ export default class extends Component {
           style={styles.container}
         >
           <View style={styles.drawerCover}>
-            <Thumbnail source={avatar} 
-              style={styles.drawerImage}/>
+            <CacheableImage source={avatar}
+              placeholder={<Icon name="image" style={styles.drawerImage}/>} 
+              style={styles.drawerImage}/>            
+
             <Text large style={styles.text}>{profile.DisplayName}</Text>
             <Text small style={styles.text}>{profile.Birthdate}</Text>
             <View style={styles.editContainer}>

@@ -3,7 +3,7 @@ import {
     Button, List, ListItem, Switch,
     Container, Text, Item, Input, Left, Body, Right, View,
 } from 'native-base'
-import Swiper from './Swiper'
+
 import {ScrollView, Image, Animated, PanResponder} from 'react-native'
 import Icon from '~/ui/elements/Icon'
 import IconMessage from '~/ui/elements/IconMessage'
@@ -29,9 +29,7 @@ export default class extends Component {
 
   constructor(props) {
     super(props);
-    var dataSource = new Swiper.DataSource({
-      pageHasChanged: (p1, p2) => p1 !== p2,
-    });
+   
     this.state = {
       scrollValue: new Animated.Value(0),
     };
@@ -41,31 +39,20 @@ export default class extends Component {
     this.childIndex = 0
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: ()=>true,
-      onMoveShouldSetPanResponder: ()=>true,      
-      onPanResponderMove: this._handlePanResponderMove,
+      onMoveShouldSetPanResponder: ()=>true,            
       onPanResponderRelease: this._handlePanResponderEnd,
       onPanResponderTerminate: this._handlePanResponderEnd,
     });
   }
 
-  _handlePanResponderMove=(e, gestureState) => {
-    // this._circleStyles.style.left = this._previousLeft + gestureState.dx;
-    // this._circleStyles.style.top = this._previousTop + gestureState.dy;
-    // this._updateNativeStyles();
-  }
-
   _handlePanResponderEnd=(e, gestureState) => {    
-    var dx = gestureState.dx;
-    var step = Math.round(dx/30)    
-    var offsetX = step * 70    + this.state.scrollValue._value
-    console.log(dx)
-    // console.log(offsetX)
-    // this.state.scrollValue.setValue(offsetX);
+    const dx = gestureState.dx
+    const step = Math.round(dx/30)    
+    const offsetX = step * 70    + this.state.scrollValue._value    
     Animated.spring(this.state.scrollValue, {
      toValue: offsetX,
      velocity: step,
-    }).start()
-    // this.childIndex-=step;
+    }).start()    
   }
 
   _onCopy = (e)=>{

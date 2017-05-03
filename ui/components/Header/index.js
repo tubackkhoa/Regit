@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
-
+import { connect } from 'react-redux'
 import {         
     Header, Left, Right, Body,           
     Text, Title, Button, Item, Input,
 } from 'native-base'
+
+import * as commonSelectors from '~/store/selectors/common'
+import * as commonActions from '~/store/actions/common'
+
 import Icon from '~/ui/elements/Icon'
 import styles from './styles'
 
+@connect(state=>({
+  searchString: commonSelectors.getSearchString(state),
+}), commonActions)
 export default class extends Component {
 
   constructor(props) {
@@ -18,6 +25,10 @@ export default class extends Component {
     }
   }
 
+  componentDidMount(){
+    this.props.onItemRef && this.props.onItemRef(this)
+  }
+
   show(type, title){
     this.setState({type, title})
   } 
@@ -25,6 +36,12 @@ export default class extends Component {
   _leftClick = (e)=>{
     const {onLeftClick} = this.props
     onLeftClick && onLeftClick(this.state.type)
+  }
+
+  _search = (value, force=false)=>{
+    if((this.props.searchString !== value) || force) {
+      this.props.search(value)
+    } 
   }
 
   renderHeaderBack(title){    
@@ -39,6 +56,7 @@ export default class extends Component {
     return this.renderHeader(left, center)    
   }
 
+  // public data not event
   renderHeaderSearch(iconName="menu"){    
     const left = (
       <Button transparent onPress={this._leftClick}>
@@ -48,7 +66,10 @@ export default class extends Component {
     const center = (
       <Item style={styles.searchContainer}>
           <Icon name="search" style={styles.searchIcon} />
-          <Input placeholderTextColor="#a7e7ff" style={styles.searchInput} placeholder="Regit Search" />                        
+          <Input value={this.props.searchString} 
+            autoCorrect={false} onChangeText={this._search} 
+            placeholderTextColor="#a7e7ff" style={styles.searchInput} 
+            placeholder="Regit Search" />                        
       </Item>
     )
     const right = (

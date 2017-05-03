@@ -31,7 +31,7 @@ import {
 } from '~/ui/elements/Form'
 
 import { validate } from './utils'
-import { profileCover } from '~/assets'
+import { profileCoverSource } from '~/assets'
 
 @connect(state=>({  
   initialValues: accountSelectors.getProfile(state),
@@ -82,8 +82,12 @@ export default class extends Component {
     this.state.scrollY.setValue(offsetY)
   }
 
+  _handleSave = (data)=>{
+    console.log(data)
+  }
+
   render() {        
-    const {initialValues:profile, route, goBack, countries, cities} = this.props
+    const {initialValues:profile, route, goBack, countries, cities, handleSubmit} = this.props
     const {avatar, scrollY} = this.state    
     // no header or footer
     const opacity = scrollY.interpolate({
@@ -110,7 +114,7 @@ export default class extends Component {
         <Button transparent style={styles.buttonLeft} onPress={()=>goBack()}>
           <Text style={styles.iconGray}>Cancel</Text>
         </Button>
-        <Button transparent style={styles.buttonRight}>
+        <Button onPress={handleSubmit(this._handleSave)} transparent style={styles.buttonRight}>
           <Text style={styles.iconGray}>Save</Text>
         </Button>                     
         <Animated.View style={{...styles.avatarContainer,top}}>      
@@ -120,13 +124,13 @@ export default class extends Component {
         
 
         <Content scrollEventThrottle={10} style={styles.container} onScroll={this._onScroll}>          
-          <Image style={styles.headerImage} source={profileCover}/>  
+          <Image style={styles.headerImage} source={profileCoverSource}/>  
           <Form style={styles.form}>            
             <Text style={styles.label}>DisplayName</Text>
             <Field name="DisplayName" component={InputField} />
-            <Toggle titleStyle={styles.label} title="Day of birth" text="Public" />            
+            <Toggle titleStyle={styles.label} title="Day of birth"/>            
             <Field name="Birthdate" displayFormat="DD MMMM YYYY" component={DateField} icon="keyboard-arrow-down" />
-            <Toggle titleStyle={styles.label} title="Location" text="Public" />            
+            <Toggle titleStyle={styles.label} title="Location"/>            
             <Field name="Country" onSelected={this._onChangeCountries} component={DropdownField} 
               header="Select Country" items={this.makeItems(countries)} />            
             <Field name="City" component={DropdownField} 

@@ -80,3 +80,9 @@ export const openDrawer = () => ({
 export const closeDrawer = () => ({
   type: 'app/closeDrawer',  
 })
+
+export const search = (payload) => ({
+  type: 'app/search',
+  payload,
+})
+

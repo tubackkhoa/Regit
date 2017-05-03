@@ -13,7 +13,8 @@ const sagaMiddleware = createSagaMiddleware()
 
 const middleware = [sagaMiddleware]
 
-if (__DEV__) {
+// only use logger when there is not devTools
+if (__DEV__ && !window.devToolsExtension) {
   // we use require for dynamic import  
   const loggerMiddleware = require('./logger').default
   // add logger for development
@@ -30,6 +31,7 @@ const configureStore = callback =>   {
       // if you use getStoredState then no need to use auto hydrate to get state back
       autoRehydrate(),
       applyMiddleware(...middleware),      
+      window.devToolsExtension ? window.devToolsExtension() : x => x
     )
   )
 

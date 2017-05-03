@@ -1,4 +1,4 @@
-import { apiCall, apiPost } from '~/store/api/common'
+import { apiGet, apiPost } from '~/store/api/common'
 
 export default {
   /**
@@ -12,9 +12,11 @@ export default {
   */
   getProfile (accessToken) {
     // return fetchJsonWithToken(token, `/logout`)
-    return apiCall('/api/AccountSettings/Profile', {}, accessToken)
+    return apiGet('/Api/AccountSettings/Profile', {}, accessToken)
   },
 
-  
+  getBusinessProfile(accessToken) {
+    return apiGet('/Api/BusinessAccount/BusinessAccountProfile', {}, accessToken)
+  }
 
 }

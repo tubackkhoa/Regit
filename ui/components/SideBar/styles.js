@@ -16,8 +16,7 @@ export default {
   },
   drawerImage: {    
     width: 100,
-    height: 100,
-    resizeMode: 'cover',
+    height: 100,    
     borderRadius: 50,
     marginTop: 10,
     marginBottom: 10,

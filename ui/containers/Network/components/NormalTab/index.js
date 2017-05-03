@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import {                 
-    Button, Container, ListItem, TabHeading, Thumbnail,
+    Button, Container, ListItem, TabHeading,
     Text, Item, View, Input, Left, Body, Tab, Right,
 } from 'native-base'
 
+import CacheableImage from '~/ui/components/CacheableImage'
 import Content from '~/ui/components/Content'
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
 // import * as commonActions from '~/store/actions/common'
-import * as accountSelectors from '~/store/selectors/account'
+// import * as accountSelectors from '~/store/selectors/account'
 
 import Icon from '~/ui/elements/Icon'
 import material from '~/theme/variables/material'
@@ -17,9 +18,6 @@ import styles from '../shared/styles'
 
 import { API_BASE } from '~/store/constants/api'
 // should use margin not padding to tap
-@connect(state=>({
-  profile: accountSelectors.getProfile(state),
-}))
 export default class extends Component {  
 
   constructor(props) {
@@ -59,19 +57,17 @@ export default class extends Component {
     })
   }
 
-  renderList(){
-    const {profile} = this.props
-    const avatar = {uri: (API_BASE + profile.PhotoUrl)}
+  renderList(friends){    
     return (
       <View rounded style={styles.content} >
-        {options.notifications.map((item,index) =>
-          <ListItem ref={ref=>this.listItems[index]=ref} last={index===options.notifications.length-1} 
-            key={index} avatar noBorder style={styles.listItemContainer}>
+        {friends.map((item, index) =>
+          <ListItem ref={ref=>this.listItems[index]=ref} last={index===friends.length-1} 
+            key={item.Id} avatar noBorder style={styles.listItemContainer}>
               <Left>
-                  <Thumbnail square style={styles.thumb} source={avatar}/>
+                  <CacheableImage square style={styles.thumb} source={{uri: API_BASE + item.Avatar}}/>
               </Left>
               <Body style={{marginLeft:10}}>
-                  <Text small>{item.user}</Text>                                          
+                  <Text small>{item.DisplayName}</Text>                                          
               </Body>
               <Right style={styles.rightContainer}>                
                 <Button onPress={e=>this.showPopover(index)} iconRight noPadder transparent>
@@ -86,6 +82,15 @@ export default class extends Component {
 
   // flex means 100%
   render() {    
+    const {network} = this.props
+    if(!network.Friends.length) {
+      return (
+        <Text>
+          You have no one in your normal network. Add your normal network.
+        </Text>
+      )
+    }
+
     return (     
       <View style={{flex:1}}>            
         <Item style={styles.item}>            
@@ -95,7 +100,7 @@ export default class extends Component {
             </Button>
           </Item>                      
         <Content>                       
-          {this.renderList()}                                
+          {this.renderList(network.Friends)}                                
         </Content>   
       </View>  
     )

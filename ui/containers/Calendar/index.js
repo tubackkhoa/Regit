@@ -15,7 +15,7 @@ import { connect } from 'react-redux'
 import * as commonActions from '~/store/actions/common'
 import * as commonSelectors from '~/store/selectors/common'
 import material from '~/theme/variables/material'
-
+import AddButton from '~/ui/elements/AddButton'
 import ViewCalendar from './ViewCalendar'
 import options from './options'
 
@@ -149,29 +149,13 @@ export default class extends Component {
     return (          
        
         <Container>   
-        <Content padder style={{backgroundColor:'#fff'}}>  
+          <Content padder style={{backgroundColor:'#fff'}}>  
 
-         <ViewCalendar/>                   
+           <ViewCalendar/>                   
 
           </Content>
 
-          <Button noPadder style={{ 
-            backgroundColor: '#00aeef',
-            height:45,
-            width:45, 
-            position: 'absolute',            
-            right: 10,
-            bottom: 20,
-            borderRadius: 22.5,
-            justifyContent: 'center',
-          }}
-              onPress={() => this.showPopover()}
-          >
-            
-              <Icon style={{color:'#fff'}} name="add" />                            
-              
-              
-          </Button>
+          <AddButton onPress={() => this.showPopover()} />
         </Container>
       
     )

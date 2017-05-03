@@ -7,16 +7,16 @@ import {
 import Content from '~/ui/components/Content'
 import { connect } from 'react-redux'
 import * as commonActions from '~/store/actions/common'
-// import HeaderBack from '~/ui/components/HeaderBack'
+import * as delegationSelectors from '~/store/selectors/delegation'
 
-import { Field, reduxForm, formValueSelector } from 'redux-form'
+import { Field, FieldArray, reduxForm, formValueSelector } from 'redux-form'
 
 import { 
   InputField,
   CheckBoxField,
   DateField,
 } from '~/ui/elements/Form'
-import { validate } from './utils'
+import { validate, renderGroupPermission } from './utils'
 
 import Icon from '~/ui/elements/Icon'
 
@@ -25,22 +25,27 @@ import styles from './styles'
 
 const formSelector = formValueSelector('DelegationForm')
 
-
+// base on id will select the initialValue, 
+// and we should create a group permission component
+// we can use SubmissionError for validate before submit
 @connect(state=>({  
-  initialValues: {
-    interaction: true,     
-    effectDate: '12/24/2016',
-    endDate: '04/12/2017'   
-  },
+  delegation: delegationSelectors.getDelegation(state),
   roles: formSelector(state, ...options.roles.map(c=>c.name)),
   dateIndefinite: formSelector(state, ...options.dateIndefinite.map(c=>c.name))
-}), {...commonActions})
+}), {...commonActions}, (stateProps, dispatchProps, ownProps)=>({
+  initialValues: stateProps.delegation[ownProps.route.query.direction].Listitems[ownProps.route.params.id],
+  ...ownProps, ...stateProps, ...dispatchProps,
+}))
 @reduxForm({ form: 'DelegationForm', validate})
 export default class extends Component {
 
+  _handleInvite = (data)=>{
+    console.log(data)
+  }
 
   render() {
-    const {route, goBack, roles, dateIndefinite} = this.props       
+    const {route, goBack, roles, dateIndefinite, handleSubmit} = this.props       
+  
     return (          
        
         <Container>        
@@ -61,15 +66,7 @@ export default class extends Component {
                   <Field label={item.title} large name={item.name} component={CheckBoxField}/>                    
                 </ListItem>
                 )}
-                {options.items.map((item, index) =>
-                  <ListItem key={index} last={index===options.items.length-1} style={styles.listItem}>                                                
-                    <Text style={styles.left}>{item.title}</Text>             
-                    <View style={styles.right}>
-                      <Field label="Read" name="interaction" component={CheckBoxField}/>
-                      <Field label="Write" name="write" component={CheckBoxField}/>
-                    </View>                      
-                  </ListItem>
-                )}                     
+                <FieldArray name="GroupVaultsPermission" component={renderGroupPermission}/>                  
               </View>
 
               <View regit style={styles.mt15} full row>
@@ -100,7 +97,7 @@ export default class extends Component {
 
 
               <Field label="Type a message" name="message" inputStyle={styles.textarea} style={styles.textareaContainer}
-               multiline component={InputField} />    
+               multiline autoCorrect={false} component={InputField} />    
 
               <View padder>
                 <Field label={
@@ -110,7 +107,9 @@ export default class extends Component {
                 } large name="agree" component={CheckBoxField}/>    
               </View>
 
-              <Button style={styles.button} block><Text>Invite</Text></Button>  
+              <Button onPress={handleSubmit(this._handleInvite)} style={styles.button} block>
+                <Text>Invite</Text>
+              </Button>  
 
 
             </Content>

@@ -8,7 +8,7 @@ import Content from '~/ui/components/Content'
 import Icon from '~/ui/elements/Icon'
 import options from './options'
 import styles from '../shared/styles'
-import { getTextParts } from '../shared/utils'
+import { getTextParts } from '~/ui/shared/utils'
 
 const renderTextParts = text => {
   const parts = getTextParts(text)

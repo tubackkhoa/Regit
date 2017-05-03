@@ -26,17 +26,18 @@ export default class extends Component {
 
   render(){
     const {
+      style, buttonStyle, iconStyle,
       title, titleStyle,    
       trueText = 'Public',
       falseText = 'Private',               
-      trueIcon = <Icon style={styles.trueIcon} name="unlock" />, 
-      falseIcon = <Icon style={styles.falseIcon} name="lock" />
+      trueIcon = <Icon style={{...styles.trueIcon, ...iconStyle}} name="unlock" />, 
+      falseIcon = <Icon style={{...styles.falseIcon, ...iconStyle}} name="lock" />
     } = this.props    
 
     return (
-      <View style={styles.container}>                        
+      <View style={{...styles.container, ...style}}>                        
         <Text style={titleStyle}>{title}</Text>        
-        <Button style={styles.button} transparent iconRight onPress={this._handleToggle}>      
+        <Button style={{...styles.button, ...buttonStyle}} transparent iconRight onPress={this._handleToggle}>      
             <Text style={titleStyle}>{this.state.checked ? trueText : falseText}</Text>
             {this.state.checked ? trueIcon : falseIcon}
         </Button>          

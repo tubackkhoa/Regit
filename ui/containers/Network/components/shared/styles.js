@@ -80,6 +80,18 @@ export default {
     marginRight:0,
     height: 55,
   },
+  trustedModalContainer:{        
+    width: material.deviceWidth - 40,
+    paddingTop: 10,
+    paddingRight:10,
+    paddingLeft:10,        
+  },
+  businessModalContainer:{        
+    width: material.deviceWidth - 10,        
+    height: material.deviceHeight - 70,  
+    paddingBottom:4,
+    overflow: 'hidden',   
+  },
   get listPopItemContainer(){
     return {...this.listItemContainer, height: 45,paddingTop:-10,justifyContent:'flex-start'}
   },
@@ -88,7 +100,11 @@ export default {
     height: 35,
     marginLeft: 10,
   },
-
+  thumbLarge: {
+    width: 40,
+    height: 40,
+    margin: 10,
+  },
   item: {
     backgroundColor: '#fff',
     borderRadius: 4,        

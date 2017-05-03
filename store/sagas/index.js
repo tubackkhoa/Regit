@@ -1,15 +1,23 @@
 import { fork } from 'redux-saga/effects'
-import asyncAuthWatchers from './auth'
-import asyncAccountWatchers from './account'
-import asyncDataWatchers from './data'
+import auth from './auth'
+import account from './account'
+import data from './data'
+import notification from './notification'
+import campaign from './campaign'
+import network from './network'
+import delegation from './delegation'
+import vault from './vault'
 
 // saga must be a function like generator of other functions
-const rootSaga = function* () {
+export default function* () {
   yield [       
-    ...asyncAuthWatchers.map(watcher => fork(watcher)),
-    ...asyncAccountWatchers.map(watcher => fork(watcher)),
-    ...asyncDataWatchers.map(watcher => fork(watcher)),
+    ...auth.map(watcher => fork(watcher)),
+    ...account.map(watcher => fork(watcher)),
+    ...data.map(watcher => fork(watcher)),
+    ...notification.map(watcher => fork(watcher)),
+    ...campaign.map(watcher => fork(watcher)),
+    ...network.map(watcher => fork(watcher)),
+    ...delegation.map(watcher => fork(watcher)),
+    ...vault.map(watcher => fork(watcher)),
   ]
 }
-
-export default rootSaga

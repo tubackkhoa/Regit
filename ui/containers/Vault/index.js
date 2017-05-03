@@ -1,98 +1,153 @@
 import React, { Component } from 'react'
 import {             
-    Button, List, ListItem, Switch,
+    Button, List, ListItem, Switch, Spinner,
     Container, Text, Item, Input, Left, Body, Right, View,
 } from 'native-base'
 
 import Icon from '~/ui/elements/Icon'
 import IconMessage from '~/ui/elements/IconMessage'
 import Content from '~/ui/components/Content'
-
+import Header from './components/Header'
+import BasicInformation from './components/BasicInformation'
+import SearchResultItem from './components/SearchResultItem'
+import AddButton from '~/ui/elements/AddButton'
 import { connect } from 'react-redux'
 
+import * as commonSelectors from '~/store/selectors/common'
+import * as authSelectors from '~/store/selectors/auth'
+import * as accountSelectors from '~/store/selectors/account'
+import * as vaultSelectors from '~/store/selectors/vault'
+
 import * as commonActions from '~/store/actions/common'
+import * as vaultActions from '~/store/actions/vault'
+import { API_BASE } from '~/store/constants/api'
+
+import {
+  contactIcon,
+  addressIcon,
+  financeIcon,
+  governmentIcon,
+  documentIcon,
+  membershipIcon,
+  relationshipIcon,
+  employmentIcon,
+  educationIcon,
+  otherIcon,
+} from '~/assets'
 
 import styles from './styles'
-import material from '~/theme/variables/material'
 
-const copiedMessage = (
-  <IconMessage size={30} message="Copied   " />
-)
-
-@connect(null, commonActions)
+@connect(state=>({  
+  token: authSelectors.getToken(state),
+  vault: vaultSelectors.getVaultInformation(state),
+  profile: accountSelectors.getProfile(state),
+  searchString: commonSelectors.getSearchString(state),
+}), {...commonActions, ...vaultActions})
 export default class extends Component {
 
-  _onCopy = (e)=>{
-    this.props.setToast(copiedMessage, 'info', 50000, 'center')
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+      selected: 0,
+    }
+    const avatar = {uri: (API_BASE + props.profile.PhotoUrl)}
+    this.options = [
+      {key: 'basicInformation', icon: avatar, title: 'Basic', type: 'avatar'}, 
+      {key: 'contact', icon: contactIcon, title: 'Contact'},
+      {key: 'groupAddress', icon: addressIcon, title: 'Address'},
+      {key: 'groupFinancial', icon: financeIcon, title: 'Financial'},
+      {key: 'groupGovernmentID', icon: governmentIcon, title: 'Government ID'}, 
+      {key: 'document', icon: documentIcon, title: 'Document'},
+      {key: 'membership', icon: membershipIcon, title: 'Membership'},
+      {key: 'family', icon: relationshipIcon, title: 'Relationship'},
+      {key: 'employment', icon: employmentIcon, title: 'Employment'},
+      {key: 'education', icon: educationIcon, title: 'Education'},
+      {key: 'others', icon: otherIcon, title: 'Others'},
+    ]
+  }
+
+  componentWillMount(){
+    this.componentWillFocus()
+  }
+
+  componentWillFocus(){
+    const {token, vault, getVaultInformation} = this.props
+    // later we have the network
+    if(!vault.VaultInformation){
+      getVaultInformation(token)
+    }  
+  }
+
+  componentWillReceiveProps({searchString}){
+    if(searchString !== this.props.searchString){
+      // console.log('do search', searchString)
+    }
+  }
+
+  _optionSelect = (selected) => {
+    this.setState({selected})
   }
 
   renderSearchResult(){
-    const {setToast} = this.props    
     return (
-      <View regit style={{
-        marginTop: 10,
-      }}>
-        <ListItem style={styles.itemHeader}>
-            <Text bold note style={styles.itemHeaderText}>
-              Home phone
-            </Text>
-            <Button style={styles.itemHeaderButton} transparent>
-              <Icon style={styles.iconGray} name="edit" />
-            </Button>
-        </ListItem>                    
-        <ListItem style={styles.itemBody}>                                                
-          <Text small>+61 90187400</Text>  
-          <Button style={styles.itemHeaderButton} transparent onPress={this._onCopy}>
-            <IconMessage size={9} color={material.grayColor} icon="copy" message="Copy" />
-          </Button>
-        </ListItem>  
-        <ListItem style={styles.itemBody} last>                                                
-          <Text small>+61 90187400</Text>  
-          <Button style={styles.itemHeaderButton} transparent onPress={this._onCopy}>
-            <IconMessage size={9} color={material.tabBarActiveTextColor} icon="copy" message="Copy" />
-          </Button>
-        </ListItem>            
-      </View>   
+      <View>
+        <SearchResultItem data={{
+          title: 'Home phone',
+          type: 'phone',
+          values: [
+            '123',
+            '123',
+            '123',
+          ]
+        }}/>   
+        <SearchResultItem data={{
+          title: 'Current Address',
+          type: 'address',
+          values: [
+            '123'
+          ]
+        }}/>   
+      </View>
     )
   }
 
-  renderSearchResultAddress(){
-    const {setToast} = this.props    
-    return (
-      <View regit style={{
-        marginTop: 10,
-      }}>
-        <ListItem style={styles.itemHeader}>
-            <Text bold note style={styles.itemHeaderText}>
-              Current Address
-            </Text>
-            <Button style={styles.itemHeaderButton} transparent>
-              <Icon style={styles.iconGray} name="edit" />
-            </Button>
-        </ListItem>    
-        <ListItem style={{...styles.itemBody,height:null}} last>    
-          <View>                                            
-            <Text bold small>My Sweet Home</Text>  
-            <Text small>Empire Building</Text>  
-            <Text small>Middel Road</Text>  
-            <Text small>Singapore</Text>  
-          </View>
-          <Button style={styles.itemHeaderButton} transparent onPress={this._onCopy}>
-            <IconMessage size={9} color={material.grayColor} icon="copy" message="Copy" />
-          </Button>
-        </ListItem>            
-      </View>   
+  renderVaultInformation(key){
+    const vaultInfo = this.props.vault.VaultInformation[key]
+    switch(key){
+      default:
+        return <BasicInformation vaultInfo={vaultInfo} />
+    }
+  }
+
+  renderVault(){    
+    const {vault} = this.props
+    if(!vault.VaultInformation){
+      return (
+        <Spinner />
+      )
+    }
+    const {selected} = this.state
+    const selectedOption = this.options[selected]        
+    const vaultInfo = vault.VaultInformation[selectedOption.key]
+    return ( 
+      <View>        
+        <Header options={this.options} selected={selected} onOptionSelect={this._optionSelect}/>
+        <Text style={styles.optionTitle}>{vaultInfo.label || selectedOption.title}</Text>
+        {this.renderVaultInformation(selectedOption.key)}
+      </View>
     )
   }
 
   render() {
-       
+    const {searchString} = this.props
+    // console.log('search',searchString)    
     return (                 
         <Container>                    
-            <Content padder>
-               {this.renderSearchResult()}
-               {this.renderSearchResultAddress()}
-            </Content>                   
+            <Content padder>                            
+              {searchString ? this.renderSearchResult() : this.renderVault()}                                       
+            </Content>                 
+            <AddButton/>  
         </Container>      
     )
   }

@@ -25,8 +25,12 @@ import styles from '../shared/styles'
 @reduxForm({ form: 'ChangePasswordForm', validate})
 export default class extends Component {
 
+  _handleSave = (data) => {
+    console.log(data)
+  }
+
   render() {
-    const {goBack, route} = this.props
+    const {goBack, route, handleSubmit} = this.props
     return (          
        
         <Container>        
@@ -34,15 +38,15 @@ export default class extends Component {
             <Content padder>       
               <Form style={styles.form}>        
                 <Text note bold style={styles.label}>CHANGE LOGIN PASSWORD</Text>
-                <Field secureTextEntry={true} placeholder="Old password" name="DisplayName" component={InputField} />
+                <Field secureTextEntry={true} placeholder="Old password" name="password" component={InputField} />
                 <Field style={styles.inputFirst} secureTextEntry={true} placeholder="New password" name="DisplayName" component={InputField} />
                 <Field style={styles.inputLast} secureTextEntry={true} placeholder="Re-enter new password" name="DisplayName" component={InputField} />
 
                 <View style={styles.buttonContainer}>
-                  <Button block style={styles.cancelButton}>
+                  <Button onPress={goBack} block style={styles.cancelButton}>
                       <Text>Cancel</Text>
                   </Button>
-                  <Button block style={styles.okButton}>
+                  <Button onPress={handleSubmit(this._handleSave)} block style={styles.okButton}>
                       <Text>Change</Text>
                   </Button>
                 </View>

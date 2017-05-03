@@ -1,30 +1,25 @@
 import React, { Component } from 'react'
-import { Image } from 'react-native'
 import { connect } from 'react-redux'
 import { View,
   Container, Header, Title, Content, Button,
   Card, CardItem, Text, Thumbnail, Left, Right, Body, 
 } from 'native-base'
 import { API_BASE } from '~/store/constants/api'
-import * as accountSelectors from '~/store/selectors/account'
-
-import { cardImage } from '~/assets'
+// import * as accountSelectors from '~/store/selectors/account'
+import moment from 'moment'
+import CacheableImage from '~/ui/components/CacheableImage'
 import RegitButton from '~/ui/elements/RegitButton'
 import Icon from '~/ui/elements/Icon'
 import styles from './styles'
 
 
-@connect(state=>({  
-  profile: accountSelectors.getProfile(state),  
-}))
 export default class extends Component {
 
   render() {
-    const {profile} = this.props
-    if(!profile)
-      return false
+    const {feed} = this.props    
+    const avatar = {uri: API_BASE + feed.BusinessImageUrl}
+    const cardImage = {uri: API_BASE + feed.Image}
 
-    const avatar = {uri: (API_BASE + profile.PhotoUrl)}
     return (      
         <Card style={styles.container}>
           <CardItem bordered style={styles.firstCard}>
@@ -39,10 +34,10 @@ export default class extends Component {
           </CardItem>
           <CardItem bordered style={styles.avatarContainer}>
             <Left>
-                <Thumbnail square source={avatar} />
+                <CacheableImage style={styles.avatar} source={avatar} />
                 <Body>
-                    <Text>{profile.DisplayName}</Text>
-                    <Text note>{profile.Birthdate}</Text>
+                    <Text>{feed.BusinessName}</Text>
+                    <Text note>{moment(feed.SpendEffectDate).format('DD MMM YYYY')}</Text>
                 </Body>
             </Left>
             <Right style={{flex:0.5}}>
@@ -53,17 +48,16 @@ export default class extends Component {
             </Right>
           </CardItem>
           <CardItem header style={styles.headerContainer}>
-          <Text>Finibus Bonorum et Malorum</Text>                            
+            <Text>{feed.Name}</Text>                            
           </CardItem>
           <CardItem content>                  
           <Body>
-          <Text style={styles.textGreen}>25 Jun 2016 at 19:00</Text>       
-              <Text style={styles.textGreen}>90 Thang Long, W.4, Tan Binh.D, HCMC, VN</Text>           
-              <Text>Wait a minute. Wait a minute</Text>
-              </Body>
+            <Text style={styles.textGreen}>{moment(feed.SpendEndDate).format('DD MMM YYYY')}</Text>                             
+            <Text>{feed.Description}</Text>
+          </Body>
           </CardItem>
           <CardItem cardBody>
-              <Image style={styles.image} source={cardImage}/>
+            <CacheableImage style={styles.image} source={cardImage} />
           </CardItem>              
           <CardItem footer style={styles.footerContainer}>
               <RegitButton>Join</RegitButton>

@@ -9,7 +9,7 @@ import {
 } from '~/store/actions/account'
 
 
-const requestGetProfileAsync = createRequestSaga({
+const requestGetProfile = createRequestSaga({
     request: api.account.getProfile,
     key: 'getProfile',    
     success: [
@@ -26,10 +26,10 @@ export default [
     // like case return, this is take => call
     // inner function we use yield*
     // from direct watcher we just yield value
-    function* asyncAccountFetchWatcher() {
+    function* fetchWatcher() {
         // use takeLatest instead of take every, so double click in short time will not trigger more fork
         yield [
-            takeLatest('app/getProfile', requestGetProfileAsync),            
+            takeLatest('app/getProfile', requestGetProfile),            
         ]
     },
 ]
