@@ -44,7 +44,7 @@ export default class extends Component {
               <Text small><Text small bold>To date:</Text> {moment(endDate).format('dddd, MMMM D, YYYY')}{"\n"}</Text>
             }
             {note &&
-              <Text small><Text small bold>Note:</Text>: {note}{"\n"}</Text>
+              <Text small><Text small bold>Note:</Text> {note}{"\n"}</Text>
             }           
           </Text>                              
         </View>        
