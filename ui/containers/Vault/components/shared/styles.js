@@ -79,9 +79,15 @@ export default {
     marginBottom: 0,
   },
   // with align at side, use left or right for best effect
-  buttonSmall:{
+  toggleSmall:{
     alignSelf: 'center',
     marginTop: 0,
     right: 15,
+  },
+  buttonSmall: {
+    borderColor: material.tabBarActiveTextColor,    
+    borderRadius: 4,
+    height: 15,        
+    marginLeft: 10,
   },
 }

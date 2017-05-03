@@ -17,10 +17,10 @@ export default class extends Component {
   renderItem({label, value, privacy}, formatFn){
     const displayValue = formatFn ? formatFn(value) : value
     return (
-      <ListItem style={{...styles.itemBody, height: 30, borderBottomWidth:0}}>                                                
+      <ListItem style={{...styles.itemBody, height: 30, borderBottomWidth:0}}>                                                      
         <Text note small>{label}</Text>
         {!!displayValue && 
-          <Toggle style={styles.buttonSmall} iconStyle={styles.iconSmall} titleStyle={styles.label} 
+          <Toggle style={styles.toggleSmall} iconStyle={styles.iconSmall} titleStyle={styles.label} 
             trueText={displayValue} falseText={displayValue} checked={!privacy} />
         }
       </ListItem> 

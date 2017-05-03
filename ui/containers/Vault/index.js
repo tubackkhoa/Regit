@@ -9,6 +9,8 @@ import IconMessage from '~/ui/elements/IconMessage'
 import Content from '~/ui/components/Content'
 import Header from './components/Header'
 import BasicInformation from './components/BasicInformation'
+import Contact from './components/Contact'
+import Address from './components/Address'
 import SearchResultItem from './components/SearchResultItem'
 import AddButton from '~/ui/elements/AddButton'
 import { connect } from 'react-redux'
@@ -50,6 +52,7 @@ export default class extends Component {
   
     this.state = {
       selected: 0,
+      refreshing: false,
     }
     const avatar = {uri: (API_BASE + props.profile.PhotoUrl)}
     this.options = [
@@ -71,12 +74,16 @@ export default class extends Component {
     this.componentWillFocus()
   }
 
-  componentWillFocus(){
+  componentWillFocus(){    
     const {token, vault, getVaultInformation} = this.props
     // later we have the network
     if(!vault.VaultInformation){
       getVaultInformation(token)
-    }  
+    } else {
+      this.state.refreshing && this.setState({
+        refreshing: false,
+      })
+    }
   }
 
   componentWillReceiveProps({searchString}){
@@ -84,6 +91,11 @@ export default class extends Component {
       // console.log('do search', searchString)
     }
   }
+
+  _onRefresh =() => {
+    this.setState({refreshing: true})                
+    this.props.getVaultInformation(this.props.token, ()=>this.setState({refreshing: false}))   
+  }   
 
   _optionSelect = (selected) => {
     this.setState({selected})
@@ -112,9 +124,12 @@ export default class extends Component {
     )
   }
 
-  renderVaultInformation(key){
-    const vaultInfo = this.props.vault.VaultInformation[key]
+  renderVaultInformation(key, vaultInfo){    
     switch(key){
+      case 'contact':
+        return <Contact vaultInfo={vaultInfo} />
+      case 'groupAddress':
+        return <Address vaultInfo={vaultInfo} />
       default:
         return <BasicInformation vaultInfo={vaultInfo} />
     }
@@ -129,12 +144,12 @@ export default class extends Component {
     }
     const {selected} = this.state
     const selectedOption = this.options[selected]        
-    const vaultInfo = vault.VaultInformation[selectedOption.key]
+    const vaultInfo = vault.VaultInformation[selectedOption.key]    
     return ( 
       <View>        
         <Header options={this.options} selected={selected} onOptionSelect={this._optionSelect}/>
         <Text style={styles.optionTitle}>{vaultInfo.label || selectedOption.title}</Text>
-        {this.renderVaultInformation(selectedOption.key)}
+        {this.renderVaultInformation(selectedOption.key, vaultInfo)}
       </View>
     )
   }
@@ -144,7 +159,8 @@ export default class extends Component {
     // console.log('search',searchString)    
     return (                 
         <Container>                    
-            <Content padder>                            
+            <Content padder refreshing={this.state.refreshing} 
+                onRefresh={this._onRefresh}>                            
               {searchString ? this.renderSearchResult() : this.renderVault()}                                       
             </Content>                 
             <AddButton/>  

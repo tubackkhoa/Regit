@@ -33,7 +33,6 @@ export default class extends Component {
 
     this.state = {
       refreshing: false,
-      // loading: false,
     }    
   }
 
@@ -61,7 +60,7 @@ export default class extends Component {
 
   render() {
     const { activeCampaign } = this.props
-  
+    // 10 items
     return (          
        
         <Container>
@@ -69,7 +68,7 @@ export default class extends Component {
             <Content padder refreshing={this.state.refreshing} 
                 onRefresh={this._onRefresh}                
             >             
-              {activeCampaign.NewFeedsItemsList && activeCampaign.NewFeedsItemsList.map(feed=>
+              {activeCampaign.NewFeedsItemsList && activeCampaign.NewFeedsItemsList.slice(0,10).map(feed=>
                 <Event feed={feed} key={feed.CampaignId} />
               )}              
             </Content>            
