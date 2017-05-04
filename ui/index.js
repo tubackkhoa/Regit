@@ -31,15 +31,4 @@ export default class Regit extends Component {
       </Provider>
     )
   }
-} 
-
-// hotfix in case babel remove console does not work
-if(!__DEV__) {
-    const noop = () => {}
-    console = {
-      info: noop,
-      log: noop,
-      error: noop,
-      warn: noop,
-    }
 }
