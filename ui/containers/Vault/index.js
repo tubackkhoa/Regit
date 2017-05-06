@@ -11,6 +11,14 @@ import Header from './components/Header'
 import BasicInformation from './components/BasicInformation'
 import Contact from './components/Contact'
 import Address from './components/Address'
+import Financial from './components/Financial'
+import GovernmentID from './components/GovernmentID'
+import Membership from './components/Membership'
+import Relationship from './components/Relationship'
+import Employment from './components/Employment'
+import Document from './components/Document'
+import Education from './components/Education'
+import Others from './components/Others'
 import SearchResultItem from './components/SearchResultItem'
 import AddButton from '~/ui/elements/AddButton'
 import { connect } from 'react-redux'
@@ -130,6 +138,22 @@ export default class extends Component {
         return <Contact vaultInfo={vaultInfo} />
       case 'groupAddress':
         return <Address vaultInfo={vaultInfo} />
+      case 'groupFinancial':
+        return <Financial vaultInfo={vaultInfo} />
+      case 'groupGovernmentID':
+        return <GovernmentID vaultInfo={vaultInfo} />
+      case 'membership':
+        return <Membership vaultInfo={vaultInfo} />
+      case 'family':
+        return <Relationship vaultInfo={vaultInfo} />
+      case 'employment':
+        return <Employment vaultInfo={vaultInfo} />
+      case 'document':
+        return <Document vaultInfo={vaultInfo} />
+      case 'education':
+        return <Education vaultInfo={vaultInfo} />
+      case 'others':
+        return <Others vaultInfo={vaultInfo} />
       default:
         return <BasicInformation vaultInfo={vaultInfo} />
     }

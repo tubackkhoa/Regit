@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
 import { 
   Text,
@@ -10,7 +10,7 @@ import Icon from '~/ui/elements/Icon'
 
 import styles from './styles'
 
-export default class extends Component {
+export default class extends PureComponent {
 
   constructor(props) {
     super(props)  
@@ -19,12 +19,19 @@ export default class extends Component {
     }
   }
 
+  // can receive prop and can update via state
+  componentWillReceiveProps({checked}){
+    if(checked !== this.state.checked){
+      this.setState({checked})
+    }
+  }
+
   _handleToggle = (e) => {            
     const checked = !this.state.checked    
     this.setState({checked}, ()=>this.props.onToggle && this.props.onToggle(checked))
   }
 
-  render(){
+  render(){    
     const {
       style, buttonStyle, iconStyle,
       title, titleStyle,    
