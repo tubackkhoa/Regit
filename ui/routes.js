@@ -21,6 +21,7 @@ import ChangePhoneNumber from './containers/User/Action/ChangePhoneNumber'
 import ChangeSecurityQuestion from './containers/User/Action/ChangeSecurityQuestion'
 import CloseAccount from './containers/User/Action/CloseAccount'
 import Vault from './containers/Vault'
+import AddVault from './containers/Vault/AddVault'
 import Message from './containers/Message'
 import Interaction from './containers/Interaction'
 import Calendar from './containers/Calendar'
@@ -151,6 +152,11 @@ export default {
     vault:{
         title: 'Vault',
         Page: Vault,        
+    },
+    'vault/add':{
+        title: 'Add Vault',
+        Page: AddVault,   
+        headerType: 'back',     
     },
     message:{
         title: 'Message',

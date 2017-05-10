@@ -34,9 +34,12 @@ export default class extends Component {
     const {token, networks, getNetworks, getNetwork, getBusinessNetwork} = this.props
     // later we have the network
     if(!networks['Business Network']){
-      getNetworks(token, data=>{        
-        data.forEach(({Id, Name})=>getNetwork(token, Id, Name))
-        getBusinessNetwork(token)
+      getNetworks(token, (err, data)=>{   
+        // if err show message
+        if(!err){     
+          data.forEach(({Id, Name})=>getNetwork(token, Id, Name))
+          getBusinessNetwork(token)
+        }
       })      
     }    
   }  

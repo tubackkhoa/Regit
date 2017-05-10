@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Image } from 'react-native'
 import {             
     Button, List, ListItem, Switch, Spinner,
     Container, Text, Item, Input, Left, Body, Right, View,
@@ -23,6 +24,11 @@ import SearchResultItem from './components/SearchResultItem'
 import AddButton from '~/ui/elements/AddButton'
 import { connect } from 'react-redux'
 
+import _ from 'lodash'
+import { Col, Row, Grid } from 'react-native-easy-grid'
+import { getPopoverOptions } from './utils'
+import material from '~/theme/variables/material'
+
 import * as commonSelectors from '~/store/selectors/common'
 import * as authSelectors from '~/store/selectors/auth'
 import * as accountSelectors from '~/store/selectors/account'
@@ -46,6 +52,10 @@ import {
 } from '~/assets'
 
 import styles from './styles'
+
+const copiedMessage = (
+  <IconMessage size={30} message="Copied   " />
+)
 
 @connect(state=>({  
   token: authSelectors.getToken(state),
@@ -76,6 +86,34 @@ export default class extends Component {
       {key: 'education', icon: educationIcon, title: 'Education'},
       {key: 'others', icon: otherIcon, title: 'Others'},
     ]
+
+    const chunks = _.chunk(this.options.slice(2), 3)    
+
+    this.popMenu = (
+      <Grid>
+        {chunks.map((row, rowIndex)=>
+        <Row key={rowIndex}>
+        {row.map(({key, icon, title, type}, index)=>
+          <Col key={key}>
+            <Button onPress={e=>this.handleOption(index)} noPadder transparent style={styles.optionButton}>
+              <Image source={icon} style={styles.optionImage} />                          
+            </Button>
+            <Text style={styles.optionText}>{title}</Text>
+          </Col>
+        )}
+        </Row>
+        )}
+      </Grid>
+    )
+  }
+
+  handleOption(index){
+    this.props.app.popover.show(false)
+    this.props.forwardTo('vault/add')
+  }
+
+  _onCopy = (e)=>{
+    this.props.setToast(copiedMessage, 'info', 500, 'center')
   }
 
   componentWillMount(){
@@ -87,11 +125,12 @@ export default class extends Component {
     // later we have the network
     if(!vault.VaultInformation){
       getVaultInformation(token)
-    } else {
-      this.state.refreshing && this.setState({
-        refreshing: false,
-      })
-    }
+    } 
+      
+    this.setState({
+      refreshing: false,
+    })
+    
   }
 
   componentWillReceiveProps({searchString}){
@@ -109,25 +148,74 @@ export default class extends Component {
     this.setState({selected})
   }
 
+  showPopover(){
+    const popoverOptions = getPopoverOptions(material.deviceWidth, {
+      x: 0, 
+      y: material.deviceHeight/2 + material.deviceWidth/2,  
+      width: material.deviceWidth,       
+    })
+    this.props.app.popover.show(this.popMenu, popoverOptions)    
+  }
+
   renderSearchResult(){
+    const {vault} = this.props
+    const searchText = this.props.searchString.toLowerCase()
+    const nosearchKeys = ['startDate', '_default', 'endDate', 'privacy']
+    const vaultSearchKeys = ['contact', 'groupAddress']
+    // we get the search results
+    const ret = []
+    vaultSearchKeys.forEach(vaultKey =>{
+      const vaultItem = vault.VaultInformation[vaultKey]      
+      Object.keys(vaultItem.value).forEach(key=>{
+        const item = vaultItem.value[key]
+        if(item.value && item.nosearch !== true){
+          const values = []
+          let type = 'field'        
+          if(item.value.constructor.name === 'Array'){
+            item.value.forEach(subItem => {              
+              if(!subItem.value){
+                type = 'group'
+                // make label, value like a group
+                const subValues = []
+                Object.keys(subItem).filter(subKey=>!nosearchKeys.includes(subKey))
+                .forEach(subKey=>{
+                  const subValue = subItem[subKey]                
+                  if(subValue.toLowerCase().indexOf(searchText) !== -1){
+                    subValues.push({
+                      label: subKey.replace(/(^[a-z])|([a-z])(?=[A-Z])/g, (m, g1, g2) => g1 ? m.toUpperCase() : m + ' '), 
+                      value: subValue
+                    })
+                  }
+                })
+                if(subValues.length){
+                  values.push(subValues)
+                }
+              } else if(subItem.value.toLowerCase().indexOf(searchText) !== -1){
+                values.push(subItem.value)
+              }
+            })
+          } else {
+            if(item.value.toLowerCase().indexOf(searchText) !== -1){
+              values.push(item.value)
+            }
+          }
+          if(values.length){
+            ret.push({            
+              title: item.label || vaultItem.label,
+              type,
+              value: values,
+            })
+          }
+        }
+      })
+
+    })    
+
     return (
       <View>
-        <SearchResultItem data={{
-          title: 'Home phone',
-          type: 'phone',
-          values: [
-            '123',
-            '123',
-            '123',
-          ]
-        }}/>   
-        <SearchResultItem data={{
-          title: 'Current Address',
-          type: 'address',
-          values: [
-            '123'
-          ]
-        }}/>   
+        {ret.map((item, index)=>
+          <SearchResultItem key={index} data={item} onCopy={this._onCopy}/>
+        )}  
       </View>
     )
   }
@@ -187,7 +275,7 @@ export default class extends Component {
                 onRefresh={this._onRefresh}>                            
               {searchString ? this.renderSearchResult() : this.renderVault()}                                       
             </Content>                 
-            <AddButton/>  
+            <AddButton onPress={()=>this.showPopover()}/>  
         </Container>      
     )
   }

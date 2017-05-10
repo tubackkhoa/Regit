@@ -15,11 +15,17 @@ export default {
   get footerIconActive() {
     return {...this.footerIcon, color: material.tabBarActiveTextColor}
   },
+  button: {
+    // move to bottom and stretch to height
+    alignSelf: 'flex-end',
+    height: '100%',
+    backgroundColor: '#fff',
+  },
   badgeIcon: {
     marginTop: -18,
   },
   badgeText: {
     left:18,
     top:-2,
-  }
+  },
 }

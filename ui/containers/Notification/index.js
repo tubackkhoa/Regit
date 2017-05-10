@@ -52,11 +52,12 @@ export default class extends Component {
     const {token, notifications, getNotification} = this.props
     if(!notifications.data.length) {
       getNotification(token)  
-    } else {
-      this.state.refreshing && this.setState({
-        refreshing: false,
-      })
-    }
+    } 
+
+    this.setState({
+      refreshing: false,
+    })
+    
   }
 
   componentWillMount(){

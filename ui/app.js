@@ -200,7 +200,7 @@ export default class App extends Component {
   handlePageWillFocus(path){    
     // currently we support only React.Component instead of check the existing method
     // when we extend the Component, it is still instanceof
-    let component = this.pageInstances[path]  
+    const component = this.pageInstances[path]    
     
     // check method
     component && component.componentWillFocus && component.componentWillFocus()    

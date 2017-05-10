@@ -75,6 +75,7 @@ export default class extends Component {
               }}>
               <Icon style={{
                 fontSize: 17,
+                color: '#fff',
               }} name="poll" />
             </View>
         </Button>
@@ -92,6 +93,7 @@ export default class extends Component {
               }}>
               <Icon style={{
                 fontSize: 14,
+                color: '#fff',
               }} name="event" />
             </View>
         </Button>
@@ -109,6 +111,7 @@ export default class extends Component {
               }}>
               <Icon style={{
                 fontSize: 17,
+                color: '#fff',
               }} name="reminder" />
             </View>
         </Button>        
@@ -126,7 +129,9 @@ export default class extends Component {
               onPress={() => this.props.app.popover.show(false)}
           >
             
-              <Icon style={{color:'#fff'}} name="close" />                            
+              <Icon style={{
+                color:'#fff'
+              }} name="close" />                            
               
               
           </Button>
@@ -134,11 +139,11 @@ export default class extends Component {
       </View>
     )
   }
-
+ 
   showPopover(){
     const popoverOptions = getPopoverOptions(150, {
       x:material.deviceWidth - 150, 
-      y:material.deviceHeight-(material.platform === 'android' ? 105 : 80), 
+      y:material.deviceHeight - material.footerHeight - (material.platform === 'android' ? 40 : 15), 
       width:material.deviceWidth,       
     })
     this.props.app.popover.show(this.popMenu, popoverOptions)    

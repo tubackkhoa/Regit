@@ -78,6 +78,10 @@ export default {
     fontSize: 12,
     marginBottom: 0,
   },
+  viewRight:{
+    height: 50,          
+    alignSelf: 'flex-start',          
+  },
   // with align at side, use left or right for best effect
   toggleSmall:{
     alignSelf: 'center',

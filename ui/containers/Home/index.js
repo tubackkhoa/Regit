@@ -46,11 +46,12 @@ export default class extends Component {
     if(!activeCampaign.NewFeedsItemsList) {
       // so keep refreshing :D
       getActiveCampaign(token)  
-    } else {
-      this.state.refreshing && this.setState({
-        refreshing: false,
-      })
-    }
+    } 
+
+    this.setState({
+      refreshing: false,
+    })
+    
   }
 
   _onRefresh =() => {

@@ -20,7 +20,7 @@ export const validate = (values) => {
 }
 
 export const renderGroupPermission = ({ fields}) => (
-  <View>
+  <View style={{flex: 1}}>
     {fields.map((permission, index) =>
       <ListItem key={index} last={index===fields.length-1} style={styles.listItem}>                                                
         <Text small style={styles.left}>{fields.get(index).name}</Text>             

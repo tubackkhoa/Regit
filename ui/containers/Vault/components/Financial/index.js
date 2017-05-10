@@ -21,11 +21,6 @@ export default class extends Component {
       <ListItem style={{...styles.itemBody, height: null}} key={index} last={last}>                                                
         
         <View>
-          {_default &&
-          <Button transparent bordered textSmall style={{...styles.buttonSmall, marginLeft:0}}>
-            <Text active>DEFAULT</Text>
-          </Button>
-          } 
           <Text>
             {description &&
               <Text small><Text small bold>Description:</Text> {description}{"\n"}</Text>
@@ -66,8 +61,15 @@ export default class extends Component {
           </Text>                              
         </View>        
         
-        <Toggle style={{...styles.toggleSmall, alignSelf:'flex-start',marginTop:-5}} iconStyle={styles.iconSmall} titleStyle={styles.label} 
+        <View style={styles.viewRight}>
+          <Toggle style={{...styles.toggleSmall, alignSelf:'flex-end',marginTop:-5}} iconStyle={styles.iconSmall} titleStyle={styles.label} 
             trueText={''} falseText={''} checked={!privacy} />
+          {_default &&
+          <Button transparent bordered textSmall style={{...styles.buttonSmall, right:20}}>
+            <Text active>DEFAULT</Text>
+          </Button>
+          } 
+        </View>
         
       </ListItem> 
     ) 

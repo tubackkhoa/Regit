@@ -12,29 +12,24 @@ import options from './options'
 import styles from '../shared/styles'
 import material from '~/theme/variables/material'
 
-const copiedMessage = (
-  <IconMessage size={30} message="Copied   " />
-)
-
-export default class extends Component {
-
-  _onCopy = (e)=>{
-    this.props.setToast(copiedMessage, 'info', 500, 'center')
-  }
+export default class extends Component {  
 
   renderItem(type, value){
+    // display for group value and isolated value
     switch(type){
-      case 'phone':
+      case 'field':
         return (
-          <Text small>+61 90187400</Text>
+          <Text small>{value}</Text>
         )
-      case 'address':
+      case 'group':
         return (
-          <View>                                            
-            <Text bold small>My Sweet Home</Text>  
-            <Text small>Empire Building</Text>  
-            <Text small>Middel Road</Text>  
-            <Text small>Singapore</Text>  
+          <View>    
+            {value.map((subValue, index)=>
+              <View row key={index}>
+                <Text bold small>{subValue.label}:</Text>
+                <Text small> {subValue.value}</Text>
+              </View>
+            )}    
           </View>
         )
     }                                            
@@ -56,10 +51,10 @@ export default class extends Component {
               <Icon style={styles.iconGray} name="edit" />
             </Button>
         </ListItem>                    
-        {data.values.map((value, index)=>
+        {data.value.map((value, index)=>
           <ListItem key={index} style={{...styles.itemBody, height: options.heightMap[data.type] || null}}>                                                
             {this.renderItem(data.type, value)}
-            <Button style={styles.itemHeaderButton} transparent onPress={this._onCopy}>
+            <Button style={styles.itemHeaderButton} transparent onPress={this.props.onCopy}>
               <IconMessage size={9} color={material.grayColor} icon="copy" message="Copy" />
             </Button>
           </ListItem>           

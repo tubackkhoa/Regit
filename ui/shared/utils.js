@@ -1,4 +1,5 @@
 import material from '~/theme/variables/material'
+import moment from 'moment'
 
 export const getPopoverOptions = (popoverWidth, fromRect, arrowPadding=-5) => ({
   fromRect,
@@ -27,4 +28,9 @@ export const getTextParts = text => {
   return match 
     ? [text.substr(0, match.index), match[1], text.substr(match.index + match[0].length)] 
     : [text]
+}
+
+export const formatDate = (value, format) => {
+  const parsed = moment(value)
+  return parsed.isValid() ? parsed.format('DD MMM YYYY') : value
 }

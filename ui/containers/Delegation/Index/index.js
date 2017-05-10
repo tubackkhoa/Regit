@@ -11,7 +11,7 @@ import * as commonActions from '~/store/actions/common'
 import * as authSelectors from '~/store/selectors/auth'
 import * as delegationSelectors from '~/store/selectors/delegation'
 
-import moment from 'moment'
+import { formatDate } from '~/ui/shared/utils'
 
 import CacheableImage from '~/ui/components/CacheableImage'
 import AutoWidthTabs from '~/ui/components/AutoWidthTabs'
@@ -37,11 +37,22 @@ export default class extends Component {
     }
   }
 
-  componentDidMount(){
+  componentWillMount(){
+    this.componentWillFocus()
+  }
+
+  componentWillFocus(){        
     const {token, delegation, getListDelegation} = this.props
-    // later we have the network    
+    // later we have the network
     !delegation['DelegationIn'] && getListDelegation(token, 'DelegationIn')
-    !delegation['DelegationOut'] && getListDelegation(token, 'DelegationOut')         
+    !delegation['DelegationOut'] && getListDelegation(token, 'DelegationOut')
+    
+    // always stop refreshing
+    this.setState({
+      refreshingIn: false,
+      refreshingOut: false,
+    })
+    
   }
 
   _onRefreshIn =() => {
@@ -56,9 +67,18 @@ export default class extends Component {
 
   renderList(listDelegation){
     const {forwardTo} = this.props    
+
+    if(!listDelegation || !listDelegation.Listitems.length) {
+      return (
+        <Text>
+          You have no one to delegate to.
+        </Text>
+      )
+    }
+
     return (
       <View rounded style={styles.content} >
-        {listDelegation && listDelegation.Listitems.map((item, index) =>
+        {listDelegation.Listitems.map((item, index) =>
           <ListItem key={item.DelegationId} avatar noBorder style={styles.listItemContainer}>
               <Left>
                   <CacheableImage style={styles.thumb} source={{
@@ -67,7 +87,7 @@ export default class extends Component {
               </Left>
               <Body style={{marginLeft:10}}>
                   <Text small bold active>{listDelegation.Direction === 'DelegationOut' ? item.ToUserDisplayName : item.FromUserDisplayName}</Text>                        
-                  <Text note small>{moment(item.EffectiveDate).format('DD MMM YYYY')}</Text>
+                  <Text note small>{formatDate(item.EffectiveDate, 'DD MMM YYYY')}</Text>
               </Body>
               <Right  style={styles.rightContainer}>
               

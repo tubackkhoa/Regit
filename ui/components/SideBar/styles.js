@@ -48,6 +48,7 @@ export default {
   icon: {    
     width: 20,
     height: 20,
+    color: '#FFF',
   },
   editContainer:{
     flexDirection:'row',
@@ -69,6 +70,6 @@ export default {
   },
   iconTextLast: {
     color: '#ce2d30',
-    paddingLeft: 20,
+    paddingLeft: 30,
   }
 };

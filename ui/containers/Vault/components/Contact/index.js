@@ -15,7 +15,7 @@ import styles from '../shared/styles'
 export default class extends Component {
 
   renderItem({label, value, privacy, default:defaultValue}, last=false){    
-    return (
+    return (!!value.length && 
       <ListItem style={{...styles.itemBody, height: null}} last={last}>                                                
         <View>
           <Text note small>{label}</Text>
