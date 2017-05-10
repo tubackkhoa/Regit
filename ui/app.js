@@ -186,14 +186,24 @@ export default class App extends Component {
     let whatdog = 10
     let component = ref
     // maybe connect, check name of constructor is _class means it is a component :D
-    if(component && component.constructor.name.substr(0,6) !== '_class'){
+    // if(component && component.constructor.name.substr(0,6) !== '_class'){
+    //   component = component._reactInternalInstance._renderedComponent
+    //   while(component._instance && component._instance.constructor.name.substr(0,6) !== '_class' && whatdog > 0){
+    //     component = component._renderedComponent
+    //     whatdog--
+    //   }
+    //   component = component._instance
+    // }
+
+    if(component && !component.render){
       component = component._reactInternalInstance._renderedComponent
-      while(component._instance && component._instance.constructor.name.substr(0,6) !== '_class' && whatdog > 0){
+      while(component._instance && !component._instance.render && whatdog > 0){
         component = component._renderedComponent
         whatdog--
       }
       component = component._instance
     }
+    
     return component
   }
 
