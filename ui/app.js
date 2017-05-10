@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import shallowEqual from 'fbjs/lib/shallowEqual'
 import { BackAndroid, NativeModules, Navigator } from 'react-native'
 import { Drawer, StyleProvider } from 'native-base'
 
@@ -91,7 +92,7 @@ export default class App extends Component {
         if(destIndex !==-1){          
           // trigger will focus, the first time should be did mount
           this.handlePageWillFocus(path)
-          this.navigator._jumpN(destIndex - this.navigator.state.presentedIndex)          
+          this.navigator._jumpN(destIndex - this.navigator.state.presentedIndex)                 
         } else {                            
           this.navigator.state.presentedIndex = this.navigator.state.routeStack.length
           this.navigator.push({title, path})                    
@@ -116,7 +117,7 @@ export default class App extends Component {
 
   // render a component from current page, then pass the params to Page
   renderComponentFromPage(page){
-    const {Page, ...route} = page
+    const {Page, ...route} = page    
     return (
       <Page ref={ref=>route.path && (this.pageInstances[route.path]=this.getPageInstance(ref))} route={route} app={this}/>
     )
@@ -200,10 +201,21 @@ export default class App extends Component {
   handlePageWillFocus(path){    
     // currently we support only React.Component instead of check the existing method
     // when we extend the Component, it is still instanceof
-    const component = this.pageInstances[path]    
-    
+    const component = this.pageInstances[path]        
     // check method
-    component && component.componentWillFocus && component.componentWillFocus()    
+    if(component){       
+      const {Page, ...route} = this.page
+      const propsChanged = !shallowEqual(route.params, component.props.route.params) 
+                      || !shallowEqual(route.query, component.props.route.query)
+      if(component.forceUpdate && propsChanged){
+        // only update prop value
+        Object.assign(component.props.route, route)
+        component.forceUpdate && component.forceUpdate()
+      }  
+
+      // after update the content then focus on it, so we have new content
+      component.componentWillFocus && component.componentWillFocus()      
+    }     
 
   }
 
