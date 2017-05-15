@@ -6,12 +6,7 @@ import {
 } from 'native-base'
 
 // assume we not try to rotate it
-export default class extends Component {   
-
-  constructor(props) {
-    super(props)  
-    this.offsetY = 0
-  }
+export default class extends Component {  
 
   static defaultProps = {
     onEndReachedThreshold: 10,
@@ -30,9 +25,7 @@ export default class extends Component {
           const offsetY = e.nativeEvent.contentOffset.y     
           const contentHeight= e.nativeEvent.contentSize.height
           const height = e.nativeEvent.layoutMeasurement.height
-          if(offsetY > this.offsetY && offsetY + height + onEndReachedThreshold > contentHeight){
-            // prevent repeating          
-            this.offsetY = offsetY
+          if(offsetY + height + onEndReachedThreshold > contentHeight){            
             onEndReached && onEndReached(offsetY, contentHeight)                      
           }                            
           return onScroll && onScroll(e)
