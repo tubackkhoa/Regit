@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import configureStore from '~/store/config'
 
 import Preload from './containers/Preload'
+import OneSignal from 'react-native-onesignal'
 
 export default class Regit extends Component {
 
@@ -13,10 +14,41 @@ export default class Regit extends Component {
     this.state = {
       store: null,
     }        
+
+    configureStore(store=> this.setState({store}))
   }
 
-  componentDidMount(){
-    configureStore(store=> this.setState({store}))
+  componentWillMount() {    
+      OneSignal.addEventListener('received', this.onReceived);
+      OneSignal.addEventListener('opened', this.onOpened);
+      OneSignal.addEventListener('registered', this.onRegistered);
+      OneSignal.addEventListener('ids', this.onIds);
+  }
+
+  componentWillUnmount() {
+      OneSignal.removeEventListener('received', this.onReceived);
+      OneSignal.removeEventListener('opened', this.onOpened);
+      OneSignal.removeEventListener('registered', this.onRegistered);
+      OneSignal.removeEventListener('ids', this.onIds);
+  }
+
+  onReceived(notification) {
+      console.log("Notification received: ", notification);
+  }
+
+  onOpened(openResult) {
+    console.log('Message: ', openResult.notification.payload.body);
+    console.log('Data: ', openResult.notification.payload.additionalData);
+    console.log('isActive: ', openResult.notification.isAppInFocus);
+    console.log('openResult: ', openResult);
+  }
+
+  onRegistered(notifData) {
+    console.log("Device had been registered for push notifications!", notifData);
+  }
+
+  onIds(device) {
+    console.log('Device info: ', device);
   }
 
   render() {    
@@ -31,4 +63,8 @@ export default class Regit extends Component {
       </Provider>
     )
   }
+}
+
+if (!window.navigator.userAgent) {
+  window.navigator.userAgent = "react-native"
 }

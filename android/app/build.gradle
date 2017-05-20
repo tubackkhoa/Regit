@@ -84,8 +84,10 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
-
+    buildToolsVersion '25.0.0'
+    lintOptions {
+        checkReleaseBuilds false
+    }
     defaultConfig {
         applicationId "com.regit"
         minSdkVersion 16
@@ -95,6 +97,8 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        manifestPlaceholders = [onesignal_app_id: "1f83a499-59aa-4b82-adc9-9a2771564aae",
+                                onesignal_google_project_number: "REMOTE"]
     }
     signingConfigs {
         release {
@@ -137,6 +141,8 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-onesignal')
+    compile project(':react-native-webrtc')
     compile project(':react-native-fs')
     compile project(':react-native-image-picker')
     compile project(':react-native-svg')

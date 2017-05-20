@@ -3,6 +3,8 @@ package com.regit;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
+import com.oney.WebRTCModule.WebRTCModulePackage;
 import com.rnfs.RNFSPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.horcrux.svg.SvgPackage;
@@ -26,6 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeOneSignalPackage(),
+            new WebRTCModulePackage(),
             new RNFSPackage(),
             new ImagePickerPackage(),
             new SvgPackage()

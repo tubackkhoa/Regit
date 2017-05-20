@@ -33,7 +33,7 @@ const formSelector = formValueSelector('DelegationForm')
   roles: formSelector(state, ...options.roles.map(c=>c.name)),
   dateIndefinite: formSelector(state, ...options.dateIndefinite.map(c=>c.name))
 }), {...commonActions}, (stateProps, dispatchProps, ownProps)=>({
-  initialValues: stateProps.delegation[ownProps.route.query.direction].Listitems[ownProps.route.params.id],
+  // initialValues: stateProps.delegation[ownProps.route.query.direction].Listitems[ownProps.route.params.id],
   ...ownProps, ...stateProps, ...dispatchProps,
 }))
 @reduxForm({ form: 'DelegationForm', validate})

@@ -32,12 +32,12 @@ export default {
     },
     {
       name: 'Poll',
-      route: 'calendar',
+      route: 'webrtc',
       icon: 'poll',
     },
     {
       name: 'Help & Support',
-      route: 'calendar',
+      route: 'test',
       icon: 'help',    
     },
 
