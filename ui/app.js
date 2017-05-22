@@ -226,7 +226,9 @@ export default class App extends Component {
           ref={ref => this.drawer = ref}
           open={drawerState === 'opened'}
           type="displace"             
-          tweenDuration={200}
+          negotiatePan={true}
+          tweenDuration={100}
+          useInteractionManager={true}
           content={<SideBar/>}
           onClose={closeDrawer}
         >           
