@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import shallowEqual from 'fbjs/lib/shallowEqual'
-import { BackAndroid, NativeModules, Navigator } from 'react-native'
+import { BackAndroid, NativeModules, Navigator, InteractionManager } from 'react-native'
 import { Drawer, StyleProvider } from 'native-base'
 
 import URL from 'url-parse'
@@ -191,10 +191,22 @@ export default class App extends Component {
     let ref = component
     // maybe connect, check name of constructor is _class means it is a component :D
     while(ref && whatdog > 0){
-      ref[method] && ref[method]()
+       while (ref && whatdog > 0) {
+      // ref[method] && ref[method]()
+      if (ref[method]) {
+        ref.setState({visible:focus})
+        // requestAnimationFrame(() => ref[method]())
+        InteractionManager.runAfterInteractions(()=>{
+          // clear previous focus or blur action
+          // clearTimeout(this.timer)
+          // and only do the action after 3 seconds, if there is no interaction after animation
+          this.timer = setTimeout(()=>ref[method](), 100)
+        })        
+        break
+      }
       ref = ref._reactInternalInstance._renderedComponent._instance
       whatdog--
-    }    
+    }  
   }
 
   // we need didFocus, it is like componentDidMount for the second time
