@@ -194,7 +194,7 @@ export default class App extends Component {
        while (ref && whatdog > 0) {
       // ref[method] && ref[method]()
       if (ref[method]) {
-        ref.setState({visible:focus})
+        // ref.setState({visible:focus})
         // requestAnimationFrame(() => ref[method]())
         InteractionManager.runAfterInteractions(()=>{
           // clear previous focus or blur action
